@@ -3,27 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>dragon-service-api</artifactId>
+        <artifactId>dragon-common</artifactId>
         <groupId>com.machine</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>dragon-core-api</artifactId>
+    <artifactId>dragon-common-launch</artifactId>
     <name>${project.artifactId}</name>
     <version>${machine.dragon.version}</version>
     <packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+    </properties>
 
-        <dependency>
-            <groupId>com.machine</groupId>
-            <artifactId>dragon-common-launch</artifactId>
-            <version>${machine.dragon.version}</version>
-        </dependency>
-    </dependencies>
 </project>

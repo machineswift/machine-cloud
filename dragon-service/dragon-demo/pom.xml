@@ -50,9 +50,16 @@
         </dependency>
 
         <dependency>
+            <groupId>com.machine</groupId>
+            <artifactId>dragon-common-cloud</artifactId>
+            <version>${machine.dragon.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 </project>

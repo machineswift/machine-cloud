@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RestController
 @RequestMapping("core")
-public class DragonCoreClientImpl  {
+public class DragonCoreClientImpl  implements IDragonCoreClient{
 
     @Value("${machine}")
     private String machine;
 
+    @Override
     @GetMapping("detail")
     public String detail() {
         String helloWorld = "Hello world! " + machine;

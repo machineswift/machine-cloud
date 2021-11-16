@@ -8,6 +8,7 @@
     <modules>
         <module>dragon-service</module>
         <module>dragon-service-api</module>
+        <module>dragon-common</module>
     </modules>
     <name>machine-dragon</name>
     <packaging>pom</packaging>
