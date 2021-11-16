@@ -7,18 +7,15 @@
         <groupId>com.machine</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>dragon-service</artifactId>
+    <artifactId>dragon-service-api</artifactId>
     <name>${project.artifactId}</name>
     <version>${machine.dragon.version}</version>
     <packaging>pom</packaging>
-    <description>machine 微服务集合</description>
-
+    <description>machine 微服务 api 集合</description>
 
     <modules>
-        <module>dragon-demo</module>
-        <module>dragon-core</module>
+        <module>dragon-core-api</module>
     </modules>
 
     <properties>

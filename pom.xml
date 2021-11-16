@@ -7,11 +7,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>dragon-service</module>
+        <module>dragon-service-api</module>
     </modules>
     <name>machine-dragon</name>
     <packaging>pom</packaging>
     <description>machine-dragon</description>
     <properties>
+        <machine.dragon.version>0.0.1-SNAPSHOT</machine.dragon.version>
         <java.version>1.8</java.version>
     </properties>
     <dependencyManagement>

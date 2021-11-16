@@ -8,8 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>dragon-core</artifactId>
+    <name>${project.artifactId}</name>
+    <version>${machine.dragon.version}</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -46,5 +47,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 </project>
