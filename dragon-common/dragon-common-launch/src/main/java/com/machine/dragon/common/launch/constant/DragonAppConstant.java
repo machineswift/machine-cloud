@@ -18,6 +18,6 @@ public interface DragonAppConstant {
 	/**
 	 * 网关模块名称
 	 */
-	String APPLICATION_CORE_NAME = APPLICATION_NAME_PREFIX + "core";
+	String APPLICATION_CORE_NAME = APPLICATION_NAME_PREFIX + "core-service";
 
 }
