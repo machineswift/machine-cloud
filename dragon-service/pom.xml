@@ -10,8 +10,6 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dragon-service</artifactId>
-    <name>${project.artifactId}</name>
-    <version>${machine.dragon.version}</version>
     <packaging>pom</packaging>
     <description>machine 微服务集合</description>
 

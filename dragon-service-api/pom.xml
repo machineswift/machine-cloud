@@ -9,8 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dragon-service-api</artifactId>
-    <name>${project.artifactId}</name>
-    <version>${machine.dragon.version}</version>
     <packaging>pom</packaging>
     <description>machine 微服务 api 集合</description>
 

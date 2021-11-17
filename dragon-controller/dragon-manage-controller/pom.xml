@@ -9,8 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dragon-manage-controller</artifactId>
-    <name>${project.artifactId}</name>
-    <version>${machine.dragon.version}</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -45,13 +43,13 @@
         <dependency>
             <groupId>com.machine</groupId>
             <artifactId>dragon-core-api</artifactId>
-            <version>${machine.dragon.version}</version>
+            <version>${version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.machine</groupId>
             <artifactId>dragon-common-cloud</artifactId>
-            <version>${machine.dragon.version}</version>
+            <version>${version}</version>
         </dependency>
 
         <dependency>
