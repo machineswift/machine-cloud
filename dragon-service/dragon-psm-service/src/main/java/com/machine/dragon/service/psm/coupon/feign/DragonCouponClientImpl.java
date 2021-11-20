@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/coupon")
+@RequestMapping("client/psm/coupon")
 public class DragonCouponClientImpl implements DragonCouponClient {
 
     @Value("${machine}")

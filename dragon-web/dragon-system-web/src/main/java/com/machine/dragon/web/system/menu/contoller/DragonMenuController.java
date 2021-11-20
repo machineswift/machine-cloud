@@ -1,6 +1,6 @@
 package com.machine.dragon.web.system.menu.contoller;
 
-import com.machine.dragon.service.oms.menu.feign.DragonMenuClient;
+import com.machine.dragon.service.system.menu.feign.DragonMenuClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

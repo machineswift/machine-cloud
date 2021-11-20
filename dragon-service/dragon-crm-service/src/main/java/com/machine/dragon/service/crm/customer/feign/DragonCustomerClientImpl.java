@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/customer")
+@RequestMapping("client/crm/customer")
 public class DragonCustomerClientImpl implements DragonCustomerClient {
 
     @Value("${machine}")
