@@ -9,7 +9,8 @@
         <module>dragon-service</module>
         <module>dragon-service-api</module>
         <module>dragon-common</module>
-        <module>dragon-controller</module>
+        <module>dragon-server</module>
+        <module>dragon-web</module>
     </modules>
     <name>machine-dragon</name>
     <packaging>pom</packaging>

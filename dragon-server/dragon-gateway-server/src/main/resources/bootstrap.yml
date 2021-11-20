@@ -1,0 +1,37 @@
+server:
+  port: 8831
+spring:
+  application:
+    name: dragon-gateway-server
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: dev
+        group: DRAGON_GROUP
+      config:
+        server-addr: 127.0.0.1:8848 #nacos中心地址
+        file-extension: yaml # 配置文件格式
+        namespace: dev
+        group: DRAGON_GROUP
+        sharedConfigs:
+          - dataId: dragon.yaml
+            group: DRAGON_GROUP
+            refresh: true
+    gateway:
+      default-filters:
+        -AddRequestHader=dradon
+      discovery:
+        locator:
+          # gateway通过服务发现组件找到其他的微服务（一般不推荐打开）
+          enabled: true
+      routes:
+        - id: dragon-manage-controller
+          # lb代表从注册中心获取服务
+          url: lb://dragon-manage-controller
+          order: 9000
+          predicates:
+            -Path=/
+  profiles:
+    active: dev # 环境标识

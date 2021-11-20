@@ -13,7 +13,11 @@
     <description>machine 微服务 api 集合</description>
 
     <modules>
-        <module>dragon-core-api</module>
+        <module>dragon-crm-api</module>
+        <module>dragon-oms-api</module>
+        <module>dragon-system-api</module>
+        <module>dragon-psm-api</module>
+        <module>dragon-pss-api</module>
     </modules>
 
     <properties>
