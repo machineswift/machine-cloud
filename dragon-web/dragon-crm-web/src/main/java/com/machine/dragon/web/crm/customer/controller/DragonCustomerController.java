@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("web/menu")
+@RequestMapping("web/customer")
 public class DragonCustomerController {
 
     @Value("${machine}")

@@ -1,5 +1,7 @@
 server:
   port: 8832
+  servlet:
+    context-path: /${spring.application.name}/v1
 spring:
   application:
     name: dragon-crm-web

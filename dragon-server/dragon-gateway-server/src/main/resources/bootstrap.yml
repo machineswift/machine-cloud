@@ -1,5 +1,5 @@
 server:
-  port: 8831
+  port: 8888
 spring:
   application:
     name: dragon-gateway-server
@@ -20,18 +20,16 @@ spring:
             group: DRAGON_GROUP
             refresh: true
     gateway:
-      default-filters:
-        -AddRequestHader=dradon
       discovery:
         locator:
           # gateway通过服务发现组件找到其他的微服务（一般不推荐打开）
           enabled: true
       routes:
-        - id: dragon-manage-controller
+        - id: dragon-system-web
           # lb代表从注册中心获取服务
-          url: lb://dragon-manage-controller
+          uri: lb://dragon-system-web
           order: 9000
           predicates:
-            -Path=/
+            - Path=/web/**
   profiles:
     active: dev # 环境标识
