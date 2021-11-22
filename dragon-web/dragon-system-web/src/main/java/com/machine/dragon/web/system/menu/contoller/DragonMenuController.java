@@ -1,5 +1,6 @@
 package com.machine.dragon.web.system.menu.contoller;
 
+import com.machine.dragon.service.crm.customer.feign.DragonCustomerClient;
 import com.machine.dragon.service.system.menu.feign.DragonMenuClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,14 @@ public class DragonMenuController {
     @Autowired
     private DragonMenuClient dragonMenuClient;
 
+    @Autowired
+    private DragonCustomerClient dragonCustomerClient;
+
     @GetMapping("get")
     public String get() {
-        String helloWorld = dragonMenuClient.detail();
-        log.info(helloWorld + machine + machine1);
-        return helloWorld;
+        String menu = dragonMenuClient.detail();
+        String customer = dragonCustomerClient.detail();
+        log.info(menu + customer + machine + machine1);
+        return menu + customer;
     }
 }

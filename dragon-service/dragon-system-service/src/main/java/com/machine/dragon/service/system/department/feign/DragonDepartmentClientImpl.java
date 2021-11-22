@@ -1,4 +1,4 @@
-package com.machine.dragon.service.crm.customer.feign;
+package com.machine.dragon.service.system.department.feign;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/crm/customer")
-public class DragonCustomerClientImpl implements DragonCustomerClient {
+@RequestMapping("client/system/department")
+public class DragonDepartmentClientImpl implements DragonDepartmentClient {
 
     @Value("${machine}")
     private String machine;
@@ -19,10 +19,8 @@ public class DragonCustomerClientImpl implements DragonCustomerClient {
     @Override
     @GetMapping("detail")
     public String detail() {
-        String customer = "customer " + machine;
-        String ss = null;
-        int i = ss.length();
-        log.info(customer);
-        return customer;
+        String menu = "menu " + machine;
+        log.info(menu);
+        return menu;
     }
 }
