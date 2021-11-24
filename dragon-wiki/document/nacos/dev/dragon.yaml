@@ -1,11 +1,13 @@
 # DataSource Config
 srring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 machine:
   dragon:
     system:
       datasource:
-        url: jdbc:mysql://127.0.0.1:3306/dragon-system?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+        url: jdbc:mysql://127.0.0.1:3306/wg2_core_t0?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
         username: root
         password: root

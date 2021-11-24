@@ -2,6 +2,7 @@ server:
   port: 8831
   servlet:
     context-path: /${spring.application.name}/v1
+
 spring:
   application:
     name: dragon-system-web
