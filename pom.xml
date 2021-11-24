@@ -11,6 +11,7 @@
         <module>dragon-common</module>
         <module>dragon-server</module>
         <module>dragon-web</module>
+        <module>dragon-starter</module>
     </modules>
     <name>machine-dragon</name>
     <packaging>pom</packaging>
@@ -19,6 +20,7 @@
         <java.version>1.8</java.version>
         <machine.dragon.version>0.0.1-SNAPSHOT</machine.dragon.version>
 
+        <mysql.connector.version>8.0.22</mysql.connector.version>
         <mybatis.plus.version>3.4.3.4</mybatis.plus.version>
         <mybatis.plus.generator.version>3.5.0</mybatis.plus.generator.version>
         <mybatis.plus.dynamic.version>3.4.0</mybatis.plus.dynamic.version>
@@ -68,6 +70,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${mybatis.plus.dynamic.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

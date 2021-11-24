@@ -1,6 +1,16 @@
 server:
   port: 8855
+
+# Logger Config
+logging:
+  level:
+    com.baomidou.mybatisplus.samples: debug
+# MyBatis-Plus 配置
+
 spring:
+  profiles:
+    # 环境标识
+    active: dev
   application:
     name: dragon-system-service
   cloud:
@@ -19,5 +29,8 @@ spring:
           - dataId: dragon.yaml
             group: DRAGON_GROUP
             refresh: true
-  profiles:
-    active: dev # 环境标识
+  # DataSource Config
+  datasource:
+    url: ${machine.dragon.system.datasource.url}
+    username: ${machine.dragon.system.datasource.username}
+    password: ${machine.dragon.system.datasource.password}

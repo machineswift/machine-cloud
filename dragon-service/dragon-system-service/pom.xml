@@ -36,8 +36,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <groupId>com.machine</groupId>
+            <artifactId>dragon-mybatis-boot-starter</artifactId>
+            <version>${version}</version>
         </dependency>
 
         <dependency>
@@ -56,5 +57,6 @@
             <artifactId>dragon-common-tool</artifactId>
             <version>${version}</version>
         </dependency>
+
     </dependencies>
 </project>
