@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "dragon-system-service", path = "client/system/department")
 public interface DragonDepartmentClient {
 
-    @GetMapping("getById")
-    DragonDepartmentDetailOutVo getById(@RequestParam(name = "id") Long id);
+    @GetMapping("getByDepartmentId")
+    DragonDepartmentDetailOutVo getByDepartmentId(@RequestParam(name = "departmentId") Long departmentId);
 }

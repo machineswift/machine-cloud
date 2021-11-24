@@ -1,7 +1,9 @@
 package com.machine.dragon.service.system.department.feign;
 
+import com.machine.dragon.common.tool.convert.DragonConvertUtil;
 import com.machine.dragon.service.system.department.feign.outVo.DragonDepartmentDetailOutVo;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
+import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,13 +25,12 @@ public class DragonDepartmentClientImpl implements DragonDepartmentClient {
     private DragonDepartmentService dragonDepartmentService;
 
     @Override
-    @GetMapping("getById")
-    public DragonDepartmentDetailOutVo getById(Long id) {
-//        DragonDepartmentDetailOutBo detailOutBo = dragonDepartmentService.getById(id);
-//        if (null == detailOutBo) {
-//            return null;
-//        }
-
-        return null;
+    @GetMapping("getByDepartmentId")
+    public DragonDepartmentDetailOutVo getByDepartmentId(Long departmentId) {
+        DragonDepartmentDetailOutBo detailOutBo = dragonDepartmentService.getByDepartmentId(departmentId);
+        if (null == detailOutBo) {
+            return null;
+        }
+        return DragonConvertUtil.convert(detailOutBo, DragonDepartmentDetailOutVo.class);
     }
 }
