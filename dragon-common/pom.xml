@@ -15,6 +15,7 @@
     <modules>
         <module>dragon-common-cloud</module>
         <module>dragon-common-launch</module>
+        <module>dragon-common-tool</module>
     </modules>
 
     <properties>

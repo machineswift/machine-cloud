@@ -1,4 +1,4 @@
-package com.machine.dragon;
+package com.machine.dragon.web.system;
 
 import com.machine.dragon.common.cloud.feign.EnableDragonFeignClients;
 import org.springframework.boot.SpringApplication;
