@@ -53,7 +53,7 @@ import java.util.function.Supplier;
 /**
  * 工具包集合，工具类快捷方式
  */
-public class DragonFunc {
+public class DragonFunction {
 
 	/**
 	 * 断言，必须不能为 null

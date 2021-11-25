@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan("com.machine.dragon.service.**.mapper.**")
 @EnableConfigurationProperties(DragonMybatisPlusProperties.class)
 @DragonPropertySource(value = "classpath:/dragon-mybatis.yml")
-public class MybatisPlusConfiguration  {
+public class DragonMybatisPlusAutoConfiguration {
 
 }
 

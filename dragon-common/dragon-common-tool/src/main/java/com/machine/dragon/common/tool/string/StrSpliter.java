@@ -1,6 +1,6 @@
 package com.machine.dragon.common.tool.string;
 
-import com.machine.dragon.common.tool.function.DragonFunc;
+import com.machine.dragon.common.tool.function.DragonFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +155,7 @@ public class StrSpliter {
 		int len = str.length();
 		int start = 0;
 		for (int i = 0; i < len; i++) {
-			if (DragonFunc.equals(separator, str.charAt(i))) {
+			if (DragonFunction.equals(separator, str.charAt(i))) {
 				addToList(list, str.substring(start, i), isTrim, ignoreEmpty);
 				start = i + 1;
 
@@ -356,7 +356,7 @@ public class StrSpliter {
 		int len = str.length();
 		int start = 0;
 		for (int i = 0; i < len; i++) {
-			if (DragonFunc.isEmpty(str.charAt(i))) {
+			if (DragonFunction.isEmpty(str.charAt(i))) {
 				addToList(list, str.substring(start, i), true, true);
 				start = i + 1;
 				if (limit > 0 && list.size() > limit - 2) {

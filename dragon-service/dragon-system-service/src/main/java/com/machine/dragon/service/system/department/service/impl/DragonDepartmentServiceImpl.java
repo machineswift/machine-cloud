@@ -1,6 +1,6 @@
 package com.machine.dragon.service.system.department.service.impl;
 
-import com.machine.dragon.common.tool.convert.DragonConvertUtil;
+import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.department.dao.DragonDepartmentDao;
 import com.machine.dragon.service.system.department.dao.outdto.DragonDepartmentOutDto;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
@@ -22,6 +22,6 @@ public class DragonDepartmentServiceImpl implements DragonDepartmentService {
         if (null == outDto) {
             return null;
         }
-        return DragonConvertUtil.convert(outDto, DragonDepartmentDetailOutBo.class);
+        return DragonJsonUtil.copy(outDto, DragonDepartmentDetailOutBo.class);
     }
 }

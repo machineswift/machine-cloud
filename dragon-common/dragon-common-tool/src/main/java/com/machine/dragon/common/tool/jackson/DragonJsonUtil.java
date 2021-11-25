@@ -16,6 +16,7 @@ import com.machine.dragon.common.tool.string.DragonStringUtil;
 import com.machine.dragon.common.tool.string.StringPool;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanInstantiationException;
 import org.springframework.lang.Nullable;
 
 import java.io.InputStream;
@@ -28,6 +29,21 @@ import java.util.*;
  */
 @Slf4j
 public class DragonJsonUtil {
+
+    /**
+     * 拷贝对象
+     *
+     * @param source 源对象
+     * @param clazz  类名
+     * @param <T>    泛型标记
+     * @return T
+     */
+    public static <T> T copy(@Nullable Object source, Class<T> clazz) {
+        if (clazz.isInterface()) {
+            throw new BeanInstantiationException(clazz, "Specified class is an interface");
+        }
+        return parse(toJson(source), clazz);
+    }
 
     /**
      * 将对象序列化成json字符串

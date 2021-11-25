@@ -1,6 +1,6 @@
 package com.machine.dragon.service.system.department.feign;
 
-import com.machine.dragon.common.tool.convert.DragonConvertUtil;
+import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.department.feign.outVo.DragonDepartmentDetailOutVo;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
 import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBo;
@@ -31,6 +31,6 @@ public class DragonDepartmentClientImpl implements DragonDepartmentClient {
         if (null == detailOutBo) {
             return null;
         }
-        return DragonConvertUtil.convert(detailOutBo, DragonDepartmentDetailOutVo.class);
+        return DragonJsonUtil.copy(detailOutBo, DragonDepartmentDetailOutVo.class);
     }
 }

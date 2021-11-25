@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Data
 public class DragonDepartmentEntity {
@@ -45,12 +45,12 @@ public class DragonDepartmentEntity {
     /**
      * 创建时间
      */
-    private ZonedDateTime createTime;
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    private ZonedDateTime updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 是否已删除

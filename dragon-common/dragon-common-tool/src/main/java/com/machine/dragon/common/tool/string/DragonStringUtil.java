@@ -1,6 +1,6 @@
 package com.machine.dragon.common.tool.string;
 
-import com.machine.dragon.common.tool.function.DragonFunc;
+import com.machine.dragon.common.tool.function.DragonFunction;
 import com.machine.dragon.common.tool.object.DragonObjectUtil;
 import com.machine.dragon.common.tool.random.RandomType;
 import com.machine.dragon.common.tool.single.DragonHolder;
@@ -413,7 +413,7 @@ public class DragonStringUtil extends StringUtils {
 
 		String template2 = template.toString();
 		for (Map.Entry<?, ?> entry : map.entrySet()) {
-			template2 = template2.replace("{" + entry.getKey() + "}", DragonFunc.toStr(entry.getValue()));
+			template2 = template2.replace("{" + entry.getKey() + "}", DragonFunction.toStr(entry.getValue()));
 		}
 		return template2;
 	}
@@ -606,7 +606,7 @@ public class DragonStringUtil extends StringUtils {
 	 * @since 3.2.0
 	 */
 	public static String getContainsStr(CharSequence str, CharSequence... testStrs) {
-		if (isEmpty(str) || DragonFunc.isEmpty(testStrs)) {
+		if (isEmpty(str) || DragonFunction.isEmpty(testStrs)) {
 			return null;
 		}
 		for (CharSequence checkStr : testStrs) {
@@ -655,7 +655,7 @@ public class DragonStringUtil extends StringUtils {
 	 * @since 3.2.0
 	 */
 	public static String getContainsStrIgnoreCase(CharSequence str, CharSequence... testStrs) {
-		if (isEmpty(str) || DragonFunc.isEmpty(testStrs)) {
+		if (isEmpty(str) || DragonFunction.isEmpty(testStrs)) {
 			return null;
 		}
 		for (CharSequence testStr : testStrs) {
@@ -1432,7 +1432,7 @@ public class DragonStringUtil extends StringUtils {
 	 * @return 查找到的个数
 	 */
 	public static int count(CharSequence content, CharSequence strForSearch) {
-		if (DragonFunc.hasEmpty(content, strForSearch) || strForSearch.length() > content.length()) {
+		if (DragonFunction.hasEmpty(content, strForSearch) || strForSearch.length() > content.length()) {
 			return 0;
 		}
 
