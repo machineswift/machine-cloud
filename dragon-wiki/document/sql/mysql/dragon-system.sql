@@ -1,8 +1,8 @@
 -- ----------------------------
 -- Table structure for dragon_department
 -- ----------------------------
-DROP TABLE IF EXISTS `dragon_department`;
-CREATE TABLE `dragon_department` (
+DROP TABLE IF EXISTS `t_dragon_department`;
+CREATE TABLE `t_dragon_department` (
     `id` varchar(32) NOT NULL COMMENT 'id',
     `tenant_id` int unsigned NOT NULL COMMENT '租户id',
     `department_id` bigint unsigned NOT NULL COMMENT '部门Id。根部门此字段为1',
@@ -20,7 +20,7 @@ CREATE TABLE `dragon_department` (
 ) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT='部门表';
 
 BEGIN;
-INSERT INTO `dragon_system`.`dragon_department` (`id`, `tenant_id`, `department_id`, `parent_id`, `code`, `name`, `sort`, `is_deleted`, `create_time`, `update_time`)
+INSERT INTO `dragon_system`.`t_dragon_department` (`id`, `tenant_id`, `department_id`, `parent_id`, `code`, `name`, `sort`, `is_deleted`, `create_time`, `update_time`)
 VALUES ('821098a85de14e249cca08378d49a38c', 1, 1, 0, '000001', '全部', 0, 0, '2021-11-22 03:23:49.885', '2021-11-22 03:23:49.885');
 COMMIT;
 
@@ -28,8 +28,8 @@ COMMIT;
 -- ----------------------------
 -- Table structure for dragon_user
 -- ----------------------------
-DROP TABLE IF EXISTS `dragon_user`;
-CREATE TABLE `dragon_user`  (
+DROP TABLE IF EXISTS `t_dragon_user`;
+CREATE TABLE `t_dragon_user`  (
     `id` varchar(32) NOT NULL COMMENT 'id',
     `tenant_id` int unsigned NOT NULL COMMENT '租户id',
     `user_id` varchar(32) NOT NULL COMMENT '用户id',
@@ -46,7 +46,7 @@ CREATE TABLE `dragon_user`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表';
 
 BEGIN;
-INSERT INTO `dragon_system`.`dragon_user` (`id`, `tenant_id`, `user_id`, `account`, `password`, `code`, `name`, `create_user`, `create_time`, `update_user`, `update_time`, `is_deleted`)
+INSERT INTO `dragon_system`.`t_dragon_user` (`id`, `tenant_id`, `user_id`, `account`, `password`, `code`, `name`, `create_user`, `create_time`, `update_user`, `update_time`, `is_deleted`)
 VALUES ('1', 1, '831098a85de14e249cca08378d49a38c', 'admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, '管理员', '831098a85de14e249cca08378d49a38c', '2021-11-22 09:07:14.885', '831098a85de14e249cca08378d49a38c', '2021-11-22 09:09:00.885', 0);
 COMMIT;
 
@@ -54,8 +54,8 @@ COMMIT;
 -- ----------------------------
 -- Table structure for dragon_user_department
 -- ----------------------------
-DROP TABLE IF EXISTS `dragon_user_department`;
-CREATE TABLE `dragon_user_department`  (
+DROP TABLE IF EXISTS `t_dragon_user_department`;
+CREATE TABLE `t_dragon_user_department`  (
     `id` varchar(32) NOT NULL COMMENT 'id',
     `tenant_id` int unsigned NOT NULL COMMENT '租户id',
     `department_id` bigint unsigned NOT NULL COMMENT '部门ID',
@@ -68,6 +68,6 @@ CREATE TABLE `dragon_user_department`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户部门表';
 
 BEGIN;
-INSERT INTO `dragon_system`.`dragon_user_department` (`id`, `tenant_id`, `department_id`, `user_id`, `create_time`, `update_time`)
+INSERT INTO `dragon_system`.`t_dragon_user_department` (`id`, `tenant_id`, `department_id`, `user_id`, `create_time`, `update_time`)
 VALUES ('811098a85de14e249cca08378d49a38c', 1, 1, '831098a85de14e249cca08378d49a38c', '2021-11-22 09:15:07.885', '2021-11-22 09:15:07.885');
 COMMIT;
