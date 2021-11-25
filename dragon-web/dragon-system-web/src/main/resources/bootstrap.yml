@@ -4,6 +4,8 @@ server:
     context-path: /${spring.application.name}/v1
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: dragon-system-web
   cloud:

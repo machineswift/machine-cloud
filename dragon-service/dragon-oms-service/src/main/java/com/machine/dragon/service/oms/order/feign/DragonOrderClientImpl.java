@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("client/oms/order")
 public class DragonOrderClientImpl implements DragonOrderClient {
 
-    @Value("${machine}")
+    @Value("${machine2}")
     private String machine;
 
     @Override

@@ -1,6 +1,8 @@
 package com.machine.dragon.web.system.menu.contoller;
 
 import com.machine.dragon.service.crm.customer.feign.DragonCustomerClient;
+import com.machine.dragon.service.system.department.feign.DragonDepartmentClient;
+import com.machine.dragon.service.system.department.feign.outVo.DragonDepartmentDetailOutVo;
 import com.machine.dragon.service.system.menu.feign.DragonMenuClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("web/department")
 public class DragonDepartmentController {
 
-    @Value("${machine}")
-    private String machine;
-
     @Value("${machine1}")
     private String machine1;
+
+    @Value("${machine2}")
+    private String machine2;
 
     @Autowired
     private DragonMenuClient dragonMenuClient;
 
     @Autowired
-    private DragonCustomerClient dragonCustomerClient;
+    private DragonDepartmentClient dragonDepartmentClient;
 
     @GetMapping("get")
     public String get() {
         String menu = dragonMenuClient.detail();
-        String customer = dragonCustomerClient.detail();
-        log.info(menu + customer + machine + machine1);
-        return menu + customer;
+        DragonDepartmentDetailOutVo vo = dragonDepartmentClient.getByDepartmentId(1L);
+        log.info(menu + machine2 + machine1);
+        return menu + vo.toString();
     }
 }

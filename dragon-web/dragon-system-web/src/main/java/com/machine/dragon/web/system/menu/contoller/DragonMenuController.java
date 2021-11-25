@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("web/menu")
 public class DragonMenuController {
 
-    @Value("${machine}")
-    private String machine;
-
     @Value("${machine1}")
     private String machine1;
+
+    @Value("${machine2}")
+    private String machine2;
 
     @Autowired
     private DragonMenuClient dragonMenuClient;
@@ -32,7 +32,7 @@ public class DragonMenuController {
     public String get() {
         String menu = dragonMenuClient.detail();
         String customer = dragonCustomerClient.detail();
-        log.info(menu + customer + machine + machine1);
+        log.info(menu + customer + machine2 + machine1);
         return menu + customer;
     }
 }

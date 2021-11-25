@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("client/system/menu")
 public class DragonMenuClientImpl implements DragonMenuClient {
 
-    @Value("${machine}")
+    @Value("${machine2}")
     private String machine;
 
     @Override

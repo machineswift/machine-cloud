@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("web/customer")
 public class DragonCustomerController {
 
-    @Value("${machine}")
-    private String machine;
-
     @Value("${machine1}")
     private String machine1;
+
+    @Value("${machine2}")
+    private String machine2;
 
     @Autowired
     private DragonCustomerClient dragonCustomerClient;
@@ -27,7 +27,7 @@ public class DragonCustomerController {
     @GetMapping("get")
     public String get() {
         String helloWorld = dragonCustomerClient.detail();
-        log.info(helloWorld + machine + machine1);
+        log.info(helloWorld + machine2 + machine1);
         return helloWorld;
     }
 }
