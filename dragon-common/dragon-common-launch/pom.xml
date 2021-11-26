@@ -10,6 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dragon-common-launch</artifactId>
     <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -20,9 +25,4 @@
             <artifactId>spring-boot</artifactId>
         </dependency>
     </dependencies>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-    </properties>
-
 </project>

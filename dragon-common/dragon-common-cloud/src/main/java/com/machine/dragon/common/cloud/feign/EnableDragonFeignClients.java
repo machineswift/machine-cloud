@@ -5,9 +5,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import java.lang.annotation.*;
 
-/**
- * @author machine
- */
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
