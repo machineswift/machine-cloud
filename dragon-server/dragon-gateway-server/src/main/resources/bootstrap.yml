@@ -23,17 +23,5 @@ spring:
       filter:
         # 网关不做限流
         enabled: false
-    gateway:
-      routes:
-        - id: dragon-system-web
-          # lb代表从注册中心获取服务
-          uri: lb://dragon-system-web
-          predicates:
-            - Path=/dragon-system-web/**
-        - id: dragon-crm-web
-          # lb代表从注册中心获取服务
-          uri: lb://dragon-crm-web
-          predicates:
-            - Path=/dragon-crm-web/**
   profiles:
     active: dev # 环境标识

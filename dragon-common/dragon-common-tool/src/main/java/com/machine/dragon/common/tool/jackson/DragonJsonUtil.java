@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
 import com.fasterxml.jackson.databind.type.MapType;
+import com.jayway.jsonpath.JsonPath;
 import com.machine.dragon.common.tool.date.DragonDateUtil;
 import com.machine.dragon.common.tool.date.DragonJavaTimeModule;
 import com.machine.dragon.common.tool.exception.Exceptions;
@@ -29,6 +30,10 @@ import java.util.*;
  */
 @Slf4j
 public class DragonJsonUtil {
+
+    public static String read(@Nullable String json, String jsonPath) {
+        return JsonPath.read(json, jsonPath).toString();
+    }
 
     /**
      * 拷贝对象
