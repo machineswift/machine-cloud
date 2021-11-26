@@ -20,16 +20,21 @@ spring:
             group: DRAGON_GROUP
             refresh: true
     gateway:
-      discovery:
-        locator:
-          # gateway通过服务发现组件找到其他的微服务（一般不推荐打开）
-          enabled: true
+#      discovery:
+#        locator:
+#          #gateway通过服务发现组件找到其他的微服务（一般不推荐打开）
+#          enabled: true
+#          lower-case-service-id: true
       routes:
         - id: dragon-system-web
           # lb代表从注册中心获取服务
           uri: lb://dragon-system-web
-          order: 9000
           predicates:
-            - Path=/web/**
+            - Path=/dragon-system-web/**
+        - id: dragon-crm-web
+          # lb代表从注册中心获取服务
+          uri: lb://dragon-crm-web
+          predicates:
+            - Path=/dragon-crm-web/**
   profiles:
     active: dev # 环境标识
