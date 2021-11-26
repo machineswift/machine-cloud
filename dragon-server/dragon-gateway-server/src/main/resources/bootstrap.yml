@@ -19,12 +19,11 @@ spring:
           - dataId: dragon.yaml
             group: DRAGON_GROUP
             refresh: true
+    sentinel:
+      filter:
+        # 网关不做限流
+        enabled: false
     gateway:
-#      discovery:
-#        locator:
-#          #gateway通过服务发现组件找到其他的微服务（一般不推荐打开）
-#          enabled: true
-#          lower-case-service-id: true
       routes:
         - id: dragon-system-web
           # lb代表从注册中心获取服务

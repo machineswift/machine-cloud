@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@AllArgsConstructor
 @MapperScan("com.machine.dragon.service.**.mapper.**")
 @EnableConfigurationProperties(DragonMybatisPlusProperties.class)
 @DragonPropertySource(value = "classpath:/dragon-mybatis.yml")
