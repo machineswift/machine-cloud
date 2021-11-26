@@ -1,4 +1,5 @@
 # DataSource Config
+# DataSource Config
 srring:
   main:
     allow-bean-definition-overriding: true
@@ -15,3 +16,4 @@ machine:
 logging:
   level:
     com.machine.dragon: debug
+    com.baomidou.mybatisplus.samples: debug
