@@ -15,8 +15,7 @@ http://127.0.0.1:8848/nacos/index.html
 nacos/nacos
 
 ## sentinel
-docker pull bladex/sentinel-dashboard:1.7.2
-docker run --name sentinel  -d -p 8858:8858 -d  bladex/sentinel-dashboard:1.7.2
+docker run --name sentinel  -d -p 8858:8858 -d  machineswift/sentinel-dashboard:1.8.2
 
 http://localhost:8858/
 sentinel/sentinel
