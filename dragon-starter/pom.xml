@@ -15,6 +15,7 @@
     <modules>
         <module>dragon-mybatis-boot-starter</module>
         <module>dragon-redis-boot-starter</module>
+        <module>dragon-rabbitmq-boot-starter</module>
     </modules>
 
     <properties>
