@@ -2,6 +2,7 @@ package com.machine.dragon.web.system.menu.contoller;
 
 import com.machine.dragon.service.crm.customer.feign.DragonCustomerClient;
 import com.machine.dragon.service.system.menu.feign.DragonMenuClient;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(tags = "菜单模块")
 @Slf4j
 @RefreshScope
 @RestController

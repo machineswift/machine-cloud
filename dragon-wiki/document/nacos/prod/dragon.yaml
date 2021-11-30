@@ -13,9 +13,4 @@ machine:
 
 knife4j:
   # 开启生产环境屏蔽
-  production: false
-
-logging:
-  level:
-    com.machine.dragon: debug
-    com.baomidou.mybatisplus.samples: debug
+  production: true

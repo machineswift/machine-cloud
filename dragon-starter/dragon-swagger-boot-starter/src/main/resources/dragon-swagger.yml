@@ -1,0 +1,34 @@
+#swagger公共信息
+dragon:
+  swagger:
+    title: Dragon 接口文档系统
+    description: Dragon 接口文档系统
+    license: Powered By Dragon
+    license-url: https://github.com/machineswift
+    terms-of-service-url: https://github.com/machineswift
+    contact:
+      name: machineswift
+      email: machineswift@qq.com
+      url: https://github.com/machineswift
+#knife4j配置
+knife4j:
+  # 开启增强配置
+  enable: true
+  #基础认证
+  basic:
+    enable: false
+    username: blade
+    password: blade
+  #增强配置
+  setting:
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    enableHost: false
+    enableHostText: http://localhost
+    enableRequestCache: true
+    enableFilterMultipartApis: false
+    enableFilterMultipartApiMethodType: POST
+    language: zh-CN
+    enableFooter: false
+    enableFooterCustom: true
+    footerCustomContent: dragon
