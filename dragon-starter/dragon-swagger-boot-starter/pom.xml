@@ -22,11 +22,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-aggregation-spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.machine</groupId>
             <artifactId>dragon-common-launch</artifactId>
             <version>${version}</version>

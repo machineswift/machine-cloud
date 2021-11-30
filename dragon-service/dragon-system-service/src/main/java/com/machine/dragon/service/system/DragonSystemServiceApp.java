@@ -1,4 +1,4 @@
-package com.machine.dragon.service.crm;
+package com.machine.dragon.service.system;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class DragonCrmServiceApplication {
+public class DragonSystemServiceApp {
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(DragonCrmServiceApplication.class, args);
-	}
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(DragonSystemServiceApp.class, args);
+    }
 }
-

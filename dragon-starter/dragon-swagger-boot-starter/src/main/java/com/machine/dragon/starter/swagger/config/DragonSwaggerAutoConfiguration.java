@@ -4,6 +4,7 @@ import com.machine.dragon.common.launch.constant.DragonAppConstant;
 import com.machine.dragon.common.launch.property.DragonPropertySource;
 import com.machine.dragon.starter.swagger.propertity.DragonSwaggerProperties;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,18 +32,18 @@ public class DragonSwaggerAutoConfiguration {
     /**
      * 引入Blade环境变量
      */
-    private final DragonSwaggerProperties dragonSwaggerProperties;
+    private final DragonSwaggerProperties swaggerProperties;
 
     @Bean
     public Docket createRestApi() {
-        if (dragonSwaggerProperties.getExcludePath().size() == 0) {
-            dragonSwaggerProperties.getExcludePath().addAll(DEFAULT_EXCLUDE_PATH);
+        if (swaggerProperties.getExcludePath().size() == 0) {
+            swaggerProperties.getExcludePath().addAll(DEFAULT_EXCLUDE_PATH);
         }
         ApiSelectorBuilder apis = new Docket(DocumentationType.SWAGGER_2)
-                .host(dragonSwaggerProperties.getHost())
-                .apiInfo(apiInfo(dragonSwaggerProperties)).select()
+                .host(swaggerProperties.getHost())
+                .apiInfo(apiInfo(swaggerProperties)).select()
                 .apis(RequestHandlerSelectors.basePackage(DragonAppConstant.BASE_PACKAGES));
-        dragonSwaggerProperties.getExcludePath().forEach(p -> apis.paths(PathSelectors.ant(p).negate()));
+        swaggerProperties.getExcludePath().forEach(p -> apis.paths(PathSelectors.ant(p).negate()));
         return apis.build();
     }
 

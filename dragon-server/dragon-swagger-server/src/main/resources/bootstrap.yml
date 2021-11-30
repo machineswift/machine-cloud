@@ -1,0 +1,58 @@
+server:
+  port: 8801
+spring:
+  profiles:
+    active: dev
+  application:
+    name: dragon-swagger-server
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: ${spring.profiles.active}
+        group: DRAGON_GROUP
+      config:
+        server-addr: 127.0.0.1:8848 #nacos中心地址
+        file-extension: yaml # 配置文件格式
+        namespace: ${spring.profiles.active}
+        group: DRAGON_GROUP
+        sharedConfigs:
+          - dataId: dragon.yaml
+            group: DRAGON_GROUP
+            refresh: true
+knife4j:
+  enableAggregation: true
+  cloud:
+    enable: true
+    routes:
+      - name: 用户体系
+        uri: 192.168.0.152:8999
+        location: /v2/api-docs?group=2.X版本
+        swaggerVersion: 2.0
+        servicePath: /abbb/ffe
+        routeAuth:
+          enable: true
+          username: test
+          password: 12313
+    routeAuth:
+      enable: true
+      username: dragon
+      password: dragon
+  nacos:
+    enable: false
+    serviceUrl: http://localhost:10000/nacos/
+    routeAuth:
+      enable: true
+      username: test
+      password: 12313
+    routes:
+      - name: 订单服务
+        serviceName: service-order
+        location: /v2/api-docs?group=default
+        swaggerVersion: 2.0
+        servicePath: /order
+        routeAuth:
+          enable: true
+          username: dragon
+          password: dragon

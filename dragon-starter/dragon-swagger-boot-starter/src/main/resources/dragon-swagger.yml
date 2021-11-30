@@ -17,8 +17,8 @@ knife4j:
   #基础认证
   basic:
     enable: false
-    username: blade
-    password: blade
+    username: dragon
+    password: dragon
   #增强配置
   setting:
     enableSwaggerModels: true

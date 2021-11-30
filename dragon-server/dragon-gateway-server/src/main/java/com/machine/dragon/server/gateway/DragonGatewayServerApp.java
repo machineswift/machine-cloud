@@ -1,4 +1,4 @@
-package com.machine.dragon.service.oms;
+package com.machine.dragon.server.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class DragonOmsServiceApplication {
+public class DragonGatewayServerApp {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(DragonOmsServiceApplication.class, args);
+		SpringApplication.run(DragonGatewayServerApp.class, args);
 	}
 }
 

@@ -1,17 +1,14 @@
-package com.machine.dragon.web.system;
+package com.machine.dragon.service.pss;
 
-import com.machine.dragon.common.cloud.feign.EnableDragonFeignClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableDragonFeignClients
-public class DragonWebSystemApplication {
+public class DragonPssServiceApp {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(DragonWebSystemApplication.class, args);
+        SpringApplication.run(DragonPssServiceApp.class, args);
     }
 }
-

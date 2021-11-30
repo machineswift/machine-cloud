@@ -8,10 +8,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableDragonFeignClients
-public class DragonWebCrmApplication {
+public class DragonWebCrmApp {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(DragonWebCrmApplication.class, args);
+        SpringApplication.run(DragonWebCrmApp.class, args);
     }
 }
 
