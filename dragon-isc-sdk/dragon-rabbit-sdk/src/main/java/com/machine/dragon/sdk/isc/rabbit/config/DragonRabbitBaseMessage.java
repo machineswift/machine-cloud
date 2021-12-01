@@ -1,6 +1,7 @@
 package com.machine.dragon.sdk.isc.rabbit.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

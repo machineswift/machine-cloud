@@ -1,6 +1,9 @@
-package com.machine.dragon.sdk.isc.rabbit.config;
+package com.machine.dragon.sdk.isc.rabbit.config.aspect;
 
+import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
+import com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitBaseMessage;
+import com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitCommitExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -23,7 +26,7 @@ public class DragonRabbitPublishAspect {
     /**
      * 定义一个切入点
      */
-    @Pointcut("@annotation(com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitPublishAnnotation)")
+    @Pointcut("@annotation(com.machine.dragon.sdk.isc.rabbit.config.aspect.DragonRabbitPublishAnnotation)")
     public void producer() {
     }
 

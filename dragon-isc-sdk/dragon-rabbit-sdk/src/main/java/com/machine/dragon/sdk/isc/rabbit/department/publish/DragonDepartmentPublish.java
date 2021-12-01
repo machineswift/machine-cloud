@@ -1,6 +1,6 @@
 package com.machine.dragon.sdk.isc.rabbit.department.publish;
 
-import com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitPublishAnnotation;
+import com.machine.dragon.sdk.isc.rabbit.config.aspect.DragonRabbitPublishAnnotation;
 import com.machine.dragon.sdk.isc.rabbit.department.config.DragonDepartmentRabbitConfig;
 import com.machine.dragon.sdk.isc.rabbit.department.message.DragonDepartmentRabbitMessage;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,6 @@
-package com.machine.dragon.sdk.isc.rabbit.config;
+package com.machine.dragon.sdk.isc.rabbit.config.aspect;
+
+import com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitDirectExchange;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
