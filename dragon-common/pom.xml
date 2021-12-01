@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dragon-common</artifactId>
     <packaging>pom</packaging>
-    <description>machine 公共代码</description>
+    <description>dragon 公共代码</description>
 
     <modules>
         <module>dragon-common-cloud</module>

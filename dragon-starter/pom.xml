@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dragon-starter</artifactId>
     <packaging>pom</packaging>
-    <description>machine starter 集合</description>
+    <description>dragon starter 集合</description>
 
     <modules>
         <module>dragon-mybatis-boot-starter</module>

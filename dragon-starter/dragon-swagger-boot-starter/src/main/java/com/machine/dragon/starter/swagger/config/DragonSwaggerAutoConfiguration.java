@@ -4,7 +4,6 @@ import com.machine.dragon.common.launch.constant.DragonAppConstant;
 import com.machine.dragon.common.launch.property.DragonPropertySource;
 import com.machine.dragon.starter.swagger.propertity.DragonSwaggerProperties;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,9 +28,6 @@ import java.util.List;
 public class DragonSwaggerAutoConfiguration {
     private static final List<String> DEFAULT_EXCLUDE_PATH = Arrays.asList("/error", "/actuator/**");
 
-    /**
-     * 引入Blade环境变量
-     */
     private final DragonSwaggerProperties swaggerProperties;
 
     @Bean

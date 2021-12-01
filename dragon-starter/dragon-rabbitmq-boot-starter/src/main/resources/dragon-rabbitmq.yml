@@ -1,1 +1,5 @@
-
+spring:
+  rabbitmq:
+    port: 5672
+    publisher-confirms: true
+    publisher-returns: true

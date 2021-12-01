@@ -1,6 +1,8 @@
 package com.machine.dragon.service.system.department.service.impl;
 
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
+import com.machine.dragon.sdk.isc.rabbit.department.message.DragonDepartmentRabbitMessage;
+import com.machine.dragon.sdk.isc.rabbit.department.publish.DragonDepartmentPublish;
 import com.machine.dragon.service.system.department.dao.DragonDepartmentDao;
 import com.machine.dragon.service.system.department.dao.outdto.DragonDepartmentOutDto;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
@@ -16,12 +18,17 @@ public class DragonDepartmentServiceImpl implements DragonDepartmentService {
     @Autowired
     private DragonDepartmentDao dragonDepartmentDao;
 
+    @Autowired
+    private DragonDepartmentPublish dragonDepartmentPublish;
+
     @Override
     public DragonDepartmentDetailOutBo getByDepartmentId(Long departmentId) {
         DragonDepartmentOutDto outDto = dragonDepartmentDao.getByDepartmentId(departmentId);
         if (null == outDto) {
             return null;
         }
+
+        dragonDepartmentPublish.publishDragonDepartmentRabbitMessage(new DragonDepartmentRabbitMessage(departmentId));
         return DragonJsonUtil.copy(outDto, DragonDepartmentDetailOutBo.class);
     }
 }

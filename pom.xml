@@ -9,9 +9,11 @@
         <module>dragon-service</module>
         <module>dragon-service-api</module>
         <module>dragon-common</module>
-        <module>dragon-server</module>
         <module>dragon-web</module>
         <module>dragon-starter</module>
+        <module>dragon-ops-server</module>
+        <module>dragon-isc-server</module>
+        <module>dragon-isc-sdk</module>
     </modules>
     <name>machine-dragon</name>
     <packaging>pom</packaging>

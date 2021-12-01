@@ -3,6 +3,11 @@ srring:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    addresses: 127.0.0.1
+    username: dragon
+    password: dragon
+    virtualHost: dragon
 machine:
   dragon:
     system:

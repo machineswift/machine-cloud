@@ -11,6 +11,8 @@
 
 ## spring cloud alibaba-sentinel
 
+## spring-boot-starter-amqp rabbit
+
 ## mybatis plus
 
 
