@@ -2,6 +2,10 @@ package com.machine.dragon.server.isc.rabbit.config.aspect;
 
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
+import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
+import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
+import com.machine.dragon.common.tool.string.DragonStringUtil;
+import com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitBaseMessage;
 import com.machine.dragon.service.system.rabbit.feign.DragonRabbitReliableMessageClient;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -30,27 +34,26 @@ public class DragonRabbitReliableMessageAspect {
     /**
      * 环绕通知
      */
-    @Around(value = "producer()&&@annotation(reliableAnnotation)&&@annotation(rabbitListener)")
+    @Around(value = "producer()&&@annotation(reliableMessageAnnotation)&&@annotation(rabbitListener)")
     public Object Around(ProceedingJoinPoint pjp,
-                         MessageReliableAnnotation reliableAnnotation,
+                         DragonRabbitReliableMessageAnnotation reliableMessageAnnotation,
                          RabbitListener rabbitListener) throws Throwable {
-        RabbitMqMessage message = (RabbitMqMessage) pjp.getArgs()[0];
-        MessageReliable messageReliable = message.getMessageReliable();
-        MultiTenantContent.setTenantId(message.getTenantId());
-        if (null != messageReliable.getId()) {
+        DragonRabbitBaseMessage message = (DragonRabbitBaseMessage) pjp.getArgs()[0];
+        DragonRabbitReliableMessage reliableMessage = message.getReliableMessage();
+
+        //todo 多租户处理
+        //MultiTenantContent.setTenantId(message.getTenantId());
+        if (null != reliableMessage.getId()) {
             //重试消息广播场景：非自己消费的消息异常则跳过,防止重复处理
-            if (!JsonUtils.object2JsonStr(rabbitListener.queues()).equals(messageReliable.getConsumerQueues())) {
-                log.warn("消费消息忽略非自己消费的可靠消息 {} queues:{} message:{}", reliableAnnotation.consumerName(),
-                        JsonUtils.object2JsonStr(rabbitListener.queues()), JsonUtils.object2JsonStr(message));
+            if (!DragonJsonUtil.toJson(rabbitListener.queues()).equals(reliableMessage.getSubscribeQueues())) {
+                log.warn("消费消息忽略非自己消费的可靠消息 {} queues:{} message:{}", reliableMessageAnnotation.publishName(),
+                        DragonJsonUtil.toJson(rabbitListener.queues()), DragonJsonUtil.toJson(message));
                 return null;
             }
         }
-        if (SY_LOG_API_QUEUE.equals(rabbitListener.queues()[0])) {
-            //日志拦截忽略打印日志
-        } else {
-            log.info("消费消息 {} queues:{} message:{}", reliableAnnotation.consumerName(),
-                    JsonUtils.object2JsonStr(rabbitListener.queues()), JsonUtils.object2JsonStr(message));
-        }
+
+        log.info("消费消息 {} queues:{} message:{}", reliableMessageAnnotation.publishName(),
+                DragonJsonUtil.toJson(rabbitListener.queues()), DragonJsonUtil.toJson(message));
 
         return pjp.proceed();
     }
@@ -58,100 +61,101 @@ public class DragonRabbitReliableMessageAspect {
     /**
      * 后置通知(方法返回)
      */
-    @AfterReturning(value = "producer()&&@annotation(reliableAnnotation)&&@annotation(rabbitListener)")
+    @AfterReturning(value = "producer()&&@annotation(reliableMessageAnnotation)&&@annotation(rabbitListener)")
     public void afterReturning(JoinPoint jp,
-                               MessageReliableAnnotation reliableAnnotation,
+                               DragonRabbitReliableMessageAnnotation reliableMessageAnnotation,
                                RabbitListener rabbitListener) {
-        RabbitMqMessage message = (RabbitMqMessage) jp.getArgs()[0];
-        MessageReliable messageReliable = message.getMessageReliable();
-        if (null != messageReliable.getId()) {
+        DragonRabbitBaseMessage message = (DragonRabbitBaseMessage) jp.getArgs()[0];
+        DragonRabbitReliableMessage reliableMessage = message.getReliableMessage();
+
+        if (null != reliableMessage.getId()) {
             //重试消息广播场景：非自己消费的消息异常则跳过,防止可靠消息被删除
-            if (!JsonUtils.object2JsonStr(rabbitListener.queues()).equals(messageReliable.getConsumerQueues())) {
+            if (!DragonJsonUtil.toJson(rabbitListener.queues()).equals(reliableMessage.getSubscribeQueues())) {
                 return;
             }
-            messageReliableClient.deleteById(message.getMessageReliable().getId());
+            dragonRabbitReliableMessageClient.deleteById(message.getReliableMessage().getId());
         }
-        //清理租户信息
-        MultiTenantContent.clearTenantId();
+        //todo 多租户处理
+        //MultiTenantContent.clearTenantId();
     }
 
     /**
      * 异常通知
      */
-    @AfterThrowing(value = "producer()&&@annotation(reliableAnnotation)&&@annotation(rabbitListener)", throwing = "exception")
+    @AfterThrowing(value = "producer()&&@annotation(reliableMessageAnnotation)&&@annotation(rabbitListener)", throwing = "exception")
     public void afterThrowing(JoinPoint jp,
-                              MessageReliableAnnotation reliableAnnotation,
+                              DragonRabbitReliableMessageAnnotation reliableMessageAnnotation,
                               RabbitListener rabbitListener,
                               Exception exception) {
-        RabbitMqMessage message = (RabbitMqMessage) jp.getArgs()[0];
-        log.error(String.format("消费消息异常,%s queues:%s message:%s", reliableAnnotation.consumerName(),
-                JsonUtils.object2JsonStr(rabbitListener.queues()), JsonUtils.object2JsonStr(message)), exception);
+        DragonRabbitBaseMessage rabbitBaseMessage = (DragonRabbitBaseMessage) jp.getArgs()[0];
+        log.error(String.format("消费消息异常,%s queues:%s message:%s", reliableMessageAnnotation.publishName(),
+                DragonJsonUtil.toJson(rabbitListener.queues()), DragonJsonUtil.toJson(rabbitBaseMessage)), exception);
 
         //补偿逻辑处理
-        String retryStrategy = reliableAnnotation.retryStrategy();
-        if (StringUtils.isEmpty(retryStrategy)) {
+        int[] retryStrategy = reliableMessageAnnotation.retryStrategy();
+        if (retryStrategy.length == 0) {
             return;
         }
 
-        MessageReliable messageReliable = message.getMessageReliable();
+        DragonRabbitReliableMessage reliableMessage = rabbitBaseMessage.getReliableMessage();
 
-        if (null == messageReliable.getId()) {
+        if (null == reliableMessage.getId()) {
             //第一次重试,添加消费者以及补偿策略信息
-            messageReliable.setTenantId(message.getTenantId());
-            messageReliable.setConsumerName(reliableAnnotation.consumerName());
-            messageReliable.setConsumerQueues(JsonUtils.object2JsonStr(rabbitListener.queues()));
-            messageReliable.setRetryStrategy(reliableAnnotation.retryStrategy());
-            messageReliable.setResendTimes(0);
-            messageReliable.setMaxResendTimes(reliableAnnotation.maxResendTimes());
+            reliableMessage.setTenantId(rabbitBaseMessage.getTenantId());
+            reliableMessage.setSubscribeName(reliableMessageAnnotation.publishName());
+            reliableMessage.setSubscribeQueues(DragonJsonUtil.toJson(rabbitListener.queues()));
+            reliableMessage.setResendTimes(0);
+            reliableMessage.setMaxResendTimes(reliableMessageAnnotation.maxResendTimes());
 
             //生产消息唯一键
-            messageReliable.setMessageKey(generateMessageKey(message, reliableAnnotation));
+            reliableMessage.setMessageKey(generateMessageKey(rabbitBaseMessage, reliableMessageAnnotation));
 
             //添加消息内容
-            message.setMessageReliable(null);
-            messageReliable.setMessageContent(JsonUtils.object2JsonStr(message));
-            message.setMessageReliable(messageReliable);
-            Long id = messageReliableClient.init(messageReliable);
-            messageReliable.setId(id);
+            rabbitBaseMessage.setReliableMessage(null);
+            reliableMessage.setMessageContent(DragonJsonUtil.toJson(rabbitBaseMessage));
+            rabbitBaseMessage.setReliableMessage(reliableMessage);
+            String id = dragonRabbitReliableMessageClient.init(reliableMessage);
+            reliableMessage.setId(id);
         } else {
             //重试消息广播场景：非自己消费的消息则跳过,防止消息数量膨胀
-            if (!JsonUtils.object2JsonStr(rabbitListener.queues()).equals(messageReliable.getConsumerQueues())) {
+            if (!DragonJsonUtil.toJson(rabbitListener.queues()).equals(reliableMessage.getSubscribeQueues())) {
                 return;
             }
 
             //重新查询,防止消息消息延迟引起的重试策略错乱
-            messageReliable = messageReliableClient.getById(messageReliable.getId());
-            if (null == messageReliable) {
+            reliableMessage = dragonRabbitReliableMessageClient.getById(reliableMessage.getId());
+            if (null == reliableMessage) {
                 //已经被正确处理或已经被移到dead里面
                 return;
             }
         }
-        message.setMessageReliable(messageReliable);
-        message.setException(exception);
-        MessageReliableConfig.getRouter().route(message.getMessageReliable());
+        rabbitBaseMessage.setReliableMessage(reliableMessage);
+        rabbitBaseMessage.setException(exception);
+        processReliableMessage(reliableMessageAnnotation.retryStrategy(), reliableMessage);
 
+        //todo 多租户处理
         //清理租户信息
-        MultiTenantContent.clearTenantId();
+        //MultiTenantContent.clearTenantId();
     }
 
     /**
      * 规则:MD5(producerExchange+producerRoutingKey+consumerQueues)+value(uniqueKeyFields)
      */
-    private String generateMessageKey(RabbitMqMessage message,
-                                      MessageReliableAnnotation reliableAnnotation) {
-        MessageReliable messageReliable = message.getMessageReliable();
+    private String generateMessageKey(DragonRabbitBaseMessage rabbitBaseMessage,
+                                      DragonRabbitReliableMessageAnnotation reliableMessageAnnotation) {
+        DragonRabbitReliableMessage reliableMessage = rabbitBaseMessage.getReliableMessage();
         StringBuilder md5Sb = new StringBuilder();
-        md5Sb.append(messageReliable.getProducerExchange()).append("-");
-        md5Sb.append(messageReliable.getProducerRoutingKey()).append("-");
-        md5Sb.append(messageReliable.getConsumerQueues());
+        md5Sb.append(reliableMessage.getPublishExchange()).append("-");
+        md5Sb.append(reliableMessage.getPublishRoutingKey()).append("-");
+        md5Sb.append(reliableMessage.getSubscribeQueues());
 
         //解析唯一键的值
         StringBuilder valuesSb = new StringBuilder();
-        String[] uniqueKeyFields = reliableAnnotation.uniqueKeyFields();
-        Object document = Configuration.defaultConfiguration().jsonProvider().parse(JsonUtils.object2JsonStr(message));
+        String[] uniqueKeyFields = reliableMessageAnnotation.uniqueKeyFields();
+        Object document = Configuration.defaultConfiguration().jsonProvider().parse(DragonJsonUtil.toJson(rabbitBaseMessage));
         for (String field : uniqueKeyFields) {
             String value = JsonPath.read(document, field).toString();
-            if (StringUtils.isNotEmpty(value)) {
+            if (DragonStringUtil.isNotEmpty(value)) {
                 valuesSb.append(value).append("-");
             }
         }
@@ -161,5 +165,18 @@ public class DragonRabbitReliableMessageAspect {
 
         return DigestUtils.md5DigestAsHex(md5Sb.toString().getBytes()).
                 replaceAll("-", "") + ":" + valuesSb.toString();
+    }
+
+    public void processReliableMessage(int[] retryStrategy,
+                                       DragonRabbitReliableMessage reliableMessage) {
+        Integer resendTimes = reliableMessage.getResendTimes();
+        if (resendTimes > (retryStrategy.length) - 1) {
+            //将消息移到死亡消息表
+            dragonRabbitReliableMessageClient.deadById(reliableMessage.getId());
+        } else {
+            //修改可靠消息消费状态
+            reliableMessage.setNextTimeSeconds(retryStrategy[resendTimes]);
+            dragonRabbitReliableMessageClient.updateSubscribeInfo(reliableMessage);
+        }
     }
 }

@@ -11,7 +11,7 @@ public @interface DragonRabbitReliableMessageAnnotation {
     /**
      * 生产者名称
      */
-    String consumerName() default "";
+    String publishName() default "";
 
     /**
      * 重试策略
