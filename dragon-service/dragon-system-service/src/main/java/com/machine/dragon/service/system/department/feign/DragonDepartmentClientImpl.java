@@ -1,7 +1,7 @@
 package com.machine.dragon.service.system.department.feign;
 
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
-import com.machine.dragon.service.system.department.feign.outVo.DragonDepartmentDetailOutVo;
+import com.machine.dragon.service.system.department.feign.outvo.DragonDepartmentDetailOutVo;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
 import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBo;
 import lombok.extern.slf4j.Slf4j;

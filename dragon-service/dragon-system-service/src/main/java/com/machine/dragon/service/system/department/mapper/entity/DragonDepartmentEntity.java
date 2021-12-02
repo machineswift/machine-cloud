@@ -1,12 +1,17 @@
 package com.machine.dragon.service.system.department.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@TableName("t_dragon_department")
 public class DragonDepartmentEntity {
 
     @TableId(type = IdType.ASSIGN_UUID)
@@ -55,5 +60,6 @@ public class DragonDepartmentEntity {
     /**
      * 是否已删除
      */
+    @TableField(value = "is_deleted")
     private Boolean deleted;
 }

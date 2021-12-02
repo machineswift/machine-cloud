@@ -1,5 +1,9 @@
-package com.machine.dragon.common.core.bean.rabbit;
+package com.machine.dragon.service.system.rabbit.mapper.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,19 +12,12 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-public class DragonRabbitReliableMessage {
+@TableName("t_dragon_rabbit_reliable_message")
+public class DragonRabbitReliableMessageEntity {
 
-    public DragonRabbitReliableMessage(String messageClassName,
-                                       String publishName,
-                                       String publishExchange,
-                                       String publishRoutingKey) {
-        this.messageClassName = messageClassName;
-        this.publishName = publishName;
-        this.publishExchange = publishExchange;
-        this.publishRoutingKey = publishRoutingKey;
-    }
-
+    @TableId(type = IdType.ASSIGN_UUID)
     private String id;
+
     private Integer tenantId;
     private String messageKey;
     private String messageClassName;
@@ -38,7 +35,10 @@ public class DragonRabbitReliableMessage {
     private String messageContent;
     private String reason;
     private String remark;
+
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+
+    @TableField(value = "is_deleted")
     private Boolean deleted;
 }

@@ -1,4 +1,4 @@
-package com.machine.dragon.service.system.department.feign.outVo;
+package com.machine.dragon.service.system.department.feign.outvo;
 
 import lombok.Data;
 

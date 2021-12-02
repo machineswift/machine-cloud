@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.machine.dragon.service.system.rabbit.mapper.DragonRabbitReliableMessageMapper">
+
+    <sql id="DragonRabbitReliableMessageColumn">
+        `id`
+        ,`tenant_id`,
+        `message_key`,
+        `message_class_name`,
+        `publish_exchange`,
+        `publish_routing_key`,
+        `publish_name`,
+        `subscribe_queues`,
+        `subscribe_name`,
+        `max_resend_times`,
+        `resend_times`,
+        `last_send_time`,
+        `subscribe_times`,
+        `last_subscribe_time`,
+        `next_exe_time`,
+        `message_content`,
+        `reason`,
+        `remark`,
+        `create_time`,
+        `update_time`,
+        `is_deleted`
+    </sql>
+
+
+    <resultMap id="DragonRabbitReliableEntityMap"
+               type="com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliableMessageEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="message_key" property="messageKey"/>
+        <result column="message_class_name" property="messageClassName"/>
+        <result column="publish_exchange" property="publishExchange"/>
+        <result column="publish_routing_key" property="publishRoutingKey"/>
+        <result column="publish_name" property="publishName"/>
+        <result column="subscribe_queues" property="subscribeQueues"/>
+        <result column="subscribe_name" property="subscribeName"/>
+        <result column="max_resend_times" property="maxResendTimes"/>
+        <result column="resend_times" property="resendTimes"/>
+        <result column="last_send_time" property="lastSendTime"/>
+        <result column="subscribe_times" property="subscribeTimes"/>
+        <result column="last_subscribe_time" property="lastSubscribeTime"/>
+        <result column="next_exe_time" property="nextExeTime"/>
+        <result column="message_content" property="messageContent"/>
+        <result column="reason" property="reason"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+    </resultMap>
+
+    <delete id="deleteByMessageKey">
+        delete
+        from t_dragon_rabbit_reliable_message drrm
+        where drrm.message_key = #{messageKey}
+    </delete>
+
+</mapper>

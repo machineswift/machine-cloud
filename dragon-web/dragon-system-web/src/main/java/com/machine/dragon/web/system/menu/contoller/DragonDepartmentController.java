@@ -1,7 +1,7 @@
 package com.machine.dragon.web.system.menu.contoller;
 
 import com.machine.dragon.service.system.department.feign.DragonDepartmentClient;
-import com.machine.dragon.service.system.department.feign.outVo.DragonDepartmentDetailOutVo;
+import com.machine.dragon.service.system.department.feign.outvo.DragonDepartmentDetailOutVo;
 import com.machine.dragon.service.system.menu.feign.DragonMenuClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

@@ -28,6 +28,12 @@
 
         <dependency>
             <groupId>com.machine</groupId>
+            <artifactId>dragon-mybatis-boot-starter</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.machine</groupId>
             <artifactId>dragon-pss-api</artifactId>
             <version>${version}</version>
         </dependency>
