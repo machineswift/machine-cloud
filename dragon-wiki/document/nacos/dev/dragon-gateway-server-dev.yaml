@@ -9,7 +9,10 @@ spring:
           predicates:
             - Path=/dragon-system-web/**
         - id: dragon-crm-web
-          # lb代表从注册中心获取服务
           uri: lb://dragon-crm-web
           predicates:
             - Path=/dragon-crm-web/**
+        - id: dragon-swagger-server
+          uri: lb://dragon-swagger-server
+          predicates:
+            - Path=/dragon-swagger-server/**

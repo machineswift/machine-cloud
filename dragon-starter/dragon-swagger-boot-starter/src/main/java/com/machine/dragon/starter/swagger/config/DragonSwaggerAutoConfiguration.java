@@ -1,9 +1,10 @@
 package com.machine.dragon.starter.swagger.config;
 
 import com.machine.dragon.common.launch.constant.DragonAppConstant;
+import com.machine.dragon.common.launch.property.DragonProperties;
 import com.machine.dragon.common.launch.property.DragonPropertySource;
 import com.machine.dragon.starter.swagger.propertity.DragonSwaggerProperties;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +22,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@AllArgsConstructor
 @EnableSwagger2WebMvc
-@EnableConfigurationProperties(DragonSwaggerProperties.class)
+@EnableConfigurationProperties({DragonProperties.class, DragonSwaggerProperties.class})
 @DragonPropertySource(value = "classpath:/dragon-swagger.yml")
 public class DragonSwaggerAutoConfiguration {
-    private static final List<String> DEFAULT_EXCLUDE_PATH = Arrays.asList("/error", "/actuator/**");
 
-    private final DragonSwaggerProperties swaggerProperties;
+    @Autowired
+    private DragonProperties dragonProperties;
+
+    @Autowired
+    private DragonSwaggerProperties swaggerProperties;
 
     @Bean
     public Docket createRestApi() {
@@ -37,7 +40,9 @@ public class DragonSwaggerAutoConfiguration {
         }
         ApiSelectorBuilder apis = new Docket(DocumentationType.SWAGGER_2)
                 .host(swaggerProperties.getHost())
-                .apiInfo(apiInfo(swaggerProperties)).select()
+                .apiInfo(apiInfo(swaggerProperties))
+                .groupName(dragonProperties.getName())
+                .select()
                 .apis(RequestHandlerSelectors.basePackage(DragonAppConstant.BASE_PACKAGES));
         swaggerProperties.getExcludePath().forEach(p -> apis.paths(PathSelectors.ant(p).negate()));
         return apis.build();
@@ -57,4 +62,6 @@ public class DragonSwaggerAutoConfiguration {
                 .version(swaggerProperties.getVersion())
                 .build();
     }
+
+    private static final List<String> DEFAULT_EXCLUDE_PATH = Arrays.asList("/error", "/actuator/**");
 }

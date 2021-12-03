@@ -21,3 +21,8 @@ spring:
           - dataId: dragon.yaml
             group: DRAGON_GROUP
             refresh: true
+  # DataSource Config
+  datasource:
+    url: ${machine.dragon.system.datasource.url}
+    username: ${machine.dragon.system.datasource.username}
+    password: ${machine.dragon.system.datasource.password}
