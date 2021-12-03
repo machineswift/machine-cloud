@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("client/system/department")
 public class DragonDepartmentClientImpl implements DragonDepartmentClient {
 
-    @Value("${machine2}")
-    private String machine;
-
     @Autowired
     private DragonDepartmentService dragonDepartmentService;
 

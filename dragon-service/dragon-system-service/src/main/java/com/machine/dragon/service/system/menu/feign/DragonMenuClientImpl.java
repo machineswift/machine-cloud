@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("client/system/menu")
 public class DragonMenuClientImpl implements DragonMenuClient {
 
-    @Value("${machine2}")
-    private String machine;
-
     @Override
     @GetMapping("detail")
     public String detail() {
-        String menu = "menu " + machine;
+        String menu = "menu";
         log.info(menu);
         return menu;
     }

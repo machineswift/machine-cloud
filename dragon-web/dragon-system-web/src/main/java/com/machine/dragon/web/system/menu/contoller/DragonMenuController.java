@@ -21,9 +21,6 @@ public class DragonMenuController {
     @Value("${machine1}")
     private String machine1;
 
-    @Value("${machine2}")
-    private String machine2;
-
     @Autowired
     private DragonMenuClient dragonMenuClient;
 
@@ -34,7 +31,7 @@ public class DragonMenuController {
     public String get() {
         String menu = dragonMenuClient.detail();
         String customer = dragonCustomerClient.detail();
-        log.info(menu + customer + machine2 + machine1);
+        log.info(menu + customer + machine1);
         return menu + customer;
     }
 }

@@ -5,6 +5,8 @@ spring:
     active: dev
   application:
     name: dragon-rabbit-server
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     nacos:
       discovery:

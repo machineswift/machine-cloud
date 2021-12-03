@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("client/psm/coupon")
 public class DragonCouponClientImpl implements DragonCouponClient {
 
-    @Value("${machine2}")
-    private String machine;
-
     @Override
     @GetMapping("detail")
     public String detail() {
-        String coupon = "coupon " + machine;
+        String coupon = "coupon";
         log.info(coupon);
         return coupon;
     }

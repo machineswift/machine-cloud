@@ -26,5 +26,5 @@ public @interface DragonRabbitReliableMessageAnnotation {
     /**
      * 最大重发次数(防止队列阻塞触发无限循环发送可靠消息)
      */
-    int maxResendTimes() default 15;
+    int maxResendTimes() default 12;
 }

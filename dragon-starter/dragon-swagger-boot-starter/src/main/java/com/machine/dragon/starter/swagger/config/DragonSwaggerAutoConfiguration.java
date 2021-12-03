@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -25,6 +26,7 @@ import java.util.List;
 @EnableSwagger2WebMvc
 @EnableConfigurationProperties({DragonProperties.class, DragonSwaggerProperties.class})
 @DragonPropertySource(value = "classpath:/dragon-swagger.yml")
+@Profile(value = "!prod")
 public class DragonSwaggerAutoConfiguration {
 
     @Autowired

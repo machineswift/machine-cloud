@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("client/pss/product")
 public class DragonProductClientImpl implements DragonProductClient {
 
-    @Value("${machine2}")
-    private String machine;
-
     @Override
     @GetMapping("detail")
     public String detail() {
-        String product = "product " + machine;
+        String product = "product";
         log.info(product);
         return product;
     }

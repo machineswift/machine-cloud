@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("client/crm/customer")
 public class DragonCustomerClientImpl implements DragonCustomerClient {
 
-    @Value("${machine2}")
-    private String machine;
-
     @Override
     @GetMapping("detail")
     public String detail() {
-        String customer = "customer " + machine;
+        String customer = "customer";
         log.info(customer);
         return customer;
     }

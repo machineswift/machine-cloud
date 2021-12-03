@@ -25,9 +25,6 @@ public class DragonDepartmentController {
     @Value("${machine1}")
     private String machine1;
 
-    @Value("${machine2}")
-    private String machine2;
-
     @Autowired
     private DragonMenuClient dragonMenuClient;
 
@@ -40,7 +37,7 @@ public class DragonDepartmentController {
     public String get(@RequestParam(value = "departmentId") Long departmentId) {
         String menu = dragonMenuClient.detail();
         DragonDepartmentDetailOutVo vo = dragonDepartmentClient.getByDepartmentId(departmentId);
-        log.info(menu + machine2 + machine1);
+        log.info(menu + machine1);
         return menu + vo.toString();
     }
 }

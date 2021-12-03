@@ -23,9 +23,6 @@ public class DragonCustomerController {
     @Value("${machine1}")
     private String machine1;
 
-    @Value("${machine2}")
-    private String machine2;
-
     @Autowired
     private DragonCustomerClient dragonCustomerClient;
 
@@ -34,7 +31,7 @@ public class DragonCustomerController {
     @GetMapping("get")
     public String get(@RequestParam(value = "customerId") String customerId) {
         String helloWorld = dragonCustomerClient.detail();
-        log.info(helloWorld + machine2 + machine1);
+        log.info(helloWorld + machine1);
         return helloWorld;
     }
 }

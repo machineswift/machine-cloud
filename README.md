@@ -16,5 +16,3 @@
 ## spring-boot-starter-amqp rabbit
 
 ## mybatis plus
-
-

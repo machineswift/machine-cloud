@@ -26,7 +26,6 @@
         `is_deleted`
     </sql>
 
-
     <resultMap id="DragonRabbitReliableEntityMap"
                type="com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliableMessageEntity">
         <id column="id" property="id"/>
@@ -57,5 +56,27 @@
         from t_dragon_rabbit_reliable_message drrm
         where drrm.message_key = #{messageKey}
     </delete>
+
+    <insert id="deadById">
+        insert into t_dragon_rabbit_dead_message
+        select *
+        from t_dragon_rabbit_reliable_message
+        where id = #{id}
+    </insert>
+
+    <update id="update4Subscribe">
+        update t_dragon_rabbit_reliable_message
+        set
+        <if test="inDto.reason != null">
+            `reason` = #{inDto.reason},
+        </if>
+        <if test="inDto.remark != null">
+            `remark` = #{inDto.remark},
+        </if>
+        subscribe_times = subscribe_times + 1,
+        last_subscribe_time = now(3),
+        next_exe_time = date_add(NOW(3), interval #{inDto.nextTimeSeconds} second)
+        where id = #{inDto.id}
+    </update>
 
 </mapper>

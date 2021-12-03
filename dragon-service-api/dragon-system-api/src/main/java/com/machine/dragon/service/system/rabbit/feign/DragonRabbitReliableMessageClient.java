@@ -18,9 +18,6 @@ public interface DragonRabbitReliableMessageClient {
     @GetMapping("deleteById")
     void deleteById(@RequestParam(name = "id") String id);
 
-    @GetMapping("deleteByMessageKey")
-    void deleteByMessageKey(@RequestParam(name = "messageKey") String messageKey);
-
     @GetMapping("deadById")
     void deadById(@RequestParam(name = "id") String id);
 

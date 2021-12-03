@@ -141,7 +141,7 @@ public class DragonRabbitReliableMessageAspect {
     }
 
     /**
-     * 规则:MD5(producerExchange+producerRoutingKey+consumerQueues)+value(uniqueKeyFields)
+     * 规则:MD5(tenantId+publishExchange+publishRoutingKey+subscribeQueues)+value(uniqueKeyFields)
      */
     private String generateMessageKey(DragonRabbitBaseMessage rabbitBaseMessage,
                                       DragonRabbitReliableMessageAnnotation reliableMessageAnnotation) {
