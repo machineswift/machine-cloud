@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.machine.dragon.service.**.mapper.**")
+@MapperScan({"com.machine.dragon.service.**.mapper.**"})
 @EnableConfigurationProperties(DragonMybatisPlusProperties.class)
 @DragonPropertySource(value = "classpath:/dragon-mybatis.yml")
 public class DragonMybatisPlusAutoConfiguration {

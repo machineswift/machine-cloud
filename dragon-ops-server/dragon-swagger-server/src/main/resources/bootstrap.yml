@@ -7,22 +7,6 @@ spring:
     active: dev
   application:
     name: dragon-swagger-server
-  cloud:
-    nacos:
-      discovery:
-        username: nacos
-        password: nacos
-        namespace: ${spring.profiles.active}
-        group: DRAGON_GROUP
-      config:
-        server-addr: 127.0.0.1:8848 #nacos中心地址
-        file-extension: yaml # 配置文件格式
-        namespace: ${spring.profiles.active}
-        group: DRAGON_GROUP
-        sharedConfigs:
-          - dataId: dragon.yaml
-            group: DRAGON_GROUP
-            refresh: true
 
 knife4j:
   enableAggregation: true
@@ -30,8 +14,8 @@ knife4j:
     enable: true
     routes:
       - name: dragon-system-web
-        uri: http://localhost:8888/dragon-system-web/v1
+        uri: http://localhost:8800/dragon-system-web/v1
         location: /v2/api-docs?group=dragon-system-web
       - name: dragon-crm-web
-        uri: http://localhost:8888/dragon-crm-web/v1
+        uri: http://localhost:8800/dragon-crm-web/v1
         location: /v2/api-docs?group=dragon-crm-web
