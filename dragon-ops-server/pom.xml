@@ -15,6 +15,7 @@
     <modules>
         <module>dragon-gateway-server</module>
         <module>dragon-swagger-server</module>
+        <module>dragon-xxljob-admin-server</module>
     </modules>
 
     <properties>
