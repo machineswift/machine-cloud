@@ -30,12 +30,13 @@ xxl:
       addresses: http://127.0.0.1:8802/dragon-xxljob-admin-server
     accessToken:
     executor:
+      # xxl-job executor appname
       appname: xxl-job-executor-sample
       # xxl-job executor registry-address: default use address to registry , otherwise use ip:port if address is null
       address:
       # xxl-job executor server-info（宿主机的ip和端口）
       ip:
-      port: 9998
+      port: 9999
       # xxl-job executor log-path
       logpath: /Users/machine/work/data/applogs/xxl-job/jobhandler
       # xxl-job executor log-retention-days
