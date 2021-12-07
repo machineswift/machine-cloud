@@ -1,4 +1,4 @@
-package com.machine.dragon.server.isc.rabbit.departemnt.subscribe;
+package com.machine.dragon.server.isc.rabbit.department.subscribe;
 
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.sdk.isc.rabbit.department.config.DragonDepartmentRabbitConfig;

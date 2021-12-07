@@ -59,4 +59,10 @@ public class DragonRabbitReliableMessageClientImpl implements DragonRabbitReliab
     public DragonRabbitReliableMessage getById(String id) {
         return dragonRabbitReliableMessageService.getById(id);
     }
+
+    @Override
+    @GetMapping("resendMessage")
+    public void resendMessage() {
+        log.info("定时任务重新发送可靠消息");
+    }
 }

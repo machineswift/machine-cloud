@@ -5,6 +5,8 @@ server:
 spring:
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: dragon-xxljob-executor-server
   cloud:

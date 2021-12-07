@@ -26,4 +26,7 @@ public interface DragonRabbitReliableMessageClient {
 
     @GetMapping("getById")
     DragonRabbitReliableMessage getById(@RequestParam(name = "id") String id);
+
+    @GetMapping("resendMessage")
+    void resendMessage();
 }
