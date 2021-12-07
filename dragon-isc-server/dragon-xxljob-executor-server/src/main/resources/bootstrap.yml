@@ -1,0 +1,45 @@
+server:
+  port: 8842
+  servlet:
+    context-path: /dragon-xxljob-executor-server
+spring:
+  profiles:
+    active: dev
+  application:
+    name: dragon-xxljob-executor-server
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: ${spring.profiles.active}
+        group: DRAGON_GROUP
+      config:
+        server-addr: 127.0.0.1:8848 #nacos中心地址
+        file-extension: yaml # 配置文件格式
+        namespace: ${spring.profiles.active}
+        group: DRAGON_GROUP
+        sharedConfigs:
+          - dataId: dragon.yaml
+            group: DRAGON_GROUP
+            refresh: true
+
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8802/dragon-xxljob-admin-server
+    accessToken:
+    executor:
+      appname: xxl-job-executor-sample
+      # xxl-job executor registry-address: default use address to registry , otherwise use ip:port if address is null
+      address:
+      # xxl-job executor server-info（宿主机的ip和端口）
+      ip:
+      port: 9998
+      # xxl-job executor log-path
+      logpath: /Users/machine/work/data/applogs/xxl-job/jobhandler
+      # xxl-job executor log-retention-days
+      logretentiondays: 180
+
+logging:
+  config: classpath:logback.xml

@@ -14,6 +14,7 @@
 
     <modules>
         <module>dragon-rabbit-server</module>
+        <module>dragon-xxljob-executor-server</module>
     </modules>
 
     <properties>

@@ -9,10 +9,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-public class XxlJobAdminApplication {
+public class DragonXxlJobAdminServerApp {
 
 	public static void main(String[] args) {
-        SpringApplication.run(XxlJobAdminApplication.class, args);
+        SpringApplication.run(DragonXxlJobAdminServerApp.class, args);
 	}
 
 }
