@@ -4,6 +4,9 @@ import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
 import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDto;
 import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDto;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public interface DragonRabbitReliableMessageDao {
 
     String insert(DragonRabbitReliableMessageInitInDto inDto);
@@ -18,4 +21,9 @@ public interface DragonRabbitReliableMessageDao {
 
     DragonRabbitReliableMessage getById(String id);
 
+    List<DragonRabbitReliableMessage> selectByCurrentDateTime(LocalDateTime dateTime);
+
+    int update4ResendMessage(String id,
+                             LocalDateTime updateTime,
+                             Integer nextTimeSeconds);
 }

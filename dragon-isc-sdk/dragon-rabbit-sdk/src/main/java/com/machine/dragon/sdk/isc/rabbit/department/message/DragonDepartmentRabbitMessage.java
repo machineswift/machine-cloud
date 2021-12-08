@@ -1,6 +1,6 @@
 package com.machine.dragon.sdk.isc.rabbit.department.message;
 
-import com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitBaseMessage;
+import com.machine.dragon.common.core.bean.rabbit.DragonRabbitBaseMessage;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

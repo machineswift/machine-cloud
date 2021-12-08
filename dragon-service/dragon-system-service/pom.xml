@@ -30,6 +30,12 @@
 
         <dependency>
             <groupId>com.machine</groupId>
+            <artifactId>dragon-rabbitmq-boot-starter</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.machine</groupId>
             <artifactId>dragon-rabbit-sdk</artifactId>
             <version>${version}</version>
         </dependency>

@@ -75,8 +75,30 @@
         </if>
         subscribe_times = subscribe_times + 1,
         last_subscribe_time = now(3),
-        next_exe_time = date_add(NOW(3), interval #{inDto.nextTimeSeconds} second)
+        next_exe_time = date_add(now(3), interval #{inDto.nextTimeSeconds} second)
         where id = #{inDto.id}
     </update>
+
+    <update id="update4ResendMessage">
+        update t_dragon_rabbit_reliable_message
+        set resend_times = resend_times + 1,
+        <if test="nextTimeSeconds != null">
+            next_exe_time = date_add(now(3), interval #{nextTimeSeconds} second),
+        </if>
+        last_send_time = now(3)
+        where id = #{id}
+        and update_time = #{updateTime}
+    </update>
+
+
+    <select id="selectByCurrentDateTime" resultMap="DragonRabbitReliableEntityMap">
+        select
+        <include refid="DragonRabbitReliableMessageColumn"/>
+        from t_dragon_rabbit_reliable_message
+        where next_exe_time &lt; now(3)
+        and update_time &lt; #{dateTime}
+        order by next_exe_time
+        limit 500
+    </select>
 
 </mapper>

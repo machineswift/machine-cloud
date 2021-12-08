@@ -9,6 +9,12 @@ import com.machine.dragon.service.system.rabbit.mapper.DragonRabbitReliableMessa
 import com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliableMessageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
+
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableMessageDao {
@@ -49,6 +55,22 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     public DragonRabbitReliableMessage getById(String id) {
         DragonRabbitReliableMessageEntity entity = dragonRabbitReliableMessageMapper.selectById(id);
         return DragonJsonUtil.copy(entity, DragonRabbitReliableMessage.class);
+    }
+
+    @Override
+    public List<DragonRabbitReliableMessage> selectByCurrentDateTime(LocalDateTime dateTime) {
+        List<DragonRabbitReliableMessageEntity> entityList = dragonRabbitReliableMessageMapper.selectByCurrentDateTime(dateTime);
+        if (CollectionUtils.isEmpty(entityList)) {
+            return Collections.EMPTY_LIST;
+        }
+        return entityList.stream().map(a -> DragonJsonUtil.copy(a, DragonRabbitReliableMessage.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public int update4ResendMessage(String id,
+                                    LocalDateTime updateTime,
+                                    Integer nextTimeSeconds) {
+        return dragonRabbitReliableMessageMapper.update4ResendMessage(id, updateTime, nextTimeSeconds);
     }
 
 }

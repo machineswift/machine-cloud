@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Slf4j
 @Service
 public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitReliableMessageService {
@@ -46,7 +49,19 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
     }
 
     @Override
+    public int update4ResendMessage(String id,
+                                    LocalDateTime updateTime,
+                                    Integer nextTimeSeconds) {
+        return dragonRabbitReliableMessageDao.update4ResendMessage(id, updateTime, nextTimeSeconds);
+    }
+
+    @Override
     public DragonRabbitReliableMessage getById(String id) {
         return dragonRabbitReliableMessageDao.getById(id);
+    }
+
+    @Override
+    public List<DragonRabbitReliableMessage> selectByCurrentDateTime(LocalDateTime dateTime) {
+        return dragonRabbitReliableMessageDao.selectByCurrentDateTime(dateTime);
     }
 }

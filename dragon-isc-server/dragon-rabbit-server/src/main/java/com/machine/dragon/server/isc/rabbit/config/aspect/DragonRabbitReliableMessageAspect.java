@@ -5,7 +5,7 @@ import com.jayway.jsonpath.JsonPath;
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.common.tool.string.DragonStringUtil;
-import com.machine.dragon.sdk.isc.rabbit.config.DragonRabbitBaseMessage;
+import com.machine.dragon.common.core.bean.rabbit.DragonRabbitBaseMessage;
 import com.machine.dragon.service.system.rabbit.feign.DragonRabbitReliableMessageClient;
 import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageInitInVo;
 import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageUpdate4SubscribeInVo;

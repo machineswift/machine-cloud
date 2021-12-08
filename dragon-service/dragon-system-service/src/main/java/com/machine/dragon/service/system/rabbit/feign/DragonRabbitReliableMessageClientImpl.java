@@ -1,25 +1,40 @@
 package com.machine.dragon.service.system.rabbit.feign;
 
+import com.machine.dragon.common.core.bean.rabbit.DragonRabbitBaseMessage;
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
+import com.machine.dragon.common.tool.date.DragonLocalDateTimeUtil;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
+import com.machine.dragon.service.system.database.service.DragonDataBaseService;
 import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageInitInVo;
 import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageUpdate4SubscribeInVo;
 import com.machine.dragon.service.system.rabbit.service.DragonRabbitReliableMessageService;
 import com.machine.dragon.service.system.rabbit.service.inbo.DragonRabbitReliableMessageInitInBo;
 import com.machine.dragon.service.system.rabbit.service.inbo.DragonRabbitReliableMessageUpdate4SubscribeInBo;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @RefreshScope
 @RestController
 @RequestMapping("client/system/rabbitReliableMessage")
 public class DragonRabbitReliableMessageClientImpl implements DragonRabbitReliableMessageClient {
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private DragonDataBaseService dragonDataBaseService;
 
     @Autowired
     private DragonRabbitReliableMessageService dragonRabbitReliableMessageService;
@@ -61,8 +76,49 @@ public class DragonRabbitReliableMessageClientImpl implements DragonRabbitReliab
     }
 
     @Override
+    @SneakyThrows
     @GetMapping("resendMessage")
     public void resendMessage() {
         log.info("定时任务重新发送可靠消息");
+
+        LocalDateTime currentDateTime = dragonDataBaseService.getCurrentDateTime();
+
+        while (true) {
+            List<DragonRabbitReliableMessage> reliableMessageList = dragonRabbitReliableMessageService.
+                    selectByCurrentDateTime(currentDateTime);
+            if (CollectionUtils.isEmpty(reliableMessageList)) {
+                return;
+            }
+
+            for (DragonRabbitReliableMessage reliableMessage : reliableMessageList) {
+                Integer nextTimeSeconds = null;
+                if (reliableMessage.getResendTimes() > reliableMessage.getMaxResendTimes()) {
+                    //超过最大重发次数
+                    deleteById(reliableMessage.getId());
+                    continue;
+                } else {
+                    //发送次数超过消费次数（防止mq队列阻塞引起可靠消息被标记为死亡）
+                    if (reliableMessage.getResendTimes() > reliableMessage.getSubscribeTimes()) {
+                        Long seconds = DragonLocalDateTimeUtil.getSecond(reliableMessage.getNextExeTime()) -
+                                DragonLocalDateTimeUtil.getSecond(reliableMessage.getLastSubscribeTime());
+                        nextTimeSeconds = Math.toIntExact((reliableMessage.getResendTimes() -
+                                reliableMessage.getSubscribeTimes()) * seconds);
+                    }
+                }
+
+                int count = dragonRabbitReliableMessageService.update4ResendMessage(reliableMessage.getId(),
+                        reliableMessage.getUpdateTime(), nextTimeSeconds);
+                if (count > 0) {
+                    //发送可靠消息
+                    DragonRabbitBaseMessage rabbitBaseMessage = (DragonRabbitBaseMessage) DragonJsonUtil.parse(
+                            reliableMessage.getMessageContent(), Class.forName(reliableMessage.getMessageClassName()));
+                    rabbitBaseMessage.setReliableMessage(reliableMessage);
+                    rabbitTemplate.convertAndSend(reliableMessage.getPublishExchange(),
+                            reliableMessage.getPublishRoutingKey(), rabbitBaseMessage);
+                }
+            }
+        }
     }
 }
+
+

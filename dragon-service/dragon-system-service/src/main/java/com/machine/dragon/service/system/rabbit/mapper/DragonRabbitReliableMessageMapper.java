@@ -6,6 +6,9 @@ import com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliab
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Mapper
 public interface DragonRabbitReliableMessageMapper extends BaseMapper<DragonRabbitReliableMessageEntity> {
 
@@ -14,4 +17,11 @@ public interface DragonRabbitReliableMessageMapper extends BaseMapper<DragonRabb
     int deadById(@Param("id") String id);
 
     int update4Subscribe(@Param("inDto") DragonRabbitReliableMessageUpdate4SubscribeInDto inDto);
+
+    int update4ResendMessage(@Param("id") String id,
+                             @Param("updateTime") LocalDateTime updateTime,
+                             @Param("nextTimeSeconds") Integer nextTimeSeconds);
+
+    List<DragonRabbitReliableMessageEntity> selectByCurrentDateTime(@Param("dateTime") LocalDateTime dateTime);
+
 }
