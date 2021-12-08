@@ -87,13 +87,16 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
                 } else {
                     //发送次数超过消费次数（防止mq队列阻塞引起可靠消息被标记为死亡）
                     if (reliableMessage.getResendTimes() > reliableMessage.getSubscribeTimes()) {
-                        Long seconds = DragonLocalDateTimeUtil.getSecond(reliableMessage.getNextExeTime()) -
-                                DragonLocalDateTimeUtil.getSecond(reliableMessage.getLastSubscribeTime());
-                        nextTimeSeconds = Math.toIntExact((reliableMessage.getResendTimes() -
-                                reliableMessage.getSubscribeTimes()) * seconds);
+                        List<Integer> retryStrategyList = DragonJsonUtil.readList(reliableMessage.getRetryStrategy(), Integer.class);
+                        if (reliableMessage.getResendTimes() >= reliableMessageList.size()) {
+                            nextTimeSeconds = retryStrategyList.get(reliableMessage.getResendTimes());
+                        } else {
+                            Long seconds = DragonLocalDateTimeUtil.getSecond(reliableMessage.getNextExeTime()) -
+                                    DragonLocalDateTimeUtil.getSecond(reliableMessage.getLastSubscribeTime());
+                            nextTimeSeconds = Math.toIntExact((reliableMessage.getResendTimes() -
+                                    reliableMessage.getSubscribeTimes()) * seconds);
+                        }
                     }
-
-                    // todo 可靠消息
                 }
 
                 int count = dragonRabbitReliableMessageDao.update4ResendMessage(reliableMessage.getId(),
