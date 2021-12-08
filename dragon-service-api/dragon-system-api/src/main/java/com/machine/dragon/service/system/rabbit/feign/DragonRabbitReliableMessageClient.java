@@ -1,8 +1,8 @@
 package com.machine.dragon.service.system.rabbit.feign;
 
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
-import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageInitInVo;
-import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageUpdate4SubscribeInVo;
+import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageInitInVO;
+import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageUpdate4SubscribeInVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface DragonRabbitReliableMessageClient {
 
     @PostMapping("init")
-    String init(@RequestBody DragonRabbitReliableMessageInitInVo inVo);
+    String init(@RequestBody DragonRabbitReliableMessageInitInVO inVo);
 
     @GetMapping("deleteById")
     void deleteById(@RequestParam(name = "id") String id);
@@ -22,7 +22,7 @@ public interface DragonRabbitReliableMessageClient {
     void deadById(@RequestParam(name = "id") String id);
 
     @PostMapping("update4Subscribe")
-    void update4Subscribe(@RequestBody DragonRabbitReliableMessageUpdate4SubscribeInVo inVo);
+    void update4Subscribe(@RequestBody DragonRabbitReliableMessageUpdate4SubscribeInVO inVo);
 
     @GetMapping("getById")
     DragonRabbitReliableMessage getById(@RequestParam(name = "id") String id);

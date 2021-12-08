@@ -7,8 +7,8 @@ import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.common.tool.string.DragonStringUtil;
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitBaseMessage;
 import com.machine.dragon.service.system.rabbit.feign.DragonRabbitReliableMessageClient;
-import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageInitInVo;
-import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageUpdate4SubscribeInVo;
+import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageInitInVO;
+import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageUpdate4SubscribeInVO;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -108,6 +108,7 @@ public class DragonRabbitReliableMessageAspect {
             reliableMessage.setSubscribeQueues(DragonJsonUtil.toJson(rabbitListener.queues()));
             reliableMessage.setResendTimes(0);
             reliableMessage.setMaxResendTimes(reliableMessageAnnotation.maxResendTimes());
+            reliableMessage.setRetryStrategy(DragonJsonUtil.toJson(reliableMessageAnnotation.retryStrategy()));
 
             //生产消息唯一键
             reliableMessage.setMessageKey(generateMessageKey(rabbitBaseMessage, reliableMessageAnnotation));
@@ -115,7 +116,7 @@ public class DragonRabbitReliableMessageAspect {
             //添加消息内容
             reliableMessage.setMessageContent(DragonJsonUtil.toJson(rabbitBaseMessage));
             rabbitBaseMessage.setReliableMessage(reliableMessage);
-            String id = dragonRabbitReliableMessageClient.init(DragonJsonUtil.copy(reliableMessage, DragonRabbitReliableMessageInitInVo.class));
+            String id = dragonRabbitReliableMessageClient.init(DragonJsonUtil.copy(reliableMessage, DragonRabbitReliableMessageInitInVO.class));
             reliableMessage.setId(id);
         } else {
             //重试消息广播场景：非自己消费的消息则跳过,防止消息数量膨胀
@@ -177,7 +178,7 @@ public class DragonRabbitReliableMessageAspect {
             dragonRabbitReliableMessageClient.deadById(reliableMessage.getId());
         } else {
             //修改可靠消息消费状态
-            DragonRabbitReliableMessageUpdate4SubscribeInVo inVo = new DragonRabbitReliableMessageUpdate4SubscribeInVo();
+            DragonRabbitReliableMessageUpdate4SubscribeInVO inVo = new DragonRabbitReliableMessageUpdate4SubscribeInVO();
             inVo.setId(reliableMessage.getId());
             inVo.setNextTimeSeconds(retryStrategy[resendTimes]);
             inVo.setReason(reliableMessage.getReason());

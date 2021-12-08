@@ -1,4 +1,4 @@
-package com.machine.dragon.service.system.rabbit.dao.indto;
+package com.machine.dragon.service.system.rabbit.service.inbo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-public class DragonRabbitReliableMessageInitInDto {
+public class DragonRabbitReliableMessageInitInBO {
     private String messageKey;
     private String messageClassName;
     private String publishName;
@@ -22,6 +22,7 @@ public class DragonRabbitReliableMessageInitInDto {
     private Integer subscribeTimes;
     private LocalDateTime lastSubscribeTime;
     private LocalDateTime nextExeTime;
+    private String retryStrategy;
     private String messageContent;
     private String reason;
     private String remark;

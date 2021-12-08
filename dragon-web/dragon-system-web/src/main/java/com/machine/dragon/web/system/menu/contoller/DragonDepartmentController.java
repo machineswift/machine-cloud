@@ -1,7 +1,7 @@
 package com.machine.dragon.web.system.menu.contoller;
 
 import com.machine.dragon.service.system.department.feign.DragonDepartmentClient;
-import com.machine.dragon.service.system.department.feign.outvo.DragonDepartmentDetailOutVo;
+import com.machine.dragon.service.system.department.feign.outvo.DragonDepartmentDetailOutVO;
 import com.machine.dragon.service.system.menu.feign.DragonMenuClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -36,7 +36,7 @@ public class DragonDepartmentController {
     @GetMapping("get")
     public String get(@RequestParam(value = "departmentId") Long departmentId) {
         String menu = dragonMenuClient.detail();
-        DragonDepartmentDetailOutVo vo = dragonDepartmentClient.getByDepartmentId(departmentId);
+        DragonDepartmentDetailOutVO vo = dragonDepartmentClient.getByDepartmentId(departmentId);
         log.info(menu + machine1);
         return menu + vo.toString();
     }

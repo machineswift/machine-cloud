@@ -18,6 +18,7 @@
         `subscribe_times`,
         `last_subscribe_time`,
         `next_exe_time`,
+        `retry_strategy`,
         `message_content`,
         `reason`,
         `remark`,
@@ -43,6 +44,7 @@
         <result column="subscribe_times" property="subscribeTimes"/>
         <result column="last_subscribe_time" property="lastSubscribeTime"/>
         <result column="next_exe_time" property="nextExeTime"/>
+        <result column="retry_strategy" property="retryStrategy"/>
         <result column="message_content" property="messageContent"/>
         <result column="reason" property="reason"/>
         <result column="remark" property="remark"/>
@@ -74,8 +76,8 @@
             `remark` = #{inDto.remark},
         </if>
         subscribe_times = subscribe_times + 1,
-        last_subscribe_time = now(3),
-        next_exe_time = date_add(now(3), interval #{inDto.nextTimeSeconds} second)
+        last_subscribe_time = now(),
+        next_exe_time = date_add(now(), interval #{inDto.nextTimeSeconds} second)
         where id = #{inDto.id}
     </update>
 
@@ -83,9 +85,9 @@
         update t_dragon_rabbit_reliable_message
         set resend_times = resend_times + 1,
         <if test="nextTimeSeconds != null">
-            next_exe_time = date_add(now(3), interval #{nextTimeSeconds} second),
+            next_exe_time = date_add(now(), interval #{nextTimeSeconds} second),
         </if>
-        last_send_time = now(3)
+        last_send_time = now()
         where id = #{id}
         and update_time = #{updateTime}
     </update>
@@ -95,7 +97,7 @@
         select
         <include refid="DragonRabbitReliableMessageColumn"/>
         from t_dragon_rabbit_reliable_message
-        where next_exe_time &lt; now(3)
+        where next_exe_time &lt; now()
         and update_time &lt; #{dateTime}
         order by next_exe_time
         limit 500

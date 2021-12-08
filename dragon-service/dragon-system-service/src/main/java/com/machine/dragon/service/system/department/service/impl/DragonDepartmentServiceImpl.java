@@ -4,9 +4,9 @@ import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.sdk.isc.rabbit.department.message.DragonDepartmentRabbitMessage;
 import com.machine.dragon.sdk.isc.rabbit.department.publish.DragonDepartmentPublish;
 import com.machine.dragon.service.system.department.dao.DragonDepartmentDao;
-import com.machine.dragon.service.system.department.dao.outdto.DragonDepartmentOutDto;
+import com.machine.dragon.service.system.department.dao.outdto.DragonDepartmentOutDTO;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
-import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBo;
+import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,13 @@ public class DragonDepartmentServiceImpl implements DragonDepartmentService {
     private DragonDepartmentPublish dragonDepartmentPublish;
 
     @Override
-    public DragonDepartmentDetailOutBo getByDepartmentId(Long departmentId) {
-        DragonDepartmentOutDto outDto = dragonDepartmentDao.getByDepartmentId(departmentId);
+    public DragonDepartmentDetailOutBO getByDepartmentId(Long departmentId) {
+        DragonDepartmentOutDTO outDto = dragonDepartmentDao.getByDepartmentId(departmentId);
         if (null == outDto) {
             return null;
         }
 
         dragonDepartmentPublish.publishDragonDepartmentRabbitMessage(new DragonDepartmentRabbitMessage(departmentId));
-        return DragonJsonUtil.copy(outDto, DragonDepartmentDetailOutBo.class);
+        return DragonJsonUtil.copy(outDto, DragonDepartmentDetailOutBO.class);
     }
 }

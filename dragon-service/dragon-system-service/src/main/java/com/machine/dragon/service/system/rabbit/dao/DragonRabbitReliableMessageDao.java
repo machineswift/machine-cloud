@@ -1,15 +1,15 @@
 package com.machine.dragon.service.system.rabbit.dao;
 
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
-import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDto;
-import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDto;
+import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDTO;
+import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface DragonRabbitReliableMessageDao {
 
-    String insert(DragonRabbitReliableMessageInitInDto inDto);
+    String insert(DragonRabbitReliableMessageInitInDTO inDto);
 
     int deleteById(String id);
 
@@ -17,7 +17,7 @@ public interface DragonRabbitReliableMessageDao {
 
     void deadById(String id);
 
-    void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInDto inDto);
+    void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInDTO inDto);
 
     DragonRabbitReliableMessage getById(String id);
 

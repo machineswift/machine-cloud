@@ -3,7 +3,7 @@
 <mapper namespace="com.machine.dragon.service.system.database.mapper.DragonDataBaseMapper">
 
     <select id="getCurrentDateTime" resultType="java.time.LocalDateTime">
-        select now(3)
+        select now(6)
     </select>
 
 </mapper>

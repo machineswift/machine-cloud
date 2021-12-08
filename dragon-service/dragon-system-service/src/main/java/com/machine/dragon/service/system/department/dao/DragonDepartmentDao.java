@@ -1,8 +1,8 @@
 package com.machine.dragon.service.system.department.dao;
 
-import com.machine.dragon.service.system.department.dao.outdto.DragonDepartmentOutDto;
+import com.machine.dragon.service.system.department.dao.outdto.DragonDepartmentOutDTO;
 
 public interface DragonDepartmentDao  {
 
-    DragonDepartmentOutDto getByDepartmentId(Long departmentId);
+    DragonDepartmentOutDTO getByDepartmentId(Long departmentId);
 }

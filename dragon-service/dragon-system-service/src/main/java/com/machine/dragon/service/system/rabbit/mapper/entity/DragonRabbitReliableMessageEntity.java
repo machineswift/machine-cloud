@@ -32,6 +32,7 @@ public class DragonRabbitReliableMessageEntity {
     private Integer subscribeTimes;
     private LocalDateTime lastSubscribeTime;
     private LocalDateTime nextExeTime;
+    private String retryStrategy;
     private String messageContent;
     private String reason;
     private String remark;

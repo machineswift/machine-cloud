@@ -6,11 +6,11 @@ import com.machine.dragon.common.tool.date.DragonLocalDateTimeUtil;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.database.dao.DragonDataBaseDao;
 import com.machine.dragon.service.system.rabbit.dao.DragonRabbitReliableMessageDao;
-import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDto;
-import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDto;
+import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDTO;
+import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDTO;
 import com.machine.dragon.service.system.rabbit.service.DragonRabbitReliableMessageService;
-import com.machine.dragon.service.system.rabbit.service.inbo.DragonRabbitReliableMessageInitInBo;
-import com.machine.dragon.service.system.rabbit.service.inbo.DragonRabbitReliableMessageUpdate4SubscribeInBo;
+import com.machine.dragon.service.system.rabbit.service.inbo.DragonRabbitReliableMessageInitInBO;
+import com.machine.dragon.service.system.rabbit.service.inbo.DragonRabbitReliableMessageUpdate4SubscribeInBO;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -38,9 +38,9 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String init(DragonRabbitReliableMessageInitInBo inBo) {
+    public String init(DragonRabbitReliableMessageInitInBO inBo) {
         dragonRabbitReliableMessageDao.deleteByMessageKey(inBo.getMessageKey());
-        return dragonRabbitReliableMessageDao.insert(DragonJsonUtil.copy(inBo, DragonRabbitReliableMessageInitInDto.class));
+        return dragonRabbitReliableMessageDao.insert(DragonJsonUtil.copy(inBo, DragonRabbitReliableMessageInitInDTO.class));
     }
 
     @Override
@@ -56,9 +56,9 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
     }
 
     @Override
-    public void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInBo inBo) {
+    public void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInBO inBo) {
         dragonRabbitReliableMessageDao.update4Subscribe(
-                DragonJsonUtil.copy(inBo, DragonRabbitReliableMessageUpdate4SubscribeInDto.class));
+                DragonJsonUtil.copy(inBo, DragonRabbitReliableMessageUpdate4SubscribeInDTO.class));
     }
 
     @Override
@@ -92,6 +92,8 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
                         nextTimeSeconds = Math.toIntExact((reliableMessage.getResendTimes() -
                                 reliableMessage.getSubscribeTimes()) * seconds);
                     }
+
+                    // todo 可靠消息
                 }
 
                 int count = dragonRabbitReliableMessageDao.update4ResendMessage(reliableMessage.getId(),

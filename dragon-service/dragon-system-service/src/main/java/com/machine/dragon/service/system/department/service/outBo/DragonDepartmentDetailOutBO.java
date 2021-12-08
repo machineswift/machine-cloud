@@ -1,11 +1,11 @@
-package com.machine.dragon.service.system.department.feign.outvo;
+package com.machine.dragon.service.system.department.service.outBo;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class DragonDepartmentDetailOutVo {
+public class DragonDepartmentDetailOutBO {
 
     /**
      * 部门Id。根部门此字段为1

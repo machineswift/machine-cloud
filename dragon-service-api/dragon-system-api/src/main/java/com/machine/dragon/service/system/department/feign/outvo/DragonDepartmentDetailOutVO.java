@@ -1,21 +1,11 @@
-package com.machine.dragon.service.system.department.dao.outdto;
+package com.machine.dragon.service.system.department.feign.outvo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class DragonDepartmentOutDto {
-
-    @TableId(type = IdType.ASSIGN_UUID)
-    private String id;
-
-    /**
-     * 租户id
-     */
-    private Integer tenantId;
+public class DragonDepartmentDetailOutVO {
 
     /**
      * 部门Id。根部门此字段为1

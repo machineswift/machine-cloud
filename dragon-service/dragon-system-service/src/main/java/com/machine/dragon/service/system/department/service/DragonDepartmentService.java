@@ -1,7 +1,7 @@
 package com.machine.dragon.service.system.department.service;
 
-import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBo;
+import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBO;
 
 public interface DragonDepartmentService {
-    DragonDepartmentDetailOutBo getByDepartmentId(Long departmentId);
+    DragonDepartmentDetailOutBO getByDepartmentId(Long departmentId);
 }

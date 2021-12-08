@@ -1,13 +1,11 @@
-package com.machine.dragon.service.system.rabbit.feign.invo;
+package com.machine.dragon.service.system.rabbit.service.inbo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
-public class DragonRabbitReliableMessageUpdate4SubscribeInVo {
+public class DragonRabbitReliableMessageUpdate4SubscribeInBO {
 
     private String id;
     private Integer nextTimeSeconds;

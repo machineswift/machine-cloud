@@ -1,7 +1,7 @@
 package com.machine.dragon.service.system.rabbit.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDto;
+import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDTO;
 import com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliableMessageEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +16,7 @@ public interface DragonRabbitReliableMessageMapper extends BaseMapper<DragonRabb
 
     int deadById(@Param("id") String id);
 
-    int update4Subscribe(@Param("inDto") DragonRabbitReliableMessageUpdate4SubscribeInDto inDto);
+    int update4Subscribe(@Param("inDto") DragonRabbitReliableMessageUpdate4SubscribeInDTO inDto);
 
     int update4ResendMessage(@Param("id") String id,
                              @Param("updateTime") LocalDateTime updateTime,

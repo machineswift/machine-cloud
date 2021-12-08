@@ -3,8 +3,8 @@ package com.machine.dragon.service.system.rabbit.dao.impl;
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.rabbit.dao.DragonRabbitReliableMessageDao;
-import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDto;
-import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDto;
+import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDTO;
+import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDTO;
 import com.machine.dragon.service.system.rabbit.mapper.DragonRabbitReliableMessageMapper;
 import com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliableMessageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     private DragonRabbitReliableMessageMapper dragonRabbitReliableMessageMapper;
 
     @Override
-    public String insert(DragonRabbitReliableMessageInitInDto inDto) {
+    public String insert(DragonRabbitReliableMessageInitInDTO inDto) {
         DragonRabbitReliableMessageEntity entity = DragonJsonUtil.copy(inDto, DragonRabbitReliableMessageEntity.class);
         //todo 处理租户信息
         entity.setTenantId(1);
@@ -47,7 +47,7 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     }
 
     @Override
-    public void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInDto inDto) {
+    public void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInDTO inDto) {
         dragonRabbitReliableMessageMapper.update4Subscribe(inDto);
     }
 
