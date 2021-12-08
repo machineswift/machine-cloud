@@ -17,11 +17,7 @@ public interface DragonRabbitReliableMessageService {
 
     void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInBo inBo);
 
-    int update4ResendMessage(String id,
-                             LocalDateTime updateTime,
-                             Integer nextTimeSeconds);
+    void resendMessage();
 
     DragonRabbitReliableMessage getById(String id);
-
-    List<DragonRabbitReliableMessage> selectByCurrentDateTime(LocalDateTime dateTime);
 }
