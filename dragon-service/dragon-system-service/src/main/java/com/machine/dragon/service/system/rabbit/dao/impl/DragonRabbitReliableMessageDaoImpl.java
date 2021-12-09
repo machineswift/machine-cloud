@@ -52,25 +52,27 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     }
 
     @Override
+    public int update4ResendMessage(String id,
+                                    LocalDateTime updateTime,
+                                    Integer nextTimeSeconds) {
+
+        Thread t=new Thread();
+        return dragonRabbitReliableMessageMapper.update4ResendMessage(id, updateTime, nextTimeSeconds);
+    }
+
+    @Override
     public DragonRabbitReliableMessage getById(String id) {
         DragonRabbitReliableMessageEntity entity = dragonRabbitReliableMessageMapper.selectById(id);
         return DragonJsonUtil.copy(entity, DragonRabbitReliableMessage.class);
     }
 
     @Override
-    public List<DragonRabbitReliableMessage> selectByCurrentDateTime(LocalDateTime dateTime) {
+    public List<DragonRabbitReliableMessage> listByCurrentDateTime(LocalDateTime dateTime) {
         List<DragonRabbitReliableMessageEntity> entityList = dragonRabbitReliableMessageMapper.selectByCurrentDateTime(dateTime);
         if (CollectionUtils.isEmpty(entityList)) {
             return Collections.EMPTY_LIST;
         }
         return entityList.stream().map(a -> DragonJsonUtil.copy(a, DragonRabbitReliableMessage.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public int update4ResendMessage(String id,
-                                    LocalDateTime updateTime,
-                                    Integer nextTimeSeconds) {
-        return dragonRabbitReliableMessageMapper.update4ResendMessage(id, updateTime, nextTimeSeconds);
     }
 
 }

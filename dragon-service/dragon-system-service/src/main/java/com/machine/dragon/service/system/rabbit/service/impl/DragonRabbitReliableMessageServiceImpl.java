@@ -26,7 +26,6 @@ import java.util.List;
 @Service
 public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitReliableMessageService {
 
-
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
@@ -73,7 +72,7 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
 
         while (true) {
             List<DragonRabbitReliableMessage> reliableMessageList = dragonRabbitReliableMessageDao.
-                    selectByCurrentDateTime(currentDateTime);
+                    listByCurrentDateTime(currentDateTime);
             if (CollectionUtils.isEmpty(reliableMessageList)) {
                 return;
             }

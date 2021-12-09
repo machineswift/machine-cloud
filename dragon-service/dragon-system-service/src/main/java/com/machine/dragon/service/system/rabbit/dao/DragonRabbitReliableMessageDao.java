@@ -19,11 +19,12 @@ public interface DragonRabbitReliableMessageDao {
 
     void update4Subscribe(DragonRabbitReliableMessageUpdate4SubscribeInDTO inDto);
 
-    DragonRabbitReliableMessage getById(String id);
-
-    List<DragonRabbitReliableMessage> selectByCurrentDateTime(LocalDateTime dateTime);
-
     int update4ResendMessage(String id,
                              LocalDateTime updateTime,
                              Integer nextTimeSeconds);
+
+    DragonRabbitReliableMessage getById(String id);
+
+    List<DragonRabbitReliableMessage> listByCurrentDateTime(LocalDateTime dateTime);
+
 }

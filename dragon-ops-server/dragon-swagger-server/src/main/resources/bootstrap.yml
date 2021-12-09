@@ -1,7 +1,7 @@
 server:
   port: 8801
   servlet:
-    context-path: /${spring.application.name}/v1
+    context-path: /${spring.application.name}
 spring:
   profiles:
     active: dev
@@ -14,8 +14,8 @@ knife4j:
     enable: true
     routes:
       - name: dragon-system-web
-        uri: http://localhost:8800/dragon-system-web/v1
+        uri: http://localhost:8800/dragon-system-web/
         location: /v2/api-docs?group=dragon-system-web
       - name: dragon-crm-web
-        uri: http://localhost:8800/dragon-crm-web/v1
+        uri: http://localhost:8800/dragon-crm-web/
         location: /v2/api-docs?group=dragon-crm-web

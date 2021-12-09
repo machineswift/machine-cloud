@@ -14,7 +14,7 @@ CREATE TABLE `t_dragon_department`
     `create_time`   DATETIME    NOT NULL DEFAULT now() COMMENT '创建时间',
     `update_time`   DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`    tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
-    PRIMARY KEY (`id`) USING BTREE,
+    PRIMARY KEY `pk`(`id`) USING BTREE,
     UNIQUE KEY `uk_01`(`tenant_id`,`department_id`,`parent_id`) USING BTREE,
     KEY             `idx_01` (`tenant_id`,`parent_id`) USING BTREE,
     KEY             `idx_02` (`tenant_id`,`code`) USING BTREE
@@ -38,7 +38,7 @@ CREATE TABLE `t_dragon_user`
     `update_user` varchar(32) NOT NULL COMMENT '修改人',
     `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
-    PRIMARY KEY (`id`) USING BTREE
+    PRIMARY KEY `pk`(`id`) USING BTREE,
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表';
 
 -- ----------------------------
@@ -58,7 +58,7 @@ CREATE TABLE `t_dragon_role`
     `update_user` varchar(32) NOT NULL COMMENT '修改人',
     `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
-    PRIMARY KEY (`id`) USING BTREE,
+    PRIMARY KEY `pk`(`id`) USING BTREE,
     UNIQUE KEY `uk_01`(`tenant_id`,`role_id`,`parent_id`) USING BTREE,
     KEY           `idx_01` (`tenant_id`,`parent_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表';
@@ -75,7 +75,7 @@ CREATE TABLE `t_dragon_user_department`
     `user_id`       varchar(32) NOT NULL COMMENT '用户ID',
     `create_time`   DATETIME    NOT NULL DEFAULT now() COMMENT '创建时间',
     `update_time`   DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
-    PRIMARY KEY (`id`) USING BTREE,
+    PRIMARY KEY `pk`(`id`) USING BTREE,
     UNIQUE KEY `uk_01`(`tenant_id`,`department_id`,`user_id`) USING BTREE,
     KEY             `idx_01` (`tenant_id`,`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户部门表';
@@ -109,7 +109,7 @@ CREATE TABLE `t_dragon_rabbit_dead_message`
     `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
     `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
-    PRIMARY KEY (`id`),
+    PRIMARY KEY `pk`(`id`) USING BTREE,
     KEY                   `idx_01` (`tenant_id`,`message_key`),
     KEY                   `idx_02` (`next_exe_time`),
     KEY                   `idx_03` (`publish_routing_key`),
@@ -146,7 +146,7 @@ CREATE TABLE `t_dragon_rabbit_reliable_message`
     `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
     `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
-    PRIMARY KEY (`id`),
+    PRIMARY KEY `pk`(`id`) USING BTREE,
     UNIQUE KEY `uk_01` (`tenant_id`,`message_key`),
     KEY                   `idx_02` (`next_exe_time`),
     KEY                   `idx_03` (`publish_routing_key`),
