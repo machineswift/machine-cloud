@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DragonDepartmentSubscribe {
 
-    @DragonRabbitReliableMessageAnnotation(publishName = "部门", retryStrategy = {5, 30, 300, 1800, 3600, 7200},
+    @DragonRabbitReliableMessageAnnotation(publishName = "部门", retryStrategy = {30, 120, 600, 1800, 3600, 7200},
             uniqueKeyFields = {"departmentId"}, maxResendTimes = 10)
     @RabbitListener(queues = DragonDepartmentRabbitConfig.DRAGON_DEPARTMENT_QUEUE,
             containerFactory = DragonRabbitServerConfig.LISTENER_4_HIGH_DELAY)

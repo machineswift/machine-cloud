@@ -1,5 +1,6 @@
 package com.machine.dragon.server.isc.rabbit.config;
 
+import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -64,7 +65,7 @@ public class DragonRabbitServerConfig {
             cachingConnectionFactory.setChannelCacheSize(maxConcurrency + 20);
         }
         factoryConfigurer.configure(factory, cachingConnectionFactory);
-        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        factory.setMessageConverter(new Jackson2JsonMessageConverter(DragonJsonUtil.getInstance()));
         factory.setAcknowledgeMode(AcknowledgeMode.NONE);
         factory.setConcurrentConsumers(1);
         factory.setMaxConcurrentConsumers(maxConcurrency);

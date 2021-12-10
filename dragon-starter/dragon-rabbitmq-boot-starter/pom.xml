@@ -28,8 +28,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.machine</groupId>
+            <artifactId>dragon-common-tool</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
 </project>

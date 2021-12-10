@@ -66,7 +66,6 @@ public class DragonRabbitReliableMessageClientImpl implements DragonRabbitReliab
         log.info("定时任务重新发送可靠消息");
         dragonRabbitReliableMessageService.resendMessage();
     }
-
 }
 
 

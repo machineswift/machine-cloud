@@ -5,8 +5,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class DragonRabbitReliableMessageUpdate4SubscribeInDTO {
+public class DragonRabbitReliableMessageExternalUpdateInDTO {
 
     private String id;
-    private Integer nextTimeSeconds;
+    private String reason;
+    private String remark;
 }

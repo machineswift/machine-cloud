@@ -1,5 +1,6 @@
 package com.machine.dragon.starter.rabbimq.config;
 
+import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -23,7 +24,7 @@ public class DragonRabbiMqAutoConfiguration {
         cachingConnectionFactory.setChannelCacheSize(50);
         RabbitTemplate rabbitTemplate = new RabbitTemplate(cachingConnectionFactory);
         rabbitTemplate.setMandatory(true);
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(DragonJsonUtil.getInstance()));
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
         });
         rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {

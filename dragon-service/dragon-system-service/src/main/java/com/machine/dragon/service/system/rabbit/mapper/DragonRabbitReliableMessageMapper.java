@@ -12,8 +12,6 @@ import java.util.List;
 @Mapper
 public interface DragonRabbitReliableMessageMapper extends BaseMapper<DragonRabbitReliableMessageEntity> {
 
-    int deleteByMessageKey(@Param("messageKey") String messageKey);
-
     int deadById(@Param("id") String id);
 
     int update4Subscribe(@Param("inDto") DragonRabbitReliableMessageUpdate4SubscribeInDTO inDto);
@@ -22,6 +20,7 @@ public interface DragonRabbitReliableMessageMapper extends BaseMapper<DragonRabb
                              @Param("updateTime") LocalDateTime updateTime,
                              @Param("nextTimeSeconds") Integer nextTimeSeconds);
 
-    List<DragonRabbitReliableMessageEntity> selectByCurrentDateTime(@Param("dateTime") LocalDateTime dateTime);
+    String getIdByMessageKey(@Param("messageKey") String messageKey);
 
+    List<DragonRabbitReliableMessageEntity> selectByCurrentDateTime(@Param("dateTime") LocalDateTime dateTime);
 }

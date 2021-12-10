@@ -5,6 +5,7 @@ import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.rabbit.dao.DragonRabbitReliableMessageDao;
 import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDTO;
 import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageUpdate4SubscribeInDTO;
+import com.machine.dragon.service.system.rabbit.dao.outdto.DragonRabbitReliableMessageOutDTO;
 import com.machine.dragon.service.system.rabbit.mapper.DragonRabbitReliableMessageMapper;
 import com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliableMessageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     private DragonRabbitReliableMessageMapper dragonRabbitReliableMessageMapper;
 
     @Override
-    public String insert(DragonRabbitReliableMessageInitInDTO inDto) {
+    public String init(DragonRabbitReliableMessageInitInDTO inDto) {
         DragonRabbitReliableMessageEntity entity = DragonJsonUtil.copy(inDto, DragonRabbitReliableMessageEntity.class);
         //todo 处理租户信息
         entity.setTenantId(1);
@@ -34,11 +35,6 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     @Override
     public int deleteById(String id) {
         return dragonRabbitReliableMessageMapper.deleteById(id);
-    }
-
-    @Override
-    public int deleteByMessageKey(String messageKey) {
-        return dragonRabbitReliableMessageMapper.deleteByMessageKey(messageKey);
     }
 
     @Override
@@ -55,24 +51,30 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     public int update4ResendMessage(String id,
                                     LocalDateTime updateTime,
                                     Integer nextTimeSeconds) {
-
-        Thread t=new Thread();
         return dragonRabbitReliableMessageMapper.update4ResendMessage(id, updateTime, nextTimeSeconds);
     }
 
     @Override
-    public DragonRabbitReliableMessage getById(String id) {
+    public DragonRabbitReliableMessageOutDTO getById(String id) {
         DragonRabbitReliableMessageEntity entity = dragonRabbitReliableMessageMapper.selectById(id);
-        return DragonJsonUtil.copy(entity, DragonRabbitReliableMessage.class);
+        if (null == entity) {
+            return null;
+        }
+        return DragonJsonUtil.copy(entity, DragonRabbitReliableMessageOutDTO.class);
     }
 
     @Override
-    public List<DragonRabbitReliableMessage> listByCurrentDateTime(LocalDateTime dateTime) {
+    public String getIdByMessageKey(String messageKey) {
+        return dragonRabbitReliableMessageMapper.getIdByMessageKey(messageKey);
+    }
+
+    @Override
+    public List<DragonRabbitReliableMessageOutDTO> listByCurrentDateTime(LocalDateTime dateTime) {
         List<DragonRabbitReliableMessageEntity> entityList = dragonRabbitReliableMessageMapper.selectByCurrentDateTime(dateTime);
         if (CollectionUtils.isEmpty(entityList)) {
             return Collections.EMPTY_LIST;
         }
-        return entityList.stream().map(a -> DragonJsonUtil.copy(a, DragonRabbitReliableMessage.class)).collect(Collectors.toList());
+        return entityList.stream().map(a -> DragonJsonUtil.copy(a, DragonRabbitReliableMessageOutDTO.class)).collect(Collectors.toList());
     }
 
 }

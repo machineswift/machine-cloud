@@ -102,10 +102,7 @@ CREATE TABLE `t_dragon_rabbit_dead_message`
     `subscribe_times`     int unsigned DEFAULT '0' COMMENT '消费次数',
     `last_subscribe_time` datetime     NOT NULL DEFAULT now() COMMENT '最后一次消费时间',
     `next_exe_time`       datetime              DEFAULT NULL COMMENT '下一次执行时间',
-    `retry_strategy`      text COMMENT '重试策略',
-    `message_content`     text COMMENT '消息内容',
-    `reason`              text COMMENT '最近一次失败原因',
-    `remark`              text COMMENT '备注',
+    `retry_strategy`      varchar(512) COMMENT '重试策略',
     `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
     `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
@@ -116,7 +113,24 @@ CREATE TABLE `t_dragon_rabbit_dead_message`
     KEY                   `idx_04` (`publish_exchange`,`publish_routing_key`),
     KEY                   `idx_05` (`subscribe_queues`),
     KEY                   `idx_06` (`create_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='rabbit 死亡消息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='rabbit 死亡消息扩展信息表';
+
+-- ----------------------------
+-- Table structure for t_dragon_rabbit_dead_message_external
+-- ----------------------------
+DROP TABLE IF EXISTS `t_dragon_rabbit_dead_message_external`;
+CREATE TABLE `t_dragon_rabbit_dead_message_external`
+(
+    `id`                  varchar(32)  NOT NULL COMMENT 'id',
+    `message_content`     text COMMENT '消息内容',
+    `reason`              text COMMENT '最近一次失败原因',
+    `remark`              text COMMENT '备注',
+    `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
+    `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+    `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
+    PRIMARY KEY `pk`(`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='rabbit 死亡消息扩展信息表';
+
 
 -- ----------------------------
 -- Table structure for t_dragon_rabbit_reliable_message
@@ -139,10 +153,7 @@ CREATE TABLE `t_dragon_rabbit_reliable_message`
     `subscribe_times`     int unsigned DEFAULT '0' COMMENT '消费次数',
     `last_subscribe_time` datetime     NOT NULL DEFAULT now() COMMENT '最后一次消费时间',
     `next_exe_time`       datetime              DEFAULT NULL COMMENT '下一次执行时间',
-    `retry_strategy`      text COMMENT '重试策略',
-    `message_content`     text COMMENT '消息内容',
-    `reason`              text COMMENT '最近一次失败原因',
-    `remark`              text COMMENT '备注',
+    `retry_strategy`      varchar(512) COMMENT '重试策略',
     `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
     `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
@@ -153,3 +164,19 @@ CREATE TABLE `t_dragon_rabbit_reliable_message`
     KEY                   `idx_04` (`publish_exchange`,`publish_routing_key`),
     KEY                   `idx_05` (`subscribe_queues`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='rabbit 可靠消息表';
+
+-- ----------------------------
+-- Table structure for t_dragon_rabbit_reliable_message_external
+-- ----------------------------
+DROP TABLE IF EXISTS `t_dragon_rabbit_reliable_message_external`;
+CREATE TABLE `t_dragon_rabbit_reliable_message_external`
+(
+    `id`                  varchar(32)  NOT NULL COMMENT 'id',
+    `message_content`     text COMMENT '消息内容',
+    `reason`              text COMMENT '最近一次失败原因',
+    `remark`              text COMMENT '备注',
+    `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
+    `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+    `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
+    PRIMARY KEY `pk`(`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='rabbit 可靠消息扩展信息表';

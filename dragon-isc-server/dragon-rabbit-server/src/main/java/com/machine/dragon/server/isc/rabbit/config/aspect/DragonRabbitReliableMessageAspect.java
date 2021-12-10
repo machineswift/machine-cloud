@@ -103,7 +103,6 @@ public class DragonRabbitReliableMessageAspect {
         DragonRabbitReliableMessage reliableMessage = rabbitBaseMessage.getReliableMessage();
         if (null == reliableMessage.getId()) {
             //第一次重试,添加消费者以及补偿策略信息
-            reliableMessage.setTenantId(rabbitBaseMessage.getTenantId());
             reliableMessage.setSubscribeName(reliableMessageAnnotation.publishName());
             reliableMessage.setSubscribeQueues(DragonJsonUtil.toJson(rabbitListener.queues()));
             reliableMessage.setResendTimes(0);
@@ -147,15 +146,15 @@ public class DragonRabbitReliableMessageAspect {
     private String generateMessageKey(DragonRabbitBaseMessage rabbitBaseMessage,
                                       DragonRabbitReliableMessageAnnotation reliableMessageAnnotation) {
         DragonRabbitReliableMessage reliableMessage = rabbitBaseMessage.getReliableMessage();
-        StringBuilder md5Sb = new StringBuilder();
-        md5Sb.append(reliableMessage.getPublishExchange()).append("-");
-        md5Sb.append(reliableMessage.getPublishRoutingKey()).append("-");
-        md5Sb.append(reliableMessage.getSubscribeQueues());
+        StringBuilder md5Sb = new StringBuilder()
+                .append(reliableMessage.getPublishExchange()).append("-")
+                .append(reliableMessage.getPublishRoutingKey()).append("-")
+                .append(reliableMessage.getSubscribeQueues());
 
         //解析唯一键的值
-        StringBuilder valuesSb = new StringBuilder();
         String[] uniqueKeyFields = reliableMessageAnnotation.uniqueKeyFields();
         Object document = Configuration.defaultConfiguration().jsonProvider().parse(DragonJsonUtil.toJson(rabbitBaseMessage));
+        StringBuilder valuesSb = new StringBuilder();
         for (String field : uniqueKeyFields) {
             String value = JsonPath.read(document, field).toString();
             if (DragonStringUtil.isNotEmpty(value)) {
@@ -173,7 +172,7 @@ public class DragonRabbitReliableMessageAspect {
     public void processReliableMessage(int[] retryStrategy,
                                        DragonRabbitReliableMessage reliableMessage) {
         Integer resendTimes = reliableMessage.getResendTimes();
-        if (resendTimes > (retryStrategy.length) - 1) {
+        if (resendTimes >= retryStrategy.length) {
             //将消息移到死亡消息表
             dragonRabbitReliableMessageClient.deadById(reliableMessage.getId());
         } else {

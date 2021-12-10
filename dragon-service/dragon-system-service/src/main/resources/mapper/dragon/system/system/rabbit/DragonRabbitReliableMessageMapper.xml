@@ -19,9 +19,6 @@
         `last_subscribe_time`,
         `next_exe_time`,
         `retry_strategy`,
-        `message_content`,
-        `reason`,
-        `remark`,
         `create_time`,
         `update_time`,
         `is_deleted`
@@ -45,19 +42,10 @@
         <result column="last_subscribe_time" property="lastSubscribeTime"/>
         <result column="next_exe_time" property="nextExeTime"/>
         <result column="retry_strategy" property="retryStrategy"/>
-        <result column="message_content" property="messageContent"/>
-        <result column="reason" property="reason"/>
-        <result column="remark" property="remark"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
         <result column="is_deleted" property="deleted"/>
     </resultMap>
-
-    <delete id="deleteByMessageKey">
-        delete
-        from t_dragon_rabbit_reliable_message drrm
-        where drrm.message_key = #{messageKey}
-    </delete>
 
     <insert id="deadById">
         insert into t_dragon_rabbit_dead_message
@@ -69,12 +57,6 @@
     <update id="update4Subscribe">
         update t_dragon_rabbit_reliable_message
         set
-        <if test="inDto.reason != null">
-            `reason` = #{inDto.reason},
-        </if>
-        <if test="inDto.remark != null">
-            `remark` = #{inDto.remark},
-        </if>
         subscribe_times = subscribe_times + 1,
         last_subscribe_time = now(),
         next_exe_time = date_add(now(), interval #{inDto.nextTimeSeconds} second)
@@ -92,6 +74,11 @@
         and update_time = #{updateTime}
     </update>
 
+    <select id="getIdByMessageKey" resultType="java.lang.String">
+        select id
+        from t_dragon_rabbit_reliable_message
+        where message_key = #{messageKey}
+    </select>
 
     <select id="selectByCurrentDateTime" resultMap="DragonRabbitReliableEntityMap">
         select

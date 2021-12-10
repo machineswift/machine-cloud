@@ -1,23 +1,14 @@
-package com.machine.dragon.service.system.rabbit.mapper.entity;
+package com.machine.dragon.service.system.rabbit.dao.outdto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@TableName("t_dragon_rabbit_reliable_message")
-public class DragonRabbitReliableMessageEntity {
-
-    @TableId(type = IdType.ASSIGN_UUID)
+public class DragonRabbitReliableMessageOutDTO {
     private String id;
-
     private Integer tenantId;
     private String messageKey;
     private String messageClassName;
@@ -36,7 +27,5 @@ public class DragonRabbitReliableMessageEntity {
 
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
-
-    @TableField(value = "is_deleted")
     private Boolean deleted;
 }

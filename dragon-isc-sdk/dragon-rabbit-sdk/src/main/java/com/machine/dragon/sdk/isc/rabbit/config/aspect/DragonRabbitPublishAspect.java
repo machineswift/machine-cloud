@@ -57,14 +57,14 @@ public class DragonRabbitPublishAspect {
             if (StringUtils.isEmpty(routingKey)) {
                 routingKey = null;
             }
-            DragonRabbitBaseMessage message = (DragonRabbitBaseMessage) jp.getArgs()[0];
+            DragonRabbitBaseMessage rabbitBaseMessage = (DragonRabbitBaseMessage) jp.getArgs()[0];
 
             //todo 多租户处理
             //MultiTenantContent.setTenantId(message.getTenantId());
 
             log.info("生产消息 {} {} {} message:{}", annotation.producerName(), annotation.exchange(),
-                    annotation.routingKey(), DragonJsonUtil.toJson(message));
-            rabbitTemplate.convertAndSend(annotation.exchange(), routingKey, message);
+                    annotation.routingKey(), DragonJsonUtil.toJson(rabbitBaseMessage));
+            rabbitTemplate.convertAndSend(annotation.exchange(), routingKey, rabbitBaseMessage);
         });
     }
 

@@ -26,6 +26,13 @@ spring:
             group: DRAGON_GROUP
             refresh: true
 
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 9000000
+        readTimeout: 9000000
+
 xxl:
   job:
     admin:

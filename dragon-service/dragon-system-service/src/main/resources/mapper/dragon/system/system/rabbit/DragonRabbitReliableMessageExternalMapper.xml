@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.machine.dragon.service.system.rabbit.mapper.DragonRabbitReliableMessageExternalMapper">
+
+    <sql id="DragonRabbitReliableMessageColumn">
+        `id`
+        ,`message_content`,
+        `reason`,
+        `remark`,
+        `create_time`,
+        `update_time`,
+        `is_deleted`
+    </sql>
+
+    <resultMap id="DragonRabbitReliableEntityMap"
+               type="com.machine.dragon.service.system.rabbit.mapper.entity.DragonRabbitReliableMessageExternalEntity">
+        <id column="id" property="id"/>
+        <result column="message_content" property="messageContent"/>
+        <result column="reason" property="reason"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+    </resultMap>
+
+    <insert id="deadById">
+        insert into t_dragon_rabbit_dead_message_external
+        select *
+        from t_dragon_rabbit_reliable_message_external
+        where id = #{id}
+    </insert>
+
+</mapper>
