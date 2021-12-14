@@ -1,4 +1,4 @@
-package com.machine.dragon.web.system.menu.contoller;
+package com.machine.dragon.web.system.department.controller;
 
 import com.machine.dragon.service.system.department.feign.DragonDepartmentClient;
 import com.machine.dragon.service.system.department.feign.outvo.DragonDepartmentDetailOutVO;

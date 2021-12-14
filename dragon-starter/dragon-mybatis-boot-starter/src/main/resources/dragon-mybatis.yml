@@ -1,8 +1,9 @@
 #mybatis-plus配置
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/**/*.xml
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.machine.dragon.service.**.mapper.entity
+  type-aliases-package: com.machine.dragon.service.**.mapper.entity
+  type-handlers-package: com.machine.dragon.starter.mybatis.handler
   global-config:
     # 关闭MP3.0自带的banner
     banner: false
@@ -12,7 +13,6 @@ mybatis-plus:
       #字段策略
       insert-strategy: not_null
       update-strategy: not_null
-      select-strategy: not_empty
       #驼峰下划线转换
       table-underline: true
       # 逻辑删除配置

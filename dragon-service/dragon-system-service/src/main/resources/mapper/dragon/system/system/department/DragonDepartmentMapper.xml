@@ -29,7 +29,7 @@
     <select id="selectByDepartmentId" resultMap="DragonDepartmentEntityMap">
         select
         <include refid="DragonDepartmentColumn"/>
-        from `t_dragon_department` dd
-        where dd.department_id = #{departmentId}
+        from t_dragon_department
+        where department_id = #{departmentId}
     </select>
 </mapper>

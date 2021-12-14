@@ -1,4 +1,20 @@
 -- ----------------------------
+-- Table structure for t_dragon_tenant
+-- ----------------------------
+DROP TABLE IF EXISTS `t_dragon_tenant`;
+CREATE TABLE `t_dragon_tenant`
+(
+    `id`          varchar(32) NOT NULL COMMENT 'id',
+    `tenant_id`   int unsigned NOT NULL DEFAULT 10000000 COMMENT '租户id',
+    `name`        varchar(32) NOT NULL COMMENT '租户名称',
+    `status`      tinyint unsigned NOT NULL DEFAULT 0 COMMENT '状态',
+    `create_time` DATETIME    NOT NULL DEFAULT now() COMMENT '创建时间',
+    `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+    `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '租户表';
+
+-- ----------------------------
 -- Table structure for t_dragon_department
 -- ----------------------------
 DROP TABLE IF EXISTS `t_dragon_department`;
@@ -18,7 +34,7 @@ CREATE TABLE `t_dragon_department`
     UNIQUE KEY `uk_01`(`tenant_id`,`department_id`,`parent_id`) USING BTREE,
     KEY             `idx_01` (`tenant_id`,`parent_id`) USING BTREE,
     KEY             `idx_02` (`tenant_id`,`code`) USING BTREE
-) ENGINE=InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT='部门表';
+) ENGINE=InnoDB CHARACTER SET = utf8mb4 COMMENT='部门表';
 
 -- ----------------------------
 -- Table structure for t_dragon_user
@@ -38,8 +54,8 @@ CREATE TABLE `t_dragon_user`
     `update_user` varchar(32) NOT NULL COMMENT '修改人',
     `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
-    PRIMARY KEY `pk`(`id`) USING BTREE,
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表';
+    PRIMARY KEY `pk`(`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '用户表';
 
 -- ----------------------------
 -- Table structure for t_dragon_role
@@ -61,7 +77,7 @@ CREATE TABLE `t_dragon_role`
     PRIMARY KEY `pk`(`id`) USING BTREE,
     UNIQUE KEY `uk_01`(`tenant_id`,`role_id`,`parent_id`) USING BTREE,
     KEY           `idx_01` (`tenant_id`,`parent_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表';
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '角色表';
 
 -- ----------------------------
 -- Table structure for dragon_user_department
@@ -78,7 +94,7 @@ CREATE TABLE `t_dragon_user_department`
     PRIMARY KEY `pk`(`id`) USING BTREE,
     UNIQUE KEY `uk_01`(`tenant_id`,`department_id`,`user_id`) USING BTREE,
     KEY             `idx_01` (`tenant_id`,`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户部门表';
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '用户部门表';
 
 
 -- ----------------------------
@@ -121,13 +137,13 @@ CREATE TABLE `t_dragon_rabbit_dead_message`
 DROP TABLE IF EXISTS `t_dragon_rabbit_dead_message_external`;
 CREATE TABLE `t_dragon_rabbit_dead_message_external`
 (
-    `id`                  varchar(32)  NOT NULL COMMENT 'id',
-    `message_content`     text COMMENT '消息内容',
-    `reason`              text COMMENT '最近一次失败原因',
-    `remark`              text COMMENT '备注',
-    `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
-    `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
-    `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
+    `id`              varchar(32) NOT NULL COMMENT 'id',
+    `message_content` text COMMENT '消息内容',
+    `reason`          text COMMENT '最近一次失败原因',
+    `remark`          text COMMENT '备注',
+    `create_time`     datetime    NOT NULL DEFAULT now() COMMENT '创建时间',
+    `update_time`     datetime    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+    `is_deleted`      tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
     PRIMARY KEY `pk`(`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='rabbit 死亡消息扩展信息表';
 
@@ -171,12 +187,12 @@ CREATE TABLE `t_dragon_rabbit_reliable_message`
 DROP TABLE IF EXISTS `t_dragon_rabbit_reliable_message_external`;
 CREATE TABLE `t_dragon_rabbit_reliable_message_external`
 (
-    `id`                  varchar(32)  NOT NULL COMMENT 'id',
-    `message_content`     text COMMENT '消息内容',
-    `reason`              text COMMENT '最近一次失败原因',
-    `remark`              text COMMENT '备注',
-    `create_time`         datetime     NOT NULL DEFAULT now() COMMENT '创建时间',
-    `update_time`         datetime     NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
-    `is_deleted`          tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
+    `id`              varchar(32) NOT NULL COMMENT 'id',
+    `message_content` text COMMENT '消息内容',
+    `reason`          text COMMENT '最近一次失败原因',
+    `remark`          text COMMENT '备注',
+    `create_time`     datetime    NOT NULL DEFAULT now() COMMENT '创建时间',
+    `update_time`     datetime    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+    `is_deleted`      tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
     PRIMARY KEY `pk`(`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='rabbit 可靠消息扩展信息表';

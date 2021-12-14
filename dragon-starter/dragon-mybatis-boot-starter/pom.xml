@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dragon-mybatis-boot-starter</artifactId>
-    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -35,6 +34,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.machine</groupId>
+            <artifactId>dragon-common-core</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
 </project>
