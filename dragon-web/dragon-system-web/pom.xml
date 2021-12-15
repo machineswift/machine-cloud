@@ -39,11 +39,5 @@
             <artifactId>dragon-crm-api</artifactId>
             <version>${version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.machine</groupId>
-            <artifactId>dragon-common-tool</artifactId>
-            <version>${version}</version>
-        </dependency>
-
     </dependencies>
 </project>

@@ -26,6 +26,19 @@ public class DragonStringUtil extends StringUtils {
     public static final int INDEX_NOT_FOUND = -1;
 
 
+    /**
+     * 模糊查询（like）特殊字符_、\、%时的处理方式
+     */
+    public static String escapeStr(String str) {
+        if (isEmpty(str)) {
+            return str;
+        }
+        str = str.replaceAll("\\\\", "\\\\\\\\");
+        str = str.replaceAll("_", "\\\\_");
+        str = str.replaceAll("%", "\\\\%");
+        return str;
+    }
+
     public static boolean isNotEmpty(@Nullable Object str) {
         return !isEmpty(str);
     }

@@ -7,16 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @ApiModel
+@NoArgsConstructor
 public class DragonTenantResponse {
 
-    @ApiModelProperty(value = "租户ID")
+    @ApiModelProperty(name = "tenantId", value = "租户ID", dataType = "int", position = 10)
     private Integer tenantId;
 
-    @ApiModelProperty(value = "名称")
+    @ApiModelProperty(name = "name", value = "名称", dataType = "string", position = 20)
     private String name;
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(name = "status", value = "状态", dataType = "string", position = 30)
     private DragonTenantStatusEnum status;
 }
