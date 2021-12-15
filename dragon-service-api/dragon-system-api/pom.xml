@@ -34,5 +34,10 @@
             <artifactId>dragon-common-tool</artifactId>
             <version>${version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+        </dependency>
     </dependencies>
 </project>

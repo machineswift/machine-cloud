@@ -6,7 +6,7 @@ import com.machine.dragon.sdk.isc.rabbit.department.publish.DragonDepartmentPubl
 import com.machine.dragon.service.system.department.dao.DragonDepartmentDao;
 import com.machine.dragon.service.system.department.dao.outdto.DragonDepartmentOutDTO;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
-import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBO;
+import com.machine.dragon.service.system.department.service.outbo.DragonDepartmentDetailOutBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

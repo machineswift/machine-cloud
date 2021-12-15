@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @ApiModel
-public abstract class DragonBasePage {
+public abstract class DragonBasePageQuery {
     @ApiModelProperty(name = "current", value = "当前页(默认1)", dataType = "int", position = Integer.MAX_VALUE, required = true)
     private Integer current = 1;
 

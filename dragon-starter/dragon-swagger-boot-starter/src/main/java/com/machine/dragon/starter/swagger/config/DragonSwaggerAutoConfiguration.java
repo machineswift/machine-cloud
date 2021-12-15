@@ -5,6 +5,7 @@ import com.machine.dragon.common.launch.property.DragonProperties;
 import com.machine.dragon.common.launch.property.DragonPropertySource;
 import com.machine.dragon.starter.swagger.propertity.DragonSwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,14 +30,10 @@ import java.util.List;
 @Profile(value = "!prod")
 public class DragonSwaggerAutoConfiguration {
 
-    @Autowired
-    private DragonProperties dragonProperties;
-
-    @Autowired
-    private DragonSwaggerProperties swaggerProperties;
-
     @Bean
-    public Docket createRestApi() {
+    @ConditionalOnMissingBean
+    public Docket createRestApi(DragonProperties dragonProperties,
+                                DragonSwaggerProperties swaggerProperties) {
         if (swaggerProperties.getExcludePath().size() == 0) {
             swaggerProperties.getExcludePath().addAll(DEFAULT_EXCLUDE_PATH);
         }

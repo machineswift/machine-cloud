@@ -1,5 +1,7 @@
 package com.machine.dragon.common.tool.jackson;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -19,6 +21,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.lang.Nullable;
+import org.springframework.util.CollectionUtils;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -33,6 +36,22 @@ public class DragonJsonUtil {
 
     public static String read(@Nullable String json, String jsonPath) {
         return JsonPath.read(json, jsonPath).toString();
+    }
+
+    public static <T1, T2> Page<T2> convertT1ToT2(IPage<T1> page, Class<T2> clazz) {
+        List<T1> recordsT1 = page.getRecords();
+
+        Page<T2> pageT2 = new Page<>(page.getCurrent(), page.getSize(), page.getTotal());
+        if (CollectionUtils.isEmpty(recordsT1)) {
+            return pageT2;
+        }
+
+        List<T2> recordsT2 = new ArrayList<>();
+        for (T1 recordT1 : recordsT1) {
+            recordsT2.add(DragonJsonUtil.copy(recordT1, clazz));
+        }
+        pageT2.setRecords(recordsT2);
+        return pageT2;
     }
 
     /**

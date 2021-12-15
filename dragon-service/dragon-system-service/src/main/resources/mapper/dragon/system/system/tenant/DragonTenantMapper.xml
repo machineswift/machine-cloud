@@ -29,4 +29,15 @@
         from t_dragon_tenant
         where tenant_id = #{tenantId}
     </select>
+
+    <select id="selectTenantPage" resultMap="DragonTenantEntityMap">
+        select
+        <include refid="DragonTenantColumn"/>
+        from t_dragon_tenant
+        <where>
+            <if test="query.name != null and query.name != ''">
+                AND name like CONCAT('%', #{query.name}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

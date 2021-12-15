@@ -1,4 +1,4 @@
-package com.machine.dragon.service.system.department.service.outBo;
+package com.machine.dragon.service.system.department.service.outbo;
 
 import lombok.Data;
 

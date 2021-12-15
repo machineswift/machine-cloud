@@ -3,7 +3,7 @@ package com.machine.dragon.service.system.department.feign;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.department.feign.outvo.DragonDepartmentDetailOutVO;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
-import com.machine.dragon.service.system.department.service.outBo.DragonDepartmentDetailOutBO;
+import com.machine.dragon.service.system.department.service.outbo.DragonDepartmentDetailOutBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
