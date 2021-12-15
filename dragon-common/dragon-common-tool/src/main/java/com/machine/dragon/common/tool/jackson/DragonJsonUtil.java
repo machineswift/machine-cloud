@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.jayway.jsonpath.JsonPath;
+import com.machine.dragon.common.core.bean.page.DragonPage;
 import com.machine.dragon.common.tool.date.DragonDateUtil;
 import com.machine.dragon.common.tool.date.DragonJavaTimeModule;
 import com.machine.dragon.common.tool.exception.Exceptions;
@@ -34,26 +35,6 @@ import java.util.*;
 @Slf4j
 public class DragonJsonUtil {
 
-    public static String read(@Nullable String json, String jsonPath) {
-        return JsonPath.read(json, jsonPath).toString();
-    }
-
-    public static <T1, T2> Page<T2> convertT1ToT2(IPage<T1> page, Class<T2> clazz) {
-        List<T1> recordsT1 = page.getRecords();
-
-        Page<T2> pageT2 = new Page<>(page.getCurrent(), page.getSize(), page.getTotal());
-        if (CollectionUtils.isEmpty(recordsT1)) {
-            return pageT2;
-        }
-
-        List<T2> recordsT2 = new ArrayList<>();
-        for (T1 recordT1 : recordsT1) {
-            recordsT2.add(DragonJsonUtil.copy(recordT1, clazz));
-        }
-        pageT2.setRecords(recordsT2);
-        return pageT2;
-    }
-
     /**
      * 拷贝对象
      *
@@ -67,6 +48,39 @@ public class DragonJsonUtil {
             throw new BeanInstantiationException(clazz, "Specified class is an interface");
         }
         return parse(toJson(source), clazz);
+    }
+
+    public static <T> List<T> copyArray(@Nullable Object source, Class<T> clazz) {
+        if (clazz.isInterface()) {
+            throw new BeanInstantiationException(clazz, "Specified class is an interface");
+        }
+        return parseArray(toJson(source), clazz);
+    }
+
+    public static <T1, T2> DragonPage<T2> convertT1ToT2(DragonPage<T1> page, Class<T2> clazz) {
+        List<T1> recordsT1 = page.getRecords();
+
+        DragonPage<T2> pageT2 = new DragonPage<>(page.getCurrent(), page.getSize(), page.getTotal());
+        if (CollectionUtils.isEmpty(recordsT1)) {
+            return pageT2;
+        }
+        pageT2.setRecords(copyArray(recordsT1, clazz));
+        return pageT2;
+    }
+
+    public static <T1, T2> Page<T2> convertT1ToT2(IPage<T1> page, Class<T2> clazz) {
+        List<T1> recordsT1 = page.getRecords();
+
+        Page<T2> pageT2 = new Page<>(page.getCurrent(), page.getSize(), page.getTotal());
+        if (CollectionUtils.isEmpty(recordsT1)) {
+            return pageT2;
+        }
+        pageT2.setRecords(copyArray(recordsT1, clazz));
+        return pageT2;
+    }
+
+    public static String read(@Nullable String json, String jsonPath) {
+        return JsonPath.read(json, jsonPath).toString();
     }
 
     /**

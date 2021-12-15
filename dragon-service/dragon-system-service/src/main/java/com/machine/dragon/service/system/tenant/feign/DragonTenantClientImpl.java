@@ -1,6 +1,7 @@
 package com.machine.dragon.service.system.tenant.feign;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.machine.dragon.common.core.bean.page.DragonPage;
 import com.machine.dragon.common.core.bean.tenant.DragonTenant;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.tenant.feign.outvo.DragonTenantListOutVO;
@@ -30,8 +31,9 @@ public class DragonTenantClientImpl implements DragonTenantClient {
     }
 
     @Override
-    public Page<DragonTenantListOutVO> selectTenantPage(DragonTenantPageQuery query) {
+    public DragonPage<DragonTenantListOutVO> selectTenantPage(DragonTenantPageQuery query) {
         Page<DragonTenantListOutBO> outBOIPage = dragonTenantService.selectTenantPage(query);
-        return DragonJsonUtil.convertT1ToT2(outBOIPage, DragonTenantListOutVO.class);
+        Page<DragonTenantListOutVO> outVOIPage = DragonJsonUtil.convertT1ToT2(outBOIPage, DragonTenantListOutVO.class);
+        return DragonPage.convert2DragonPage(outVOIPage);
     }
 }

@@ -1,6 +1,6 @@
 package com.machine.dragon.service.system.tenant.feign;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.machine.dragon.common.core.bean.page.DragonPage;
 import com.machine.dragon.common.core.bean.tenant.DragonTenant;
 import com.machine.dragon.service.system.tenant.feign.outvo.DragonTenantListOutVO;
 import com.machine.dragon.service.system.tenant.feign.query.DragonTenantPageQuery;
@@ -17,5 +17,5 @@ public interface DragonTenantClient {
     DragonTenant getByTenantId(@RequestParam(name = "tenantId") Integer tenantId);
 
     @PostMapping("selectTenantPage")
-    Page<DragonTenantListOutVO> selectTenantPage(@RequestBody DragonTenantPageQuery query);
+    DragonPage<DragonTenantListOutVO> selectTenantPage(@RequestBody DragonTenantPageQuery query);
 }

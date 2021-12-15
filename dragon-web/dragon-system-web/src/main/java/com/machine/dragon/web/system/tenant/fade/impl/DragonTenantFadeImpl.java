@@ -1,6 +1,7 @@
 package com.machine.dragon.web.system.tenant.fade.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.machine.dragon.common.core.bean.page.DragonPage;
 import com.machine.dragon.common.core.bean.tenant.DragonTenant;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.tenant.feign.DragonTenantClient;
@@ -27,9 +28,9 @@ public class DragonTenantFadeImpl implements DragonTenantFade {
     }
 
     @Override
-    public Page<DragonTenantResponse> queryTenantPage(QueryTenantPageRequest request) {
+    public DragonPage<DragonTenantResponse> queryTenantPage(QueryTenantPageRequest request) {
         DragonTenantPageQuery query = DragonJsonUtil.copy(request, DragonTenantPageQuery.class);
-        Page<DragonTenantListOutVO> outVOIPage = dragonTenantClient.selectTenantPage(query);
+        DragonPage<DragonTenantListOutVO> outVOIPage = dragonTenantClient.selectTenantPage(query);
         return DragonJsonUtil.convertT1ToT2(outVOIPage, DragonTenantResponse.class);
     }
 }

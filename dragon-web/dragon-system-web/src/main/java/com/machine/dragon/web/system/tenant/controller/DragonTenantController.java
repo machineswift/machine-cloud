@@ -1,7 +1,7 @@
 package com.machine.dragon.web.system.tenant.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.machine.dragon.common.core.bean.page.DragonPage;
 import com.machine.dragon.common.tool.string.DragonStringUtil;
 import com.machine.dragon.web.system.tenant.controller.request.QueryTenantPageRequest;
 import com.machine.dragon.web.system.tenant.controller.response.DragonTenantResponse;
@@ -40,7 +40,7 @@ public class DragonTenantController {
             @ApiImplicitParam(name = "request", value = "分页查询", dataType = "QueryTenantPageRequest", paramType = "body", required = true)
     })
     @PostMapping("queryTenantPage")
-    public IPage<DragonTenantResponse> queryTenantPage(@RequestBody @Validated QueryTenantPageRequest request) {
+    public DragonPage<DragonTenantResponse> queryTenantPage(@RequestBody @Validated QueryTenantPageRequest request) {
         request.setName(DragonStringUtil.escapeStr(request.getName()));
         return dragonTenantFade.queryTenantPage(request);
     }
