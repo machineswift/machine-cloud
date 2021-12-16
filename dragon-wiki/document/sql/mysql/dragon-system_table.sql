@@ -84,6 +84,7 @@ CREATE TABLE `t_dragon_role`
     `tenant_id`   int unsigned NOT NULL COMMENT '租户id',
     `role_id`     bigint unsigned NOT NULL COMMENT '角色Id。超级管理员角色此字段为1',
     `parent_id`   bigint unsigned NOT NULL COMMENT '父角色Id。根角色此字段为0',
+    `code`        varchar(64) NOT NULL COMMENT '角色编号,不能重复',
     `name`        varchar(64)          DEFAULT NULL COMMENT '名称',
     `sort`        bigint      NOT NULL DEFAULT '0' COMMENT '排序',
     `remark`      text COMMENT '备注',
@@ -93,8 +94,9 @@ CREATE TABLE `t_dragon_role`
     `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
     `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
     PRIMARY KEY `pk`(`id`) USING BTREE,
-    UNIQUE KEY `uk_01`(`tenant_id`,`role_id`,`parent_id`) USING BTREE,
-    KEY           `idx_01` (`tenant_id`,`parent_id`) USING BTREE
+    UNIQUE KEY `uk_01` (`tenant_id`,`code`),
+    UNIQUE KEY `uk_02` (`tenant_id`,`role_id`),
+    KEY           `idx_01` (`tenant_id`,`parent_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '角色表';
 
 -- ----------------------------
