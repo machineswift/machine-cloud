@@ -24,10 +24,6 @@ public class DragonDepartmentServiceImpl implements DragonDepartmentService {
     @Override
     public DragonDepartmentDetailOutBO getByDepartmentId(Long departmentId) {
         DragonDepartmentOutDTO outDto = dragonDepartmentDao.getByDepartmentId(departmentId);
-        if (null == outDto) {
-            return null;
-        }
-
         dragonDepartmentPublish.publishDragonDepartmentRabbitMessage(new DragonDepartmentRabbitMessage(departmentId));
         return DragonJsonUtil.copy(outDto, DragonDepartmentDetailOutBO.class);
     }

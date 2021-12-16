@@ -17,9 +17,6 @@ public class DragonDepartmentDaoImpl implements DragonDepartmentDao {
     @Override
     public DragonDepartmentOutDTO getByDepartmentId(Long departmentId) {
         DragonDepartmentEntity entity = dragonDepartmentMapper.selectByDepartmentId(departmentId);
-        if (null == entity) {
-            return null;
-        }
         return DragonJsonUtil.copy(entity, DragonDepartmentOutDTO.class);
     }
 }

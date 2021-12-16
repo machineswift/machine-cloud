@@ -58,28 +58,6 @@ CREATE TABLE `t_dragon_user`
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '用户表';
 
 -- ----------------------------
--- Table structure for t_dragon_role
--- ----------------------------
-DROP TABLE IF EXISTS `t_dragon_role`;
-CREATE TABLE `t_dragon_role`
-(
-    `id`          varchar(32) NOT NULL COMMENT 'id',
-    `tenant_id`   int unsigned NOT NULL COMMENT '租户id',
-    `role_id`     bigint unsigned NOT NULL COMMENT '角色Id。超级管理员角色此字段为1',
-    `parent_id`   bigint unsigned NOT NULL COMMENT '父角色Id。超级管理角色此字段为0',
-    `name`        varchar(64)          DEFAULT NULL COMMENT '名称',
-    `sort`        int(11) NULL DEFAULT NULL COMMENT '排序',
-    `create_user` varchar(32) NOT NULL COMMENT '创建人',
-    `create_time` DATETIME    NOT NULL DEFAULT now() COMMENT '创建时间',
-    `update_user` varchar(32) NOT NULL COMMENT '修改人',
-    `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
-    `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
-    PRIMARY KEY `pk`(`id`) USING BTREE,
-    UNIQUE KEY `uk_01`(`tenant_id`,`role_id`,`parent_id`) USING BTREE,
-    KEY           `idx_01` (`tenant_id`,`parent_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '角色表';
-
--- ----------------------------
 -- Table structure for dragon_user_department
 -- ----------------------------
 DROP TABLE IF EXISTS `t_dragon_user_department`;
@@ -96,6 +74,56 @@ CREATE TABLE `t_dragon_user_department`
     KEY             `idx_01` (`tenant_id`,`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '用户部门表';
 
+-- ----------------------------
+-- Table structure for t_dragon_role
+-- ----------------------------
+DROP TABLE IF EXISTS `t_dragon_role`;
+CREATE TABLE `t_dragon_role`
+(
+    `id`          varchar(32) NOT NULL COMMENT 'id',
+    `tenant_id`   int unsigned NOT NULL COMMENT '租户id',
+    `role_id`     bigint unsigned NOT NULL COMMENT '角色Id。超级管理员角色此字段为1',
+    `parent_id`   bigint unsigned NOT NULL COMMENT '父角色Id。根角色此字段为0',
+    `name`        varchar(64)          DEFAULT NULL COMMENT '名称',
+    `sort`        bigint      NOT NULL DEFAULT '0' COMMENT '排序',
+    `remark`      text COMMENT '备注',
+    `create_user` varchar(32) NOT NULL COMMENT '创建人',
+    `create_time` DATETIME    NOT NULL DEFAULT now() COMMENT '创建时间',
+    `update_user` varchar(32) NOT NULL COMMENT '修改人',
+    `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+    `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
+    PRIMARY KEY `pk`(`id`) USING BTREE,
+    UNIQUE KEY `uk_01`(`tenant_id`,`role_id`,`parent_id`) USING BTREE,
+    KEY           `idx_01` (`tenant_id`,`parent_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '角色表';
+
+-- ----------------------------
+-- Table structure for t_dragon_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `t_dragon_menu`;
+CREATE TABLE `t_dragon_menu`
+(
+    `id`          varchar(32) NOT NULL COMMENT 'id',
+    `tenant_id`   int unsigned NOT NULL COMMENT '租户id',
+    `menu_id`     bigint unsigned NOT NULL COMMENT '菜单Id',
+    `parent_id`   bigint unsigned NOT NULL COMMENT '父级菜单Id。顶级菜单此字段为0',
+    `code`        varchar(64) NOT NULL COMMENT '菜单编号,不能重复',
+    `name`        varchar(64) NOT NULL COMMENT '菜单名称',
+    `alias`       varchar(64) NOT NULL COMMENT '菜单别名',
+    `path`        text        NOT NULL COMMENT '请求地址',
+    `sort`        bigint      NOT NULL DEFAULT '0' COMMENT '在父菜单中的次序值。sort值大的排序靠前',
+    `is_opened`   tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否打开新页面',
+    `remark`      text COMMENT '备注',
+    `create_user` varchar(32) NOT NULL COMMENT '创建人',
+    `create_time` DATETIME    NOT NULL DEFAULT now() COMMENT '创建时间',
+    `update_user` varchar(32) NOT NULL COMMENT '修改人',
+    `update_time` DATETIME    NOT NULL DEFAULT now() ON UPDATE now() COMMENT '更新时间',
+    `is_deleted`  tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
+    PRIMARY KEY `pk`(`id`) USING BTREE,
+    UNIQUE KEY `uk_01` (`tenant_id`,`code`),
+    UNIQUE KEY `uk_02` (`tenant_id`,`menu_id`),
+    KEY           `idx_01` (`tenant_id`,`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COMMENT='菜单表';
 
 -- ----------------------------
 -- Table structure for t_dragon_rabbit_dead_message

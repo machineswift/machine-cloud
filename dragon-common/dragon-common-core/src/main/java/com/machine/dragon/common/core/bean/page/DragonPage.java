@@ -35,16 +35,16 @@ public class DragonPage<T> {
         return new DragonPage(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords());
     }
 
-    @ApiModelProperty(name = "current", value = "当前页", dataType = "int", position = Integer.MAX_VALUE - 70, required = true)
+    @ApiModelProperty(name = "current", value = "当前页", dataType = "int", position = 10, required = true)
     private Long current;
 
-    @ApiModelProperty(name = "current", value = "每页的数量", dataType = "int", position = Integer.MAX_VALUE - 80, required = true)
+    @ApiModelProperty(name = "current", value = "每页的数量", dataType = "int", position = 20, required = true)
     private Long size;
 
-    @ApiModelProperty(name = "total", value = "总数", dataType = "int", position = Integer.MAX_VALUE - 90, required = true)
+    @ApiModelProperty(name = "total", value = "总数", dataType = "int", position = 30, required = true)
     private Long total;
 
-    @ApiModelProperty(name = "records", value = "查询数据列表", dataType = "list", position = Integer.MAX_VALUE - 100, required = true)
+    @ApiModelProperty(name = "records", value = "查询数据列表", dataType = "list", position = 40, required = true)
     protected List<T> records = Collections.emptyList();
 
 }

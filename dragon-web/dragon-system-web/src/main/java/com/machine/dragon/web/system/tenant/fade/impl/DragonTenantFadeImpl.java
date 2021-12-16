@@ -8,6 +8,7 @@ import com.machine.dragon.service.system.tenant.feign.DragonTenantClient;
 import com.machine.dragon.service.system.tenant.feign.outvo.DragonTenantListOutVO;
 import com.machine.dragon.service.system.tenant.feign.query.DragonTenantPageQuery;
 import com.machine.dragon.web.system.tenant.controller.request.QueryTenantPageRequest;
+import com.machine.dragon.web.system.tenant.controller.response.DragonTenantDetailResponse;
 import com.machine.dragon.web.system.tenant.controller.response.DragonTenantResponse;
 import com.machine.dragon.web.system.tenant.fade.DragonTenantFade;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +23,9 @@ public class DragonTenantFadeImpl implements DragonTenantFade {
     private DragonTenantClient dragonTenantClient;
 
     @Override
-    public DragonTenantResponse queryTenantDetail(Integer tenantId) {
+    public DragonTenantDetailResponse queryTenantDetail(Integer tenantId) {
         DragonTenant dragonTenant = dragonTenantClient.getByTenantId(tenantId);
-        return DragonJsonUtil.copy(dragonTenant, DragonTenantResponse.class);
+        return DragonJsonUtil.copy(dragonTenant, DragonTenantDetailResponse.class);
     }
 
     @Override

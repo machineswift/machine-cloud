@@ -6,8 +6,11 @@
         `id`
         ,`tenant_id`,
         `department_id`,
-        `parent_id`,`code`,
-        `name`,`sort`,`create_time`,
+        `parent_id`,
+        `code`,
+        `name`,
+        `sort`,
+        `create_time`,
         `update_time`,
         `is_deleted`
     </sql>

@@ -4,6 +4,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.machine.dragon.common.core.bean.page.DragonPage;
 import com.machine.dragon.common.tool.string.DragonStringUtil;
 import com.machine.dragon.web.system.tenant.controller.request.QueryTenantPageRequest;
+import com.machine.dragon.web.system.tenant.controller.response.DragonTenantDetailResponse;
 import com.machine.dragon.web.system.tenant.controller.response.DragonTenantResponse;
 import com.machine.dragon.web.system.tenant.fade.DragonTenantFade;
 import io.swagger.annotations.Api;
@@ -30,7 +31,7 @@ public class DragonTenantController {
             @ApiImplicitParam(name = "tenantId", value = "租户ID", paramType = "integer", format = "int32", required = true)
     })
     @GetMapping("queryTenantDetail")
-    public DragonTenantResponse describeTenantInfo(@RequestParam(value = "tenantId") Integer tenantId) {
+    public DragonTenantDetailResponse queryTenantDetail(@RequestParam(value = "tenantId") Integer tenantId) {
         return dragonTenantFade.queryTenantDetail(tenantId);
     }
 

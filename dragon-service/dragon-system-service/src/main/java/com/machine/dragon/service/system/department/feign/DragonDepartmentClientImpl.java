@@ -24,9 +24,6 @@ public class DragonDepartmentClientImpl implements DragonDepartmentClient {
     @GetMapping("getByDepartmentId")
     public DragonDepartmentDetailOutVO getByDepartmentId(Long departmentId) {
         DragonDepartmentDetailOutBO detailOutBo = dragonDepartmentService.getByDepartmentId(departmentId);
-        if (null == detailOutBo) {
-            return null;
-        }
         return DragonJsonUtil.copy(detailOutBo, DragonDepartmentDetailOutVO.class);
     }
 }
