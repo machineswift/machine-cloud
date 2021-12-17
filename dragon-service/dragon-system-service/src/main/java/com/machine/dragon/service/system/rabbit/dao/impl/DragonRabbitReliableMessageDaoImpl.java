@@ -1,6 +1,5 @@
 package com.machine.dragon.service.system.rabbit.dao.impl;
 
-import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.rabbit.dao.DragonRabbitReliableMessageDao;
 import com.machine.dragon.service.system.rabbit.dao.indto.DragonRabbitReliableMessageInitInDTO;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +22,7 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     private DragonRabbitReliableMessageMapper dragonRabbitReliableMessageMapper;
 
     @Override
-    public String init(DragonRabbitReliableMessageInitInDTO inDto) {
+    public String insert(DragonRabbitReliableMessageInitInDTO inDto) {
         DragonRabbitReliableMessageEntity entity = DragonJsonUtil.copy(inDto, DragonRabbitReliableMessageEntity.class);
         //todo 处理租户信息
         entity.setTenantId(1);
@@ -49,9 +47,9 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
 
     @Override
     public int update4ResendMessage(String id,
-                                    LocalDateTime updateTime,
-                                    Integer nextTimeSeconds) {
-        return dragonRabbitReliableMessageMapper.update4ResendMessage(id, updateTime, nextTimeSeconds);
+                                    Long updateTime,
+                                    Integer nextTimeMillis) {
+        return dragonRabbitReliableMessageMapper.update4ResendMessage(id, updateTime, nextTimeMillis);
     }
 
     @Override
@@ -69,8 +67,8 @@ public class DragonRabbitReliableMessageDaoImpl implements DragonRabbitReliableM
     }
 
     @Override
-    public List<DragonRabbitReliableMessageOutDTO> listByCurrentDateTime(LocalDateTime dateTime) {
-        List<DragonRabbitReliableMessageEntity> entityList = dragonRabbitReliableMessageMapper.selectByCurrentDateTime(dateTime);
+    public List<DragonRabbitReliableMessageOutDTO> listByCurrentTimeMillis(Long currentTimeMillis) {
+        List<DragonRabbitReliableMessageEntity> entityList = dragonRabbitReliableMessageMapper.selectByCurrentTimeMillis(currentTimeMillis);
         if (CollectionUtils.isEmpty(entityList)) {
             return Collections.EMPTY_LIST;
         }

@@ -2,8 +2,6 @@ package com.machine.dragon.service.system.role.feign.outvo;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class DragonRoleDetailOutVO {
 
@@ -45,7 +43,7 @@ public class DragonRoleDetailOutVO {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Long createTime;
 
     /**
      * 修改人
@@ -55,5 +53,5 @@ public class DragonRoleDetailOutVO {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Long updateTime;
 }

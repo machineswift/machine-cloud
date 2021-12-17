@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Slf4j
 @Service
 public class DragonDataBaseServiceImpl implements DragonDataBaseService {
@@ -16,8 +14,8 @@ public class DragonDataBaseServiceImpl implements DragonDataBaseService {
     private DragonDataBaseDao dragonDataBaseDao;
 
     @Override
-    public LocalDateTime getCurrentDateTime() {
-        return dragonDataBaseDao.getCurrentDateTime();
+    public Long getCurrentDateTime() {
+        return dragonDataBaseDao.currentTimeMillis();
     }
 
 }

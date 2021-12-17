@@ -1,14 +1,8 @@
 package com.machine.dragon.service.system.rabbit.mapper.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -28,14 +22,19 @@ public class DragonRabbitReliableMessageEntity {
     private String subscribeName;
     private Integer maxResendTimes;
     private Integer resendTimes;
-    private LocalDateTime lastSendTime;
+    private Long lastSendTime;
     private Integer subscribeTimes;
-    private LocalDateTime lastSubscribeTime;
-    private LocalDateTime nextExeTime;
+    private Long lastSubscribeTime;
+
+    private Long nextExeTime;
+
     private String retryStrategy;
 
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Long createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateTime;
 
     @TableField(value = "is_deleted")
     private Boolean deleted;

@@ -3,9 +3,6 @@ package com.machine.dragon.common.core.bean.rabbit;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 public class DragonRabbitReliableMessage {
@@ -31,15 +28,15 @@ public class DragonRabbitReliableMessage {
     private String subscribeName;
     private Integer maxResendTimes;
     private Integer resendTimes;
-    private LocalDateTime lastSendTime;
+    private Long lastSendTime;
     private Integer subscribeTimes;
-    private LocalDateTime lastSubscribeTime;
-    private LocalDateTime nextExeTime;
+    private Long lastSubscribeTime;
+    private Long nextExeTime;
     private String retryStrategy;
     private String messageContent;
     private String reason;
     private String remark;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+    private Long createTime;
+    private Long updateTime;
     private Boolean deleted;
 }

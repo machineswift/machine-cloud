@@ -2,8 +2,6 @@ package com.machine.dragon.service.system.role.dao.outdto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class DragonRoleDetailOutDTO {
 
@@ -40,7 +38,7 @@ public class DragonRoleDetailOutDTO {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Long createTime;
 
     /**
      * 修改人
@@ -50,5 +48,5 @@ public class DragonRoleDetailOutDTO {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Long updateTime;
 }

@@ -2,8 +2,6 @@ package com.machine.dragon.service.system.department.feign.outvo;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class DragonDepartmentDetailOutVO {
 
@@ -35,10 +33,10 @@ public class DragonDepartmentDetailOutVO {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Long createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Long updateTime;
 }

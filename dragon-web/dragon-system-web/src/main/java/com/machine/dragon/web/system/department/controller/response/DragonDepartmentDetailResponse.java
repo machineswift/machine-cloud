@@ -21,4 +21,10 @@ public class DragonDepartmentDetailResponse {
 
     @ApiModelProperty(name = "name", value = "名称", dataType = "string", position = 40)
     private String name;
+
+    @ApiModelProperty(name = "createTime", value = "创建时间", dataType = "long", position = 50)
+    private Long createTime;
+
+    @ApiModelProperty(name = "updateTime", value = "更新时间", dataType = "long", position = 60)
+    private Long updateTime;
 }

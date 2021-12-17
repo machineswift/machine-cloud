@@ -1,13 +1,8 @@
 package com.machine.dragon.service.system.role.mapper.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -55,7 +50,8 @@ public class DragonRoleEntity {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Long createTime;
 
     /**
      * 修改人
@@ -65,7 +61,8 @@ public class DragonRoleEntity {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateTime;
 
     /**
      * 是否已删除

@@ -2,8 +2,6 @@ package com.machine.dragon.service.system.menu.feign.outvo;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class DragonMenuDetailOutVO {
 

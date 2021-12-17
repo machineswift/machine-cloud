@@ -3,8 +3,6 @@ package com.machine.dragon.service.system.rabbit.dao.indto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 public class DragonRabbitReliableMessageExternalInitInDTO {
@@ -14,6 +12,8 @@ public class DragonRabbitReliableMessageExternalInitInDTO {
         this.id = id;
         this.messageContent = messageContent;
     }
+
+
 
     private String id;
     private String messageContent;

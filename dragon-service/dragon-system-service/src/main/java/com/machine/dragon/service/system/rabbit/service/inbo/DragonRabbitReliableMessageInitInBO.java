@@ -15,6 +15,10 @@ public class DragonRabbitReliableMessageInitInBO {
     private String subscribeName;
     private Integer maxResendTimes;
     private Integer resendTimes;
+    private Integer subscribeTimes;
+    private Long nextExeTime;
     private String retryStrategy;
     private String messageContent;
+    private String reason;
+    private String remark;
 }

@@ -3,8 +3,6 @@ package com.machine.dragon.service.system.rabbit.dao.outdto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 public class DragonRabbitReliableMessageOutDTO {
@@ -19,13 +17,13 @@ public class DragonRabbitReliableMessageOutDTO {
     private String subscribeName;
     private Integer maxResendTimes;
     private Integer resendTimes;
-    private LocalDateTime lastSendTime;
+    private Long lastSendTime;
     private Integer subscribeTimes;
-    private LocalDateTime lastSubscribeTime;
-    private LocalDateTime nextExeTime;
+    private Long lastSubscribeTime;
+    private Long nextExeTime;
     private String retryStrategy;
 
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+    private Long createTime;
+    private Long updateTime;
     private Boolean deleted;
 }

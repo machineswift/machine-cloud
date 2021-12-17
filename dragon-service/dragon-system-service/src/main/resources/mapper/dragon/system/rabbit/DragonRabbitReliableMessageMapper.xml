@@ -58,18 +58,20 @@
         update t_dragon_rabbit_reliable_message
         set
         subscribe_times = subscribe_times + 1,
-        last_subscribe_time = now(),
-        next_exe_time = date_add(now(), interval #{inDto.nextTimeSeconds} second)
+        last_subscribe_time = REPLACE(unix_timestamp(NOW(3)),'.',''),
+        next_exe_time = REPLACE(unix_timestamp(NOW(3)),'.','') + #{inDto.nextTimeMillis},
+        update_time = REPLACE(unix_timestamp(NOW(3)),'.','')
         where id = #{inDto.id}
     </update>
 
     <update id="update4ResendMessage">
         update t_dragon_rabbit_reliable_message
         set resend_times = resend_times + 1,
-        <if test="nextTimeSeconds != null">
-            next_exe_time = date_add(now(), interval #{nextTimeSeconds} second),
+        <if test="nextTimeMillis != null">
+            next_exe_time = REPLACE(unix_timestamp(NOW(3)),'.','') + #{nextTimeMillis},
         </if>
-        last_send_time = now()
+        last_send_time = REPLACE(unix_timestamp(NOW(3)),'.',''),
+        update_time = REPLACE(unix_timestamp(NOW(3)),'.','')
         where id = #{id}
         and update_time = #{updateTime}
     </update>
@@ -80,12 +82,12 @@
         where message_key = #{messageKey}
     </select>
 
-    <select id="selectByCurrentDateTime" resultMap="DragonRabbitReliableEntityMap">
+    <select id="selectByCurrentTimeMillis" resultMap="DragonRabbitReliableEntityMap">
         select
         <include refid="DragonRabbitReliableMessageColumn"/>
         from t_dragon_rabbit_reliable_message
-        where next_exe_time &lt; now()
-        and update_time &lt; #{dateTime}
+        where next_exe_time &lt; REPLACE(unix_timestamp(NOW(3)),'.','')
+        and update_time &lt; #{currentTimeMillis}
         order by next_exe_time
         limit 500
     </select>

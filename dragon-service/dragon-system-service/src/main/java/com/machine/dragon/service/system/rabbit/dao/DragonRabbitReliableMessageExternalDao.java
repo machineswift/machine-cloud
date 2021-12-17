@@ -6,7 +6,7 @@ import com.machine.dragon.service.system.rabbit.dao.outdto.DragonRabbitReliableM
 
 public interface DragonRabbitReliableMessageExternalDao {
 
-    void init(DragonRabbitReliableMessageExternalInitInDTO inDTO);
+    void insert(DragonRabbitReliableMessageExternalInitInDTO inDTO);
 
     void deleteById(String id);
 

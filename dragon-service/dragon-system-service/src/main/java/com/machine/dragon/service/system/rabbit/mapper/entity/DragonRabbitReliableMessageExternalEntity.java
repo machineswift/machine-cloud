@@ -1,11 +1,10 @@
 package com.machine.dragon.service.system.rabbit.mapper.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +15,11 @@ public class DragonRabbitReliableMessageExternalEntity {
     private String reason;
     private String remark;
 
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Long createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateTime;
 
     @TableField(value = "is_deleted")
     private Boolean deleted;

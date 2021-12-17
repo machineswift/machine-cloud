@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class DragonRabbitReliableMessageUpdate4SubscribeInBO {
 
     private String id;
-    private Integer nextTimeSeconds;
+    private Integer nextTimeMillis;
     private String reason;
     private String remark;
 }

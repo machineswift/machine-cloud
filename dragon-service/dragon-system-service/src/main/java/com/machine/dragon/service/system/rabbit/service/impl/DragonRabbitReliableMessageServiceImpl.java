@@ -2,7 +2,6 @@ package com.machine.dragon.service.system.rabbit.service.impl;
 
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitBaseMessage;
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
-import com.machine.dragon.common.tool.date.DragonLocalDateTimeUtil;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.common.tool.string.DragonStringUtil;
 import com.machine.dragon.service.system.database.dao.DragonDataBaseDao;
@@ -25,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -52,8 +50,15 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
             dragonRabbitReliableMessageDao.deleteById(reliableMessageId);
             dragonRabbitReliableMessageExternalDao.deleteById(reliableMessageId);
         }
-        reliableMessageId = dragonRabbitReliableMessageDao.init(DragonJsonUtil.copy(inBo, DragonRabbitReliableMessageInitInDTO.class));
-        dragonRabbitReliableMessageExternalDao.init(new DragonRabbitReliableMessageExternalInitInDTO(reliableMessageId, inBo.getMessageContent()));
+
+        DragonRabbitReliableMessageInitInDTO messageInitInDTO = DragonJsonUtil.copy(inBo, DragonRabbitReliableMessageInitInDTO.class);
+        messageInitInDTO.setLastSendTime(System.currentTimeMillis());
+        messageInitInDTO.setLastSubscribeTime(System.currentTimeMillis());
+        reliableMessageId = dragonRabbitReliableMessageDao.insert(messageInitInDTO);
+
+        DragonRabbitReliableMessageExternalInitInDTO messageExternalInitInDTO = DragonJsonUtil.copy(inBo, DragonRabbitReliableMessageExternalInitInDTO.class);
+        messageExternalInitInDTO.setId(reliableMessageId);
+        dragonRabbitReliableMessageExternalDao.insert(messageExternalInitInDTO);
         return reliableMessageId;
     }
 
@@ -99,17 +104,17 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
     @Override
     @SneakyThrows
     public void resendMessage() {
-        LocalDateTime currentDateTime = dragonDataBaseDao.getCurrentDateTime();
+        Long currentTimeMillis = dragonDataBaseDao.currentTimeMillis();
 
         while (true) {
             List<DragonRabbitReliableMessageOutDTO> reliableMessageOutDTOList = dragonRabbitReliableMessageDao.
-                    listByCurrentDateTime(currentDateTime);
+                    listByCurrentTimeMillis(currentTimeMillis);
             if (CollectionUtils.isEmpty(reliableMessageOutDTOList)) {
                 return;
             }
 
             for (DragonRabbitReliableMessageOutDTO reliableMessageOutDTO : reliableMessageOutDTOList) {
-                Integer nextTimeSeconds = null;
+                Integer nextTimeMillis = null;
                 if (reliableMessageOutDTO.getResendTimes() > reliableMessageOutDTO.getMaxResendTimes()) {
                     //超过最大重发次数
                     deleteById(reliableMessageOutDTO.getId());
@@ -119,23 +124,17 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
                     if (reliableMessageOutDTO.getResendTimes() >= reliableMessageOutDTO.getSubscribeTimes()) {
                         List<Integer> retryStrategyList = DragonJsonUtil.readList(reliableMessageOutDTO.getRetryStrategy(), Integer.class);
                         if (reliableMessageOutDTO.getResendTimes() < reliableMessageOutDTOList.size()) {
-                            nextTimeSeconds = retryStrategyList.get(reliableMessageOutDTO.getResendTimes());
+                            nextTimeMillis = retryStrategyList.get(reliableMessageOutDTO.getResendTimes()) * 1000;
                         } else {
-                            Long seconds = DragonLocalDateTimeUtil.getSecond(reliableMessageOutDTO.getNextExeTime()) -
-                                    DragonLocalDateTimeUtil.getSecond(reliableMessageOutDTO.getLastSubscribeTime());
-                            nextTimeSeconds = Math.toIntExact((reliableMessageOutDTO.getResendTimes() -
-                                    reliableMessageOutDTO.getSubscribeTimes()) * seconds);
+                            Long timeMillis = reliableMessageOutDTO.getNextExeTime() - reliableMessageOutDTO.getLastSubscribeTime();
+                            nextTimeMillis = Math.toIntExact((reliableMessageOutDTO.getResendTimes() -
+                                    reliableMessageOutDTO.getSubscribeTimes()) * timeMillis);
                         }
-                    }
-
-                    if (null == nextTimeSeconds) {
-                        //解决 DateTime 到秒级的并发问题
-                        nextTimeSeconds = 10;
                     }
                 }
 
                 int count = dragonRabbitReliableMessageDao.update4ResendMessage(reliableMessageOutDTO.getId(),
-                        reliableMessageOutDTO.getUpdateTime(), nextTimeSeconds);
+                        reliableMessageOutDTO.getUpdateTime(), nextTimeMillis);
                 if (count > 0) {
                     //发送可靠消息
                     DragonRabbitReliableMessageExternalOutDTO reliableMessageExternalOutDTO = dragonRabbitReliableMessageExternalDao.getById(reliableMessageOutDTO.getId());

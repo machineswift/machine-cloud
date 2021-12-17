@@ -114,9 +114,13 @@ public class DragonRabbitReliableMessageAspect {
 
             //添加消息内容
             reliableMessage.setMessageContent(DragonJsonUtil.toJson(rabbitBaseMessage));
-            rabbitBaseMessage.setReliableMessage(reliableMessage);
-            String id = dragonRabbitReliableMessageClient.init(DragonJsonUtil.copy(reliableMessage, DragonRabbitReliableMessageInitInVO.class));
-            reliableMessage.setId(id);
+
+            DragonRabbitReliableMessageInitInVO initInVO = DragonJsonUtil.copy(reliableMessage, DragonRabbitReliableMessageInitInVO.class);
+            initInVO.setSubscribeTimes(1);
+            initInVO.setException(exception);
+            initInVO.setNextExeTime(System.currentTimeMillis() + retryStrategy[0] * 1000);
+            initInVO.setRemark(reliableMessage.getRemark());
+            dragonRabbitReliableMessageClient.init(initInVO);
         } else {
             //重试消息广播场景：非自己消费的消息则跳过,防止消息数量膨胀
             if (!DragonJsonUtil.toJson(rabbitListener.queues()).equals(reliableMessage.getSubscribeQueues())) {
@@ -129,11 +133,22 @@ public class DragonRabbitReliableMessageAspect {
                 //已经被正确处理或已经被移到dead里面
                 return;
             }
-            rabbitBaseMessage.setReliableMessage(reliableMessage);
-        }
 
-        rabbitBaseMessage.setException(exception);
-        processReliableMessage(reliableMessageAnnotation.retryStrategy(), reliableMessage);
+            Integer resendTimes = reliableMessage.getResendTimes();
+            if (resendTimes >= retryStrategy.length) {
+                //将消息移到死亡消息表
+                dragonRabbitReliableMessageClient.deadById(reliableMessage.getId());
+            } else {
+                //修改可靠消息消费状态
+                DragonRabbitReliableMessageUpdate4SubscribeInVO inVo = new DragonRabbitReliableMessageUpdate4SubscribeInVO();
+                inVo.setId(reliableMessage.getId());
+                inVo.setNextTimeMillis(retryStrategy[resendTimes] * 1000);
+                inVo.setReason(reliableMessage.getReason());
+                inVo.setException(exception);
+                inVo.setRemark(reliableMessage.getRemark());
+                dragonRabbitReliableMessageClient.update4Subscribe(inVo);
+            }
+        }
 
         //todo 多租户处理
         //清理租户信息
@@ -167,22 +182,5 @@ public class DragonRabbitReliableMessageAspect {
 
         return DigestUtils.md5DigestAsHex(md5Sb.toString().getBytes()).
                 replaceAll("-", "") + ":" + valuesSb.toString();
-    }
-
-    public void processReliableMessage(int[] retryStrategy,
-                                       DragonRabbitReliableMessage reliableMessage) {
-        Integer resendTimes = reliableMessage.getResendTimes();
-        if (resendTimes >= retryStrategy.length) {
-            //将消息移到死亡消息表
-            dragonRabbitReliableMessageClient.deadById(reliableMessage.getId());
-        } else {
-            //修改可靠消息消费状态
-            DragonRabbitReliableMessageUpdate4SubscribeInVO inVo = new DragonRabbitReliableMessageUpdate4SubscribeInVO();
-            inVo.setId(reliableMessage.getId());
-            inVo.setNextTimeSeconds(retryStrategy[resendTimes]);
-            inVo.setReason(reliableMessage.getReason());
-            inVo.setRemark(reliableMessage.getRemark());
-            dragonRabbitReliableMessageClient.update4Subscribe(inVo);
-        }
     }
 }

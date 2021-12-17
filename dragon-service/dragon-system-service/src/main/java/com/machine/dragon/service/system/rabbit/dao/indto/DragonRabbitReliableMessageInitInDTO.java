@@ -3,9 +3,6 @@ package com.machine.dragon.service.system.rabbit.dao.indto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 public class DragonRabbitReliableMessageInitInDTO {
@@ -18,10 +15,10 @@ public class DragonRabbitReliableMessageInitInDTO {
     private String subscribeName;
     private Integer maxResendTimes;
     private Integer resendTimes;
-    private LocalDateTime lastSendTime;
+    private Long lastSendTime;
     private Integer subscribeTimes;
-    private LocalDateTime lastSubscribeTime;
-    private LocalDateTime nextExeTime;
+    private Long lastSubscribeTime;
+    private Long nextExeTime;
     private String retryStrategy;
     private String messageContent;
     private String reason;

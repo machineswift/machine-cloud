@@ -17,7 +17,7 @@ public class DragonRabbitReliableMessageExternalDaoImpl implements DragonRabbitR
     private DragonRabbitReliableMessageExternalMapper dragonRabbitReliableMessageExternalMapper;
 
     @Override
-    public void init(DragonRabbitReliableMessageExternalInitInDTO inDTO) {
+    public void insert(DragonRabbitReliableMessageExternalInitInDTO inDTO) {
         DragonRabbitReliableMessageExternalEntity entity = DragonJsonUtil.copy(inDTO, DragonRabbitReliableMessageExternalEntity.class);
         dragonRabbitReliableMessageExternalMapper.insert(entity);
     }
