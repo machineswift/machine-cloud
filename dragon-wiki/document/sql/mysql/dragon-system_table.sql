@@ -44,7 +44,6 @@ CREATE TABLE `t_dragon_user`
 (
     `id`          varchar(32) NOT NULL COMMENT 'id',
     `tenant_id`   int unsigned NOT NULL COMMENT '租户id',
-    `user_id`     varchar(32) NOT NULL COMMENT '用户id',
     `account`     varchar(32) NULL DEFAULT NULL COMMENT '账号',
     `password`    varchar(64) NULL DEFAULT NULL COMMENT '密码',
     `code`        varchar(32) DEFAULT NULL COMMENT '编码',

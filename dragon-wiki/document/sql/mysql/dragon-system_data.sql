@@ -11,17 +11,19 @@ VALUES ('821098a85de14e249cca08378d49a38c', 10000000, 1, 0, '000001', '全部', 
 COMMIT;
 
 BEGIN;
-INSERT INTO `dragon_system`.`t_dragon_user` (`id`, `tenant_id`, `user_id`, `account`, `password`, `code`, `name`,
-                                             `create_user`, `create_time`, `update_user`, `update_time`, `is_deleted`)
-VALUES ('1', 10000000, '831098a85de14e249cca08378d49a38c', 'superadmin',
-        '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, '超级管理员',
+INSERT INTO `dragon_system`.`t_dragon_user` (`id`, `tenant_id`, `account`, `password`, `code`, `name`, `create_user`,
+                                             `create_time`, `update_user`, `update_time`, `is_deleted`)
+VALUES ('831098a85de14e249cca08378d49a38c', 10000000, 'superadmin',
+        '$2a$10$UNynLuoZnZ2N/LfqdJ6fE./l.tJkNsBLJibbBxhs4tpJzkzJjzave', NULL, '超级管理员',
         '831098a85de14e249cca08378d49a38c', 1639731002290, '831098a85de14e249cca08378d49a38c', 1639731002290, 0);
 COMMIT;
 
 BEGIN;
-INSERT INTO `dragon_system`.`t_dragon_role` (`id`, `tenant_id`, `role_id`, `parent_id`,`code`, `name`, `sort`, `create_user`,
+INSERT INTO `dragon_system`.`t_dragon_role` (`id`, `tenant_id`, `role_id`, `parent_id`, `code`, `name`, `sort`,
+                                             `create_user`,
                                              `create_time`, `update_user`, `update_time`, `is_deleted`)
-VALUES ('811098a85de14e249cca08378d49a38c', 10000000, 1, 0, 'SUPER_ADMIN','超级管理员', 0, '831098a85de14e249cca08378d49a38c',
+VALUES ('811098a85de14e249cca08378d49a38c', 10000000, 1, 0, 'SUPER_ADMIN', '超级管理员', 0,
+        '831098a85de14e249cca08378d49a38c',
         1639731002290, '831098a85de14e249cca08378d49a38c', 1639731002290, 0);
 COMMIT;
 
