@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DragonUserDetailOutVO {
 
-    private String id;
+    private String userId;
 
     /**
      * 账号

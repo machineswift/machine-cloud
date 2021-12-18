@@ -86,7 +86,7 @@ CREATE TABLE `t_dragon_role`
     `code`        varchar(64) NOT NULL COMMENT '角色编号,不能重复',
     `name`        varchar(64)          DEFAULT NULL COMMENT '名称',
     `sort`        bigint      NOT NULL DEFAULT '0' COMMENT '排序',
-    `remark`      text        NOT NULL DEFAULT '' COMMENT '备注',
+    `remark`      text COMMENT '备注',
     `create_user` varchar(32) NOT NULL COMMENT '创建人',
     `create_time` bigint unsigned NOT NULL COMMENT '创建时间',
     `update_user` varchar(32) NOT NULL COMMENT '修改人',
@@ -114,7 +114,7 @@ CREATE TABLE `t_dragon_menu`
     `path`        text        NOT NULL COMMENT '请求地址',
     `sort`        bigint      NOT NULL DEFAULT '0' COMMENT '在父菜单中的次序值。sort值大的排序靠前',
     `is_opened`   tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否打开新页面',
-    `remark`      text        NOT NULL DEFAULT '' COMMENT '备注',
+    `remark`      text COMMENT '备注',
     `create_user` varchar(32) NOT NULL COMMENT '创建人',
     `create_time` bigint unsigned NOT NULL COMMENT '创建时间',
     `update_user` varchar(32) NOT NULL COMMENT '修改人',
@@ -167,9 +167,9 @@ DROP TABLE IF EXISTS `t_dragon_rabbit_dead_message_external`;
 CREATE TABLE `t_dragon_rabbit_dead_message_external`
 (
     `id`              varchar(32) NOT NULL COMMENT 'id',
-    `message_content` text        NOT NULL DEFAULT '' COMMENT '消息内容',
-    `reason`          text        NOT NULL DEFAULT '' COMMENT '最近一次失败原因',
-    `remark`          text        NOT NULL DEFAULT '' COMMENT '备注',
+    `message_content` text        NOT NULL COMMENT '消息内容',
+    `reason`          text        NOT NULL COMMENT '最近一次失败原因',
+    `remark`          text COMMENT '备注',
     `create_time`     bigint unsigned NOT NULL COMMENT '创建时间',
     `update_time`     bigint unsigned NOT NULL COMMENT '更新时间',
     `is_deleted`      tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',
@@ -217,9 +217,9 @@ DROP TABLE IF EXISTS `t_dragon_rabbit_reliable_message_external`;
 CREATE TABLE `t_dragon_rabbit_reliable_message_external`
 (
     `id`              varchar(32) NOT NULL COMMENT 'id',
-    `message_content` text        NOT NULL DEFAULT '' COMMENT '消息内容',
-    `reason`          text        NOT NULL DEFAULT '' COMMENT '最近一次失败原因',
-    `remark`          text        NOT NULL DEFAULT '' COMMENT '备注',
+    `message_content` text        NOT NULL COMMENT '消息内容',
+    `reason`          text        NOT NULL COMMENT '最近一次失败原因',
+    `remark`          text COMMENT '备注',
     `create_time`     bigint unsigned NOT NULL COMMENT '创建时间',
     `update_time`     bigint unsigned NOT NULL COMMENT '更新时间',
     `is_deleted`      tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除',

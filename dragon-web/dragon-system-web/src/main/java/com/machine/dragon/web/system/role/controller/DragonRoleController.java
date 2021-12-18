@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DragonRoleController {
 
     @Autowired
-    private DragonRoleFade dragonMRoleFade;
+    private DragonRoleFade dragonRoleFade;
 
     @ApiOperationSupport(order = 10)
     @ApiOperation(value = "查询一个角色信息")
@@ -30,7 +30,7 @@ public class DragonRoleController {
     })
     @GetMapping("queryRoleDetail")
     public DragonRoleDetailResponse queryRoleDetail(@RequestParam(value = "roleId") Long roleId) {
-        return dragonMRoleFade.queryRoleDetail(roleId);
+        return dragonRoleFade.queryRoleDetail(roleId);
     }
 
 }

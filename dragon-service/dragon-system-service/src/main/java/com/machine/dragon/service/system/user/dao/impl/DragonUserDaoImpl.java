@@ -17,6 +17,12 @@ public class DragonUserDaoImpl implements DragonUserDao {
     @Override
     public DragonUserOutDTO getByUserId(String userId) {
         DragonUserEntity entity = dragonUserMapper.selectById(userId);
-        return DragonJsonUtil.copy(entity, DragonUserOutDTO.class);
+        if (null == entity) {
+            return null;
+        }
+
+        DragonUserOutDTO outDTO = DragonJsonUtil.copy(entity, DragonUserOutDTO.class);
+        outDTO.setUserId(entity.getId());
+        return outDTO;
     }
 }
