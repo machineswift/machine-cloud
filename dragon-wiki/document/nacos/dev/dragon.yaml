@@ -8,6 +8,11 @@ spring:
     username: dragon
     password: dragon
     virtualHost: dragon
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8858
 machine:
   dragon:
     system:
