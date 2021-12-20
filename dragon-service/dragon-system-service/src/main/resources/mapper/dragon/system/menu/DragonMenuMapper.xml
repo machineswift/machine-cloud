@@ -47,4 +47,11 @@
         from t_dragon_menu
         where menu_id = #{menuId}
     </select>
+
+    <select id="selectMenuList" resultMap="DragonMenuEntityMap">
+        select
+        <include refid="DragonMenuColumn"/>
+        from t_dragon_menu
+    </select>
+
 </mapper>
