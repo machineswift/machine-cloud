@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(value = "dragon-system-service", path = "client/system/menu")
+@FeignClient(value = "dragon-system-service", path = "menu")
 public interface DragonMenuResource {
 
     @GetMapping("getByMenuId")

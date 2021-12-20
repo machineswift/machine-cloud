@@ -1,5 +1,6 @@
 package com.machine.dragon.web.system.department.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.machine.dragon.web.system.department.controller.response.DragonDepartmentDetailResponse;
 import com.machine.dragon.web.system.department.fade.DragonDepartmentFade;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "部门模块")
 @Slf4j
 @RestController
-@RequestMapping("web/department")
+@RequestMapping("department")
 public class DragonDepartmentController {
 
     @Autowired
@@ -29,6 +30,7 @@ public class DragonDepartmentController {
             @ApiImplicitParam(name = "departmentId", value = "部门Id", paramType = "integer", format = "int64", required = true)
     })
     @GetMapping("queryDepartmentDetail")
+    @SentinelResource(value="dragon-system-web.department.queryDepartmentDetail")
     public DragonDepartmentDetailResponse queryDepartmentDetail(@RequestParam(value = "departmentId") Long departmentId) {
         return dragonDepartmentFade.queryDepartmentDetail(departmentId);
     }

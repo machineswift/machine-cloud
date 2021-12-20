@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "租户模块")
 @Slf4j
 @RestController
-@RequestMapping("web/tenant")
+@RequestMapping("tenant")
 public class DragonTenantController {
 
     @Autowired

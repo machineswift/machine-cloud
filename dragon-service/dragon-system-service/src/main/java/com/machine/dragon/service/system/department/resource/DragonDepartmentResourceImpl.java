@@ -1,5 +1,6 @@
 package com.machine.dragon.service.system.department.resource;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.department.resource.outvo.DragonDepartmentDetailOutVO;
 import com.machine.dragon.service.system.department.service.DragonDepartmentService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/system/department")
+@RequestMapping("department")
 public class DragonDepartmentResourceImpl implements DragonDepartmentResource {
 
     @Autowired
@@ -22,8 +23,11 @@ public class DragonDepartmentResourceImpl implements DragonDepartmentResource {
 
     @Override
     @GetMapping("getByDepartmentId")
+    @SentinelResource(value = "dragon-system-service.department.queryDepartmentDetail")
     public DragonDepartmentDetailOutVO getByDepartmentId(Long departmentId) {
         DragonDepartmentDetailOutBO detailOutBo = dragonDepartmentService.getByDepartmentId(departmentId);
+        String ss = null;
+        ss.length();
         return DragonJsonUtil.copy(detailOutBo, DragonDepartmentDetailOutVO.class);
     }
 }

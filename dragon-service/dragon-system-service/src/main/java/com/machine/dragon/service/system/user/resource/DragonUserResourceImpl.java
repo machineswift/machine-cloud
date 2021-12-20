@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/system/user")
+@RequestMapping("user")
 public class DragonUserResourceImpl implements DragonUserResource {
 
     @Autowired

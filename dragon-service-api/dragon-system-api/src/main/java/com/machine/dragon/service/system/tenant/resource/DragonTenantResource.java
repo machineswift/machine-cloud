@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "dragon-system-service", path = "client/system/tenant")
+@FeignClient(value = "dragon-system-service", path = "tenant")
 public interface DragonTenantResource {
 
     @GetMapping("getByTenantId")

@@ -20,7 +20,7 @@ import java.util.List;
 @Api(tags = "菜单模块")
 @Slf4j
 @RestController
-@RequestMapping("web/menu")
+@RequestMapping("menu")
 public class DragonMenuController {
 
     @Autowired

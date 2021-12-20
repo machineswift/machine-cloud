@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/system/rabbitReliableMessage")
+@RequestMapping("rabbitReliableMessage")
 public class DragonRabbitReliableMessageResourceImpl implements DragonRabbitReliableMessageResource {
 
     @Autowired

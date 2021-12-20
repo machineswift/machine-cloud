@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "角色模块")
 @Slf4j
 @RestController
-@RequestMapping("web/role")
+@RequestMapping("role")
 public class DragonRoleController {
 
     @Autowired

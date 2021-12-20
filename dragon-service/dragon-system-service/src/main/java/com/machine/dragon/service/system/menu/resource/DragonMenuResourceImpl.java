@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/system/menu")
+@RequestMapping("menu")
 public class DragonMenuResourceImpl implements DragonMenuResource {
 
     @Autowired

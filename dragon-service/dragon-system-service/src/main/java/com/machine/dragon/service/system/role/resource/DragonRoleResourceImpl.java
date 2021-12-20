@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/system/role")
+@RequestMapping("role")
 public class DragonRoleResourceImpl implements DragonRoleResource {
 
     @Autowired

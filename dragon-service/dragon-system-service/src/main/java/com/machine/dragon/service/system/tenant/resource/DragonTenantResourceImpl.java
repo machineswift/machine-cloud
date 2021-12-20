@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("client/system/tenant")
+@RequestMapping("tenant")
 public class DragonTenantResourceImpl implements DragonTenantResource {
 
     @Autowired
