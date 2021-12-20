@@ -6,7 +6,7 @@ import com.machine.dragon.common.core.bean.tenant.DragonTenant;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.tenant.dao.DragontenantDao;
 import com.machine.dragon.service.system.tenant.dao.outdto.DragonTenantListOutDTO;
-import com.machine.dragon.service.system.tenant.feign.query.DragonTenantPageQuery;
+import com.machine.dragon.service.system.tenant.resource.query.DragonTenantPageQuery;
 import com.machine.dragon.service.system.tenant.mapper.DragonTenantMapper;
 import com.machine.dragon.service.system.tenant.mapper.entity.DragonTenantEntity;
 import org.springframework.beans.factory.annotation.Autowired;

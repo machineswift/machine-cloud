@@ -6,9 +6,9 @@ import com.machine.dragon.common.core.bean.rabbit.DragonRabbitReliableMessage;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.common.tool.string.DragonStringUtil;
 import com.machine.dragon.common.core.bean.rabbit.DragonRabbitBaseMessage;
-import com.machine.dragon.service.system.rabbit.feign.DragonRabbitReliableMessageClient;
-import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageInitInVO;
-import com.machine.dragon.service.system.rabbit.feign.invo.DragonRabbitReliableMessageUpdate4SubscribeInVO;
+import com.machine.dragon.service.system.rabbit.resource.DragonRabbitReliableMessageResource;
+import com.machine.dragon.service.system.rabbit.resource.invo.DragonRabbitReliableMessageInitInVO;
+import com.machine.dragon.service.system.rabbit.resource.invo.DragonRabbitReliableMessageUpdate4SubscribeInVO;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -24,7 +24,7 @@ import org.springframework.util.DigestUtils;
 public class DragonRabbitReliableMessageAspect {
 
     @Autowired
-    private DragonRabbitReliableMessageClient dragonRabbitReliableMessageClient;
+    private DragonRabbitReliableMessageResource dragonRabbitReliableMessageResource;
 
     /**
      * 定义一个切入点
@@ -76,7 +76,7 @@ public class DragonRabbitReliableMessageAspect {
             if (!DragonJsonUtil.toJson(rabbitListener.queues()).equals(reliableMessage.getSubscribeQueues())) {
                 return;
             }
-            dragonRabbitReliableMessageClient.deleteById(message.getReliableMessage().getId());
+            dragonRabbitReliableMessageResource.deleteById(message.getReliableMessage().getId());
         }
         //todo 多租户处理
         //MultiTenantContent.clearTenantId();
@@ -120,7 +120,7 @@ public class DragonRabbitReliableMessageAspect {
             initInVO.setException(exception);
             initInVO.setNextExeTime(System.currentTimeMillis() + retryStrategy[0] * 1000);
             initInVO.setRemark(reliableMessage.getRemark());
-            dragonRabbitReliableMessageClient.init(initInVO);
+            dragonRabbitReliableMessageResource.init(initInVO);
         } else {
             //重试消息广播场景：非自己消费的消息则跳过,防止消息数量膨胀
             if (!DragonJsonUtil.toJson(rabbitListener.queues()).equals(reliableMessage.getSubscribeQueues())) {
@@ -128,7 +128,7 @@ public class DragonRabbitReliableMessageAspect {
             }
 
             //重新查询,防止消息消息延迟引起的重试策略错乱
-            reliableMessage = dragonRabbitReliableMessageClient.getById(reliableMessage.getId());
+            reliableMessage = dragonRabbitReliableMessageResource.getById(reliableMessage.getId());
             if (null == reliableMessage) {
                 //已经被正确处理或已经被移到dead里面
                 return;
@@ -137,7 +137,7 @@ public class DragonRabbitReliableMessageAspect {
             Integer resendTimes = reliableMessage.getResendTimes();
             if (resendTimes >= retryStrategy.length) {
                 //将消息移到死亡消息表
-                dragonRabbitReliableMessageClient.deadById(reliableMessage.getId());
+                dragonRabbitReliableMessageResource.deadById(reliableMessage.getId());
             } else {
                 //修改可靠消息消费状态
                 DragonRabbitReliableMessageUpdate4SubscribeInVO inVo = new DragonRabbitReliableMessageUpdate4SubscribeInVO();
@@ -146,7 +146,7 @@ public class DragonRabbitReliableMessageAspect {
                 inVo.setReason(reliableMessage.getReason());
                 inVo.setException(exception);
                 inVo.setRemark(reliableMessage.getRemark());
-                dragonRabbitReliableMessageClient.update4Subscribe(inVo);
+                dragonRabbitReliableMessageResource.update4Subscribe(inVo);
             }
         }
 

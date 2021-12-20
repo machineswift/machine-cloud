@@ -1,6 +1,6 @@
 package com.machine.dragon.server.isc.xxljob.jobhandler.rabbit;
 
-import com.machine.dragon.service.system.rabbit.feign.DragonRabbitReliableMessageClient;
+import com.machine.dragon.service.system.rabbit.resource.DragonRabbitReliableMessageResource;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class RabbitReliableMessageXxlJob {
 
     @Autowired
-    private DragonRabbitReliableMessageClient dragonRabbitReliableMessageClient;
+    private DragonRabbitReliableMessageResource dragonRabbitReliableMessageClient;
 
     @XxlJob("rabbitReliableMessageJobHandler")
     public void rabbitReliableMessageJobHandler() {

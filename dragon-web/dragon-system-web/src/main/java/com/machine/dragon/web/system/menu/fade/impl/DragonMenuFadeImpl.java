@@ -1,8 +1,8 @@
 package com.machine.dragon.web.system.menu.fade.impl;
 
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
-import com.machine.dragon.service.system.menu.feign.DragonMenuClient;
-import com.machine.dragon.service.system.menu.feign.outvo.DragonMenuDetailOutVO;
+import com.machine.dragon.service.system.menu.resource.DragonMenuResource;
+import com.machine.dragon.service.system.menu.resource.outvo.DragonMenuDetailOutVO;
 import com.machine.dragon.web.system.menu.contoller.response.DragonMenuDetailResponse;
 import com.machine.dragon.web.system.menu.fade.DragonMenuFade;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 public class DragonMenuFadeImpl implements DragonMenuFade {
 
     @Autowired
-    private DragonMenuClient dragonMenuClient;
+    private DragonMenuResource dragonMenuResource;
 
     @Override
     public DragonMenuDetailResponse queryMenuDetail(Long menuId) {
-        DragonMenuDetailOutVO detailOutVO = dragonMenuClient.getByMenuId(menuId);
+        DragonMenuDetailOutVO detailOutVO = dragonMenuResource.getByMenuId(menuId);
         return DragonJsonUtil.copy(detailOutVO, DragonMenuDetailResponse.class);
     }
 

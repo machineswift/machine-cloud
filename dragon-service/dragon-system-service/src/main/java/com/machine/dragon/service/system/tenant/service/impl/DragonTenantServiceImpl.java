@@ -5,7 +5,7 @@ import com.machine.dragon.common.core.bean.tenant.DragonTenant;
 import com.machine.dragon.common.tool.jackson.DragonJsonUtil;
 import com.machine.dragon.service.system.tenant.dao.DragontenantDao;
 import com.machine.dragon.service.system.tenant.dao.outdto.DragonTenantListOutDTO;
-import com.machine.dragon.service.system.tenant.feign.query.DragonTenantPageQuery;
+import com.machine.dragon.service.system.tenant.resource.query.DragonTenantPageQuery;
 import com.machine.dragon.service.system.tenant.service.DragonTenantService;
 import com.machine.dragon.service.system.tenant.service.outbo.DragonTenantListOutBO;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.machine.dragon.web.crm.customer.controller;
 
-import com.machine.dragon.service.crm.customer.feign.DragonCustomerClient;
+import com.machine.dragon.service.crm.customer.resource.DragonCustomerResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +24,7 @@ public class DragonCustomerController {
     private String machine1;
 
     @Autowired
-    private DragonCustomerClient dragonCustomerClient;
+    private DragonCustomerResource dragonCustomerClient;
 
     @ApiOperation(value = "部门详情")
     @ApiImplicitParam(name = "departmentId", value = "部门Id", paramType = "string", required = true)
