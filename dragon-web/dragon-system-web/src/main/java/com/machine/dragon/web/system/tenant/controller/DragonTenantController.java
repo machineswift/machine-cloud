@@ -42,6 +42,7 @@ public class DragonTenantController {
     })
     @PostMapping("queryTenantPage")
     public DragonPage<DragonTenantResponse> queryTenantPage(@RequestBody @Validated QueryTenantPageRequest request) {
+        log.info("分页查询租户信息 :{}", request);
         request.setName(DragonStringUtil.escapeStr(request.getName()));
         return dragonTenantFade.queryTenantPage(request);
     }

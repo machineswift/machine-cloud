@@ -23,5 +23,10 @@ nacos/nacos
 ## sentinel
 docker run --name sentinel  -d -p 8858:8858 -d  machineswift/sentinel-dashboard:1.8.2
 
-http://localhost:8858/
+http://localhost:8858
 sentinel/sentinel
+
+## zipkin
+docker run --name zipkin -d -p 9411:9411 openzipkin/zipkin:2.23
+
+http://localhost:9411/zipkin
