@@ -85,7 +85,7 @@ CREATE TABLE `t_dragon_role`
     `parent_id`   bigint unsigned NOT NULL COMMENT '父角色Id。根角色此字段为0',
     `code`        varchar(64) NOT NULL COMMENT '角色编号,不能重复',
     `name`        varchar(64)          DEFAULT NULL COMMENT '名称',
-    `sort`        bigint      NOT NULL DEFAULT '0' COMMENT '排序',
+    `sort`        bigint      NOT NULL DEFAULT '0' COMMENT '排序。sort值大的排序靠前',
     `remark`      text COMMENT '备注',
     `create_user` varchar(32) NOT NULL COMMENT '创建人',
     `create_time` bigint unsigned NOT NULL COMMENT '创建时间',

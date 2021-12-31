@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @Api(tags = "角色模块")
 @Slf4j
 @RestController
@@ -32,5 +34,4 @@ public class DragonRoleController {
     public DragonRoleDetailResponse queryRoleDetail(@RequestParam(value = "roleId") Long roleId) {
         return dragonRoleFade.queryRoleDetail(roleId);
     }
-
 }
