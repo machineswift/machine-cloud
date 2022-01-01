@@ -5,7 +5,7 @@ import com.machine.dragon.common.core.bean.page.DragonPage;
 import com.machine.dragon.common.tool.string.DragonStringUtil;
 import com.machine.dragon.web.system.tenant.controller.request.QueryTenantPageRequest;
 import com.machine.dragon.web.system.tenant.controller.response.DragonTenantDetailResponse;
-import com.machine.dragon.web.system.tenant.controller.response.DragonTenantResponse;
+import com.machine.dragon.web.system.tenant.controller.response.DragonTenantListResponse;
 import com.machine.dragon.web.system.tenant.fade.DragonTenantFade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -41,7 +41,7 @@ public class DragonTenantController {
             @ApiImplicitParam(name = "request", value = "分页查询", dataType = "QueryTenantPageRequest", paramType = "body", required = true)
     })
     @PostMapping("queryTenantPage")
-    public DragonPage<DragonTenantResponse> queryTenantPage(@RequestBody @Validated QueryTenantPageRequest request) {
+    public DragonPage<DragonTenantListResponse> queryTenantPage(@RequestBody @Validated QueryTenantPageRequest request) {
         log.info("分页查询租户信息 :{}", request);
         request.setName(DragonStringUtil.escapeStr(request.getName()));
         return dragonTenantFade.queryTenantPage(request);

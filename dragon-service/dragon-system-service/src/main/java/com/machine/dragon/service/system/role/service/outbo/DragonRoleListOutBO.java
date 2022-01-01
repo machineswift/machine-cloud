@@ -1,9 +1,9 @@
-package com.machine.dragon.service.system.role.dao.outdto;
+package com.machine.dragon.service.system.role.service.outbo;
 
 import lombok.Data;
 
 @Data
-public class DragonRoleDetailOutDTO {
+public class DragonRoleListOutBO {
 
     /**
      * 角色Id。超级管理员角色此字段为1
@@ -29,11 +29,6 @@ public class DragonRoleDetailOutDTO {
      * 在父菜单中的次序值。sort值大的排序靠前
      */
     private Long sort;
-
-    /**
-     * 备注
-     */
-    private String remark;
 
     /**
      * 创建人

@@ -36,6 +36,11 @@ public class DragonRoleDetailOutVO {
     private Long sort;
 
     /**
+     * 备注
+     */
+    private String remark;
+
+    /**
      * 创建人
      */
     private String createUser;

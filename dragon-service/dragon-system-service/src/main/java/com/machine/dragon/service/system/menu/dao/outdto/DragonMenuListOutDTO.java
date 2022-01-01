@@ -29,4 +29,9 @@ public class DragonMenuListOutDTO {
      * 在父菜单中的次序值。sort值大的排序靠前
      */
     private Long sort;
+
+    /**
+     * 是否打开新页面
+     */
+    private Boolean opened;
 }

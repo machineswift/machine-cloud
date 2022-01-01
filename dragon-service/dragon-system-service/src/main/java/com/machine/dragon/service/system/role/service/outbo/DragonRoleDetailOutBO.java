@@ -31,6 +31,11 @@ public class DragonRoleDetailOutBO {
     private Long sort;
 
     /**
+     * 备注
+     */
+    private String remark;
+
+    /**
      * 创建人
      */
     private String createUser;

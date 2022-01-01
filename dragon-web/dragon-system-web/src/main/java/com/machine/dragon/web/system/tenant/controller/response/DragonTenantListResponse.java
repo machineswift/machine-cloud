@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @ApiModel
 @NoArgsConstructor
-public class DragonTenantResponse {
+public class DragonTenantListResponse {
 
     @ApiModelProperty(name = "tenantId", value = "租户ID", dataType = "int", position = 10)
     private Integer tenantId;

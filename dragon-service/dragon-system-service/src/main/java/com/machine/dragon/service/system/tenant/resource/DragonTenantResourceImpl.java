@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,7 @@ public class DragonTenantResourceImpl implements DragonTenantResource {
     }
 
     @Override
+    @PostMapping("selectTenantPage")
     public DragonPage<DragonTenantListOutVO> selectTenantPage(DragonTenantPageQuery query) {
         Page<DragonTenantListOutBO> outBOIPage = dragonTenantService.selectTenantPage(query);
         Page<DragonTenantListOutVO> outVOIPage = DragonJsonUtil.convertT1ToT2(outBOIPage, DragonTenantListOutVO.class);

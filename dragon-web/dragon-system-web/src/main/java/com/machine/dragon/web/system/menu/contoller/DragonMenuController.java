@@ -38,7 +38,6 @@ public class DragonMenuController {
 
     @ApiOperationSupport(order = 10)
     @ApiOperation(value = "查询菜单树")
-
     @GetMapping("queryMenuTree")
     public List<DragonMenuTreeResponse> queryMenuTree() {
         return dragonMenuFade.queryMenuTree();

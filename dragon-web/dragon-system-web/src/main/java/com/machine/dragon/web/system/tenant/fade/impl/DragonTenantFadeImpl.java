@@ -8,7 +8,7 @@ import com.machine.dragon.service.system.tenant.resource.outvo.DragonTenantListO
 import com.machine.dragon.service.system.tenant.resource.query.DragonTenantPageQuery;
 import com.machine.dragon.web.system.tenant.controller.request.QueryTenantPageRequest;
 import com.machine.dragon.web.system.tenant.controller.response.DragonTenantDetailResponse;
-import com.machine.dragon.web.system.tenant.controller.response.DragonTenantResponse;
+import com.machine.dragon.web.system.tenant.controller.response.DragonTenantListResponse;
 import com.machine.dragon.web.system.tenant.fade.DragonTenantFade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,9 @@ public class DragonTenantFadeImpl implements DragonTenantFade {
     }
 
     @Override
-    public DragonPage<DragonTenantResponse> queryTenantPage(QueryTenantPageRequest request) {
+    public DragonPage<DragonTenantListResponse> queryTenantPage(QueryTenantPageRequest request) {
         DragonTenantPageQuery query = DragonJsonUtil.copy(request, DragonTenantPageQuery.class);
         DragonPage<DragonTenantListOutVO> outVOIPage = dragonTenantResource.selectTenantPage(query);
-        return DragonJsonUtil.convertT1ToT2(outVOIPage, DragonTenantResponse.class);
+        return DragonJsonUtil.convertT1ToT2(outVOIPage, DragonTenantListResponse.class);
     }
 }

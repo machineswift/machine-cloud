@@ -4,12 +4,13 @@
 
     <sql id="DragonRoleColumn">
         `id`
-        ,`tenant_id`,
+        ,`Role_id`,
         `role_id`,
         `parent_id`,
         `code`,
         `name`,
         `sort`,
+        `remark`,
         `create_user`,
         `create_time`,
         `update_user`,
@@ -26,6 +27,7 @@
         <result column="code" property="code"/>
         <result column="name" property="name"/>
         <result column="sort" property="sort"/>
+        <result column="remark" property="remark"/>
         <result column="create_user" property="createUser"/>
         <result column="create_time" property="createTime"/>
         <result column="update_user" property="updateUser"/>
@@ -38,5 +40,22 @@
         <include refid="DragonRoleColumn"/>
         from t_dragon_role
         where role_id = #{roleId}
+    </select>
+
+    <select id="selectRoleList" resultMap="DragonRoleEntityMap">
+        select
+        <include refid="DragonRoleColumn"/>
+        from t_dragon_role
+    </select>
+
+    <select id="selectRolePage" resultMap="DragonRoleEntityMap">
+        select
+        <include refid="DragonRoleColumn"/>
+        from t_dragon_role
+        <where>
+            <if test="query.name != null and query.name != ''">
+                AND name like CONCAT('%', #{query.name}, '%')
+            </if>
+        </where>
     </select>
 </mapper>

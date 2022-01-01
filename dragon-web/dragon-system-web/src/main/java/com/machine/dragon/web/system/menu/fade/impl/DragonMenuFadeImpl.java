@@ -52,10 +52,8 @@ public class DragonMenuFadeImpl implements DragonMenuFade {
             menuOutBoMap.put(b.getMenuId(), b);
         }
 
-
         //组装tree
         for (DragonMenuTreeResponse c : _temps) {
-
             if (!menuOutBoMap.containsKey(c.getParentId())) {
                 //parentId没找到,是顶级菜单
                 responses.add(c);
@@ -72,7 +70,7 @@ public class DragonMenuFadeImpl implements DragonMenuFade {
                     boolean added = false;
                     for (int i = 0; i < children.size(); i++) {
                         DragonMenuTreeResponse _response = children.get(i);
-                        if (c.getSort() <= _response.getSort()) {
+                        if (c.getSort() > _response.getSort()) {
                             children.add(i, c);
                             added = true;
                             break;
@@ -84,6 +82,8 @@ public class DragonMenuFadeImpl implements DragonMenuFade {
                 }
             }
         }
+
+        responses.sort(Comparator.comparing(DragonMenuTreeResponse::getSort).reversed());
         return responses;
     }
 
