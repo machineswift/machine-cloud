@@ -4,7 +4,7 @@ public interface DragonBaseEnum<E extends Enum<E>, T> {
 
     Integer getCode();
 
-    String getName();
+    String getMsg();
 
     /**
      * 根据Code获取对应IBaseEnum实例
