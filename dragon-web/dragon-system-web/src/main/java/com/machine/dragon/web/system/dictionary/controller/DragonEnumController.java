@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("enum")
-public class DragonEnumtController {
+public class DragonEnumController {
 
     @Autowired
     private DragonEnumFade dragonEnumFade;
