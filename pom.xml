@@ -14,6 +14,7 @@
         <module>dragon-ops-server</module>
         <module>dragon-isc-server</module>
         <module>dragon-isc-sdk</module>
+        <module>dragon-test</module>
     </modules>
     <name>machine-dragon</name>
     <packaging>pom</packaging>
