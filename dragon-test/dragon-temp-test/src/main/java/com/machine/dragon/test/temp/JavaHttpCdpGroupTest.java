@@ -6,11 +6,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class JavaHttpTest {
+public class JavaHttpCdpGroupTest {
     /**
      * http get请求
      *
@@ -191,7 +190,7 @@ public class JavaHttpTest {
         System.out.println(signParam);
         System.out.println(sign);
         System.out.println(url);
-        String result = JavaHttpTest.doPost(url.toString(), paramBody);
+        String result = JavaHttpCdpGroupTest.doPost(url.toString(), paramBody);
         System.out.println(result);
     }
 }
