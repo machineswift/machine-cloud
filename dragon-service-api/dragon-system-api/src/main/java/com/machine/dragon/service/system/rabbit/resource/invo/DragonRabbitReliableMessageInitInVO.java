@@ -21,7 +21,7 @@ public class DragonRabbitReliableMessageInitInVO {
     private String retryStrategy;
     private String messageContent;
     private String reason;
-    private String remark;
+    private String description;
 
     /**
      * 添加失败堆栈信息

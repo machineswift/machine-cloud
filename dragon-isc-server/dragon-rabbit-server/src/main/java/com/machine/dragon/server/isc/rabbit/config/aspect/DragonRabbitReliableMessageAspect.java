@@ -119,7 +119,7 @@ public class DragonRabbitReliableMessageAspect {
             initInVO.setSubscribeTimes(1);
             initInVO.setException(exception);
             initInVO.setNextExeTime(System.currentTimeMillis() + retryStrategy[0] * 1000);
-            initInVO.setRemark(reliableMessage.getRemark());
+            initInVO.setDescription(reliableMessage.getDescription());
             dragonRabbitReliableMessageResource.init(initInVO);
         } else {
             //重试消息广播场景：非自己消费的消息则跳过,防止消息数量膨胀
@@ -145,7 +145,7 @@ public class DragonRabbitReliableMessageAspect {
                 inVo.setNextTimeMillis(retryStrategy[resendTimes] * 1000);
                 inVo.setReason(reliableMessage.getReason());
                 inVo.setException(exception);
-                inVo.setRemark(reliableMessage.getRemark());
+                inVo.setDescription(reliableMessage.getDescription());
                 dragonRabbitReliableMessageResource.update4Subscribe(inVo);
             }
         }

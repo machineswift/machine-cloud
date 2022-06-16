@@ -10,5 +10,5 @@ public class DragonRabbitReliableMessageUpdate4SubscribeInBO {
     private String id;
     private Integer nextTimeMillis;
     private String reason;
-    private String remark;
+    private String description;
 }

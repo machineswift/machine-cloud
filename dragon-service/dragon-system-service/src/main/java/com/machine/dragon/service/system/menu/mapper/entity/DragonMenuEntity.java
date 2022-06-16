@@ -55,7 +55,7 @@ public class DragonMenuEntity {
     /**
      * 备注
      */
-    private String remark;
+    private String description;
 
     /**
      * 是否打开新页面

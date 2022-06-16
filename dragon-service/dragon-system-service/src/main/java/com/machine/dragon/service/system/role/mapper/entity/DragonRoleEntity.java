@@ -42,10 +42,11 @@ public class DragonRoleEntity {
      */
     private Long sort;
 
+
     /**
-     * 备注
+     * 描述
      */
-    private String remark;
+    private String description;
 
     /**
      * 创建人

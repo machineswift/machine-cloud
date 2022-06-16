@@ -22,6 +22,6 @@ public class DragonRoleDetailResponse {
     @ApiModelProperty(name = "name", value = "名称", dataType = "string", position = 40)
     private String name;
 
-    @ApiModelProperty(name = "remark", value = "备注", dataType = "string", position = 50)
-    private String remark;
+    @ApiModelProperty(name = "description", value = "备注", dataType = "string", position = 50)
+    private String description;
 }

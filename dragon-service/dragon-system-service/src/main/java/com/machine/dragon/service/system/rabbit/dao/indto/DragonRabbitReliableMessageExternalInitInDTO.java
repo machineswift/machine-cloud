@@ -18,5 +18,5 @@ public class DragonRabbitReliableMessageExternalInitInDTO {
     private String id;
     private String messageContent;
     private String reason;
-    private String remark;
+    private String description;
 }

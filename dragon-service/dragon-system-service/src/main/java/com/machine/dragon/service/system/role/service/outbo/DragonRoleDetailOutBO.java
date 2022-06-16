@@ -33,7 +33,7 @@ public class DragonRoleDetailOutBO {
     /**
      * 备注
      */
-    private String remark;
+    private String description;
 
     /**
      * 创建人

@@ -38,7 +38,7 @@ public class DragonRoleDetailOutVO {
     /**
      * 备注
      */
-    private String remark;
+    private String description;
 
     /**
      * 创建人

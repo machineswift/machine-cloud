@@ -9,7 +9,7 @@ public class DragonRabbitReliableMessageExternalOutDTO {
     private String id;
     private String messageContent;
     private String reason;
-    private String remark;
+    private String description;
 
     private Long createTime;
     private Long updateTime;

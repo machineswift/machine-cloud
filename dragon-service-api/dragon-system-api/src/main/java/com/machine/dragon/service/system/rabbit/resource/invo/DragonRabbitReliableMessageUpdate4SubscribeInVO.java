@@ -11,7 +11,7 @@ public class DragonRabbitReliableMessageUpdate4SubscribeInVO {
     private String id;
     private Integer nextTimeMillis;
     private String reason;
-    private String remark;
+    private String description;
 
     /**
      * 添加失败堆栈信息

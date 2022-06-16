@@ -97,7 +97,7 @@ public class DragonRabbitReliableMessageServiceImpl implements DragonRabbitRelia
         DragonRabbitReliableMessageExternalOutDTO reliableMessageExternalOutDTO = dragonRabbitReliableMessageExternalDao.getById(id);
         reliableMessage.setMessageContent(reliableMessageExternalOutDTO.getMessageContent());
         reliableMessage.setReason(reliableMessageExternalOutDTO.getReason());
-        reliableMessage.setRemark(reliableMessageExternalOutDTO.getRemark());
+        reliableMessage.setDescription(reliableMessageExternalOutDTO.getDescription());
         return reliableMessage;
     }
 

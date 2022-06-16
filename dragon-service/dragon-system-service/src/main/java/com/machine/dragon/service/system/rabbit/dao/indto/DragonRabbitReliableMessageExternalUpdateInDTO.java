@@ -9,5 +9,5 @@ public class DragonRabbitReliableMessageExternalUpdateInDTO {
 
     private String id;
     private String reason;
-    private String remark;
+    private String description;
 }

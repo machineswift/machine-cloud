@@ -22,5 +22,5 @@ public class DragonRabbitReliableMessageInitInDTO {
     private String retryStrategy;
     private String messageContent;
     private String reason;
-    private String remark;
+    private String description;
 }

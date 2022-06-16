@@ -13,7 +13,7 @@
         `path`,
         `sort`,
         `is_opened`,
-        `remark`,
+        `description`,
         `create_user`,
         `create_time`,
         `update_user`,
@@ -33,7 +33,7 @@
         <result column="path" property="path"/>
         <result column="sort" property="sort"/>
         <result column="is_opened" property="opened"/>
-        <result column="remark" property="remark"/>
+        <result column="description" property="description"/>
         <result column="create_user" property="createUser"/>
         <result column="create_time" property="createTime"/>
         <result column="update_user" property="updateUser"/>

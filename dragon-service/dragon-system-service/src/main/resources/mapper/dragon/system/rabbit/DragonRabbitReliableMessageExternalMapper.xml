@@ -6,7 +6,7 @@
         `id`
         ,`message_content`,
         `reason`,
-        `remark`,
+        `description`,
         `create_time`,
         `update_time`,
         `is_deleted`
@@ -17,7 +17,7 @@
         <id column="id" property="id"/>
         <result column="message_content" property="messageContent"/>
         <result column="reason" property="reason"/>
-        <result column="remark" property="remark"/>
+        <result column="description" property="description"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
         <result column="is_deleted" property="deleted"/>

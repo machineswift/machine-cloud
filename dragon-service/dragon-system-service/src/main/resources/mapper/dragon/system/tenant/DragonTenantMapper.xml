@@ -4,12 +4,7 @@
 
     <sql id="DragonTenantColumn">
         `id`
-        ,`tenant_id`,
-        `name`,
-        `status`,
-        `create_time`,
-        `update_time`,
-        `is_deleted`
+        ,`tenant_id`,`name`,`full_name`,`status`,`description`,`create_user`,`create_time`,`update_user`,`update_time`,`is_deleted`
     </sql>
 
     <resultMap id="DragonTenantEntityMap"
@@ -17,8 +12,12 @@
         <id column="id" property="id"/>
         <result column="tenant_id" property="tenantId"/>
         <result column="name" property="name"/>
+        <result column="full_name" property="fullNname"/>
         <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="create_user" property="createUser"/>
         <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
         <result column="update_time" property="updateTime"/>
         <result column="is_deleted" property="deleted"/>
     </resultMap>
@@ -36,7 +35,8 @@
         from t_dragon_tenant
         <where>
             <if test="query.name != null and query.name != ''">
-                AND name like CONCAT('%', #{query.name}, '%')
+                AND (name like CONCAT('%', #{query.name}, '%')
+                OR full_name like CONCAT('%', #{query.name}, '%'))
             </if>
         </where>
     </select>

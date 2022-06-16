@@ -35,7 +35,7 @@ public class DragonRabbitReliableMessage {
     private String retryStrategy;
     private String messageContent;
     private String reason;
-    private String remark;
+    private String description;
     private Long createTime;
     private Long updateTime;
     private Boolean deleted;
