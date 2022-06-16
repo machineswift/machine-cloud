@@ -4,15 +4,7 @@
 
     <sql id="DragonDepartmentColumn">
         `id`
-        ,`tenant_id`,
-        `department_id`,
-        `parent_id`,
-        `code`,
-        `name`,
-        `sort`,
-        `create_time`,
-        `update_time`,
-        `is_deleted`
+        ,`tenant_id`,`department_id`,`parent_id`,`code`,`name`,`sort`,`create_user`,`create_time`,`update_user`,`update_time`,`is_deleted`
     </sql>
 
     <resultMap id="DragonDepartmentEntityMap"
@@ -24,7 +16,9 @@
         <result column="code" property="code"/>
         <result column="name" property="name"/>
         <result column="sort" property="sort"/>
+        <result column="create_user" property="createUser"/>
         <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
         <result column="update_time" property="updateTime"/>
         <result column="is_deleted" property="deleted"/>
     </resultMap>

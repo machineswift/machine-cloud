@@ -26,8 +26,6 @@ public class DragonDepartmentResourceImpl implements DragonDepartmentResource {
     @SentinelResource(value = "dragon-system-service.department.queryDepartmentDetail")
     public DragonDepartmentDetailOutVO getByDepartmentId(Long departmentId) {
         DragonDepartmentDetailOutBO detailOutBo = dragonDepartmentService.getByDepartmentId(departmentId);
-        String ss = null;
-        ss.length();
         return DragonJsonUtil.copy(detailOutBo, DragonDepartmentDetailOutVO.class);
     }
 }

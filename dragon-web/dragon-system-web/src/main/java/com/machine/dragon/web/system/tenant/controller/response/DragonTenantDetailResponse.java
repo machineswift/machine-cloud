@@ -17,6 +17,12 @@ public class DragonTenantDetailResponse {
     @ApiModelProperty(name = "name", value = "名称", dataType = "string", position = 20)
     private String name;
 
-    @ApiModelProperty(name = "status", value = "状态", dataType = "string", position = 30)
+    @ApiModelProperty(name = "fullName", value = "全称", dataType = "string", position = 30)
+    private String fullName;
+
+    @ApiModelProperty(name = "status", value = "状态:{DragonTenantStatusEnum}", dataType = "string", position = 40)
     private DragonTenantStatusEnum status;
+
+    @ApiModelProperty(name = "status", value = "描述", dataType = "string", position = 50)
+    private String description;
 }

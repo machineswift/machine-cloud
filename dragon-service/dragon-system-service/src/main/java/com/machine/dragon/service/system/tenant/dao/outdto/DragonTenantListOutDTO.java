@@ -11,5 +11,7 @@ public class DragonTenantListOutDTO {
 
     private String name;
 
+    private String fullName;
+
     private DragonTenantStatusEnum status;
 }

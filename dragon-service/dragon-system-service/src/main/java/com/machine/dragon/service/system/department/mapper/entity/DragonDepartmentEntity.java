@@ -43,10 +43,20 @@ public class DragonDepartmentEntity {
     private Long sort;
 
     /**
+     * 创建人
+     */
+    private String createUser;
+
+    /**
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
     private Long createTime;
+
+    /**
+     * 修改人
+     */
+    private String updateUser;
 
     /**
      * 更新时间

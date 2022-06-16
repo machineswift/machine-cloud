@@ -11,5 +11,9 @@ public class DragonTenant {
 
     private String name;
 
+    private String fullName;
+
     private DragonTenantStatusEnum status;
+
+    private String description;
 }
