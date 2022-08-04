@@ -17,6 +17,7 @@
         <module>dragon-common-launch</module>
         <module>dragon-common-tool</module>
         <module>dragon-common-core</module>
+        <module>dragon-common-web</module>
     </modules>
 
     <properties>

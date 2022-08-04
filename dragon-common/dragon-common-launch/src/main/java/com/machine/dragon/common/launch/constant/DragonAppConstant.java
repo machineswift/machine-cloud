@@ -18,5 +18,5 @@ public class DragonAppConstant {
     /**
      * 生产环境
      */
-    public static final String  PROD_CODE = "prod";
+    public static final String PROD_CODE = "prod";
 }
